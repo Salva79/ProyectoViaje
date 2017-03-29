@@ -1,0 +1,29 @@
+{
+  "name": "TiposProducto",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "Nombre": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "id": {
+      "type": "belongsTo",
+      "model": "Ingreso",
+      "foreignKey": "tipo"
+    },
+    "id": {
+      "type": "belongsTo",
+      "model": "Producto",
+      "foreignKey": "tipo"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

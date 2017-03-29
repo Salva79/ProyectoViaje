@@ -1,0 +1,46 @@
+{
+  "name": "Producto",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "Descripcion": {
+      "type": "string",
+      "required": true
+    },
+    "Referencia": {
+      "type": "string",
+      "required": true
+    },
+    "PrecioVenta": {
+      "type": "number",
+      "required": true
+    },
+    "Beneficio": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "id": {
+      "type": "belongsTo",
+      "model": "Proveedor",
+      "foreignKey": "Fabricante"
+    },
+    "id": {
+      "type": "belongsTo",
+      "model": "TiposProducto",
+      "foreignKey": "Tipo"
+    },
+    "id": {
+      "type": "hasMany",
+      "model": "Pedido",
+      "foreignKey": "IdProducto"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

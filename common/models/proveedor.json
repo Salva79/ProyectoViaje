@@ -1,0 +1,25 @@
+{
+  "name": "Proveedor",
+  "plural": "Proveedores",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "Nombre": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "id": {
+      "type": "hasMany",
+      "model": "Producto",
+      "foreignKey": "fabricante"
+    },
+  },
+  "acls": [],
+  "methods": {}
+}

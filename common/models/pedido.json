@@ -1,0 +1,36 @@
+{
+  "name": "Pedido",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "FechaPedido": {
+      "type": "date",
+      "required": true
+    },
+    "CantidadPedida": {
+      "type": "number",
+      "required": true
+    },
+    "CantidadEntrega": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "userId": {
+      "type": "belongsTo",
+      "model": "Usuario",
+      "foreignKey": "alumno"
+    },
+    "id": {
+      "type": "hasMany",
+      "model": "Producto",
+      "foreignKey": "IdProducto"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

@@ -1,0 +1,94 @@
+{
+  "name": "Usuario",
+  "base": "User",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "apellidos": {
+      "type": "string",
+      "required": true
+    },
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "dni": {
+      "type": "string",
+      "required": true
+    },
+    "curso": {
+      "type": "string",
+      "required": true
+    },
+    "telefono": {
+      "type": "number",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "coordina": {
+      "type": "hasOne",
+      "model": "Centro",
+      "foreignKey": "coordinador"
+    },
+    "centro": {
+      "type": "hasOne",
+      "model": "Centro",
+      "foreignKey": "centro"
+    },
+    "objetivo": {
+      "type": "hasOne",
+      "model": "Objetivo",
+      "foreignKey": "objetivo"
+    },
+    "pedidos": {
+      "type": "hasMany",
+      "model": "Pedido",
+      "foreignKey": "alumno"
+    },
+    "ingresos": {
+      "type": "hasMany",
+      "model": "Ingreso",
+      "foreignKey": "alumno"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "request_password_reset"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "reset_password_get"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "reset_password_post"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}
