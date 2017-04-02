@@ -6,18 +6,18 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {
+  "properties": {             
     "Nombre": {
       "type": "string",
       "required": true
-    }
+    },
   },
   "validations": [],
   "relations": {
     "id": {
       "type": "hasMany",
       "model": "Producto",
-      "foreignKey": "fabricante"
+      "foreignKey": "Fabricante"
     },
   },
   "acls": [],

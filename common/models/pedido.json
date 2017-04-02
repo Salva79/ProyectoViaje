@@ -23,7 +23,7 @@
     "userId": {
       "type": "belongsTo",
       "model": "Usuario",
-      "foreignKey": "alumno"
+      "foreignKey": "Alumno"
     },
     "id": {
       "type": "hasMany",

@@ -6,23 +6,23 @@
     "validateUpsert": true
   },
   "properties": {
-    "apellidos": {
+    "Apellidos": {
       "type": "string",
       "required": true
     },
-    "nombre": {
+    "Nombre": {
       "type": "string",
       "required": true
     },
-    "dni": {
+    "DNI": {
       "type": "string",
       "required": true
     },
-    "curso": {
+    "Curso": {
       "type": "string",
       "required": true
     },
-    "telefono": {
+    "Telefono": {
       "type": "number",
       "required": false
     }
@@ -32,27 +32,27 @@
     "coordina": {
       "type": "hasOne",
       "model": "Centro",
-      "foreignKey": "coordinador"
+      "foreignKey": "Coordinador"
     },
-    "centro": {
+    "Centro": {
       "type": "hasOne",
       "model": "Centro",
-      "foreignKey": "centro"
+      "foreignKey": "Centro"
     },
-    "objetivo": {
+    "Objetivo": {
       "type": "hasOne",
       "model": "Objetivo",
-      "foreignKey": "objetivo"
+      "foreignKey": "Objetivo"
     },
-    "pedidos": {
+    "Pedidos": {
       "type": "hasMany",
       "model": "Pedido",
-      "foreignKey": "alumno"
+      "foreignKey": "Alumno"
     },
-    "ingresos": {
+    "Ingresos": {
       "type": "hasMany",
       "model": "Ingreso",
-      "foreignKey": "alumno"
+      "foreignKey": "Alumno"
     }
   },
   "acls": [

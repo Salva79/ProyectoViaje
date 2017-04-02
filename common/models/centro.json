@@ -16,18 +16,18 @@
     "validateUpsert": true
   },
   "properties": {
-    "codigo": {
+    "Codigo": {
       "type": "number",
       "required": true
     },
-    "nombre": {
+    "Nombre": {
       "type": "string",
       "required": true
     },
-    "localidad": {
+    "Localidad": {
       "type": "string"
     },
-    "verificado": {
+    "Verificado": {
       "type": "boolean"
     }
   },
@@ -36,9 +36,9 @@
     "userId": {
       "type": "belongsTo",
       "model": "Usuario",
-      "foreignKey": "coordinador"
+      "foreignKey": "Coordinador"
     },
-    "centro": {
+    "Centro": {
       "type": "belongsTo",
       "model": "Usuario",
       "foreignKey": "id"
