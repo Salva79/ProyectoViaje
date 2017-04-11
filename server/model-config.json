@@ -13,9 +13,6 @@
       "./mixins"
     ]
   },
-  "Email": {
-    "dataSource": "emailDs"
-  },
   "User": {
     "dataSource": "db"
   },
@@ -29,74 +26,13 @@
   },
   "RoleMapping": {
     "dataSource": "db",
-    "public": false
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
   },
   "Role": {
     "dataSource": "db",
     "public": false
-  },
-  "Grupo": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Materia": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Materiaimpartida": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Materiamatriculada": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Matricula": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Nivel": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Usuario": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Centro": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Anyoescolar": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Tutorizado": {
-    "dataSource": "db",
-    "public": true
-  },
-  "Pedido": {
-    "dataSource": null,
-    "public": true
-  },
-  "Producto": {
-    "dataSource": null,
-    "public": true
-  },
-  "Proveedor": {
-    "dataSource": null,
-    "public": true
-  },
-  "TiposProducto": {
-    "dataSource": null,
-    "public": true
-  },
-  "Ingreso": {
-    "dataSource": null,
-    "public": true
-  },
-  "Objetivo": {
-    "dataSource": null,
-    "public": true
   }
 }
