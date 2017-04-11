@@ -36,35 +36,35 @@
     "public": false
   },
   "Centro": {
-    "dataSource": "MysqlDB",
+    "dataSource": "db",
     "public": true
   },
   "Objetivo": {
-    "dataSource": "MysqlDB",
+    "dataSource": "db",
     "public": true
   },
   "TipoPedido": {
-    "dataSource": "MysqlDB",
+    "dataSource": "db",
     "public": true
   },
   "Proveedor": {
-    "dataSource": "MysqlDB",
+    "dataSource": "db",
     "public": true
   },
   "Producto": {
-    "dataSource": "MysqlDB",
+    "dataSource": "db",
     "public": true
   },
   "Ingreso": {
-    "dataSource": "MysqlDB",
+    "dataSource": "db",
     "public": true
   },
   "Pedido": {
-    "dataSource": "MysqlDB",
+    "dataSource": "db",
     "public": true
   },
   "Usuario": {
-    "dataSource": "MysqlDB",
+    "dataSource": "db",
     "public": true
   }
 }

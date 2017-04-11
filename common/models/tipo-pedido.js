@@ -1,5 +1,5 @@
 'use strict';
 
-module.exports = function(Tipopedido) {
+module.exports = function(TipoPedido) {
 
 };
