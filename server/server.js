@@ -9,12 +9,13 @@ app.start = function(){
   // start the web server
   return app.listen(function() {
     app.emit('started');
-    console.log('\n---------------------------------------------------------------------------');
-    console.log('\n\tProyecto Gestión Económica del Viaje de Estudios\n');
+    console.log('---------------------------------------------------------------------------');
+    console.log('\tProyecto Gestión Económica del Viaje de Estudios');
+    console.log('\tTutor: Alberto Sierra Olmo');
     console.log('\tRealizado por:');
     console.log('\t\tRubén Fernández Fernández');
     console.log('\t\tSalvador Eugenio Medina Muñoz');
-    console.log('\tPara I.E.S. Dos Mares\n');
+    console.log('\tPara I.E.S. Dos Mares');
     console.log('---------------------------------------------------------------------------');
     console.log('\tIniciando Web server');
     console.log('---------------------------------------------------------------------------');
@@ -26,7 +27,7 @@ app.start = function(){
       console.log('---------------------------------------------------------------------------');
       console.log('\tNavega por tu REST API en %s%s', baseUrl, explorerPath);
     }
-    console.log('---------------------------------------------------------------------------\n');
+    console.log('---------------------------------------------------------------------------');
   });
 };
 
