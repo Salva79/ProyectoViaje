@@ -15,7 +15,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "usuarios": {
+      "type": "hasOne",
+      "model": "Usuario",
+      "foreignKey": "alumno"
+    },
+    "tipoPedidos": {
+      "type": "hasOne",
+      "model": "TipoPedido",
+      "foreignKey": "Tipo"
+    }
+  },
   "acls": [],
   "methods": {}
 }

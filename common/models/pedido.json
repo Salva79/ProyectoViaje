@@ -19,7 +19,18 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "usuarios": {
+      "type": "hasOne",
+      "model": "Usuario",
+      "foreignKey": "alumno"
+    },
+    "productos": {
+      "type": "hasOne",
+      "model": "Producto",
+      "foreignKey": "IdProducto"
+    }
+  },
   "acls": [],
   "methods": {}
 }

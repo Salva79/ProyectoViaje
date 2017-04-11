@@ -5,7 +5,7 @@
     "url": "",
     "database": "ViajeDB",
     "password": "alumno",
-    "name": "MysqlDB",
+    "name": "db",
     "user": "root",
     "connector": "mysql"
   }

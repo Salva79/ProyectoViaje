@@ -28,7 +28,23 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "centros": {
+      "type": "hasOne",
+      "model": "Centro",
+      "foreignKey": "curso"
+    },
+    "pedidos": {
+      "type": "hasMany",
+      "model": "Pedido",
+      "foreignKey": "alumno"
+    },
+    "objetivo": {
+      "type": "hasOne",
+      "model": "Objetivo",
+      "foreignKey": "objetivo"
+    }
+  },
   "acls": [],
   "methods": {}
 }

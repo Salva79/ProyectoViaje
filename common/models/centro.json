@@ -22,7 +22,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "usuarios": {
+      "type": "hasOne",
+      "model": "Usuario",
+      "foreignKey": "coordinador"
+    }
+  },
   "acls": [],
   "methods": {}
 }
