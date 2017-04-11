@@ -1,0 +1,25 @@
+{
+  "name": "Pedido",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "FechaPedido": {
+      "type": "date",
+      "required": true
+    },
+    "CantidadPedida": {
+      "type": "number",
+      "required": true
+    },
+    "CantidadEntrega": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

@@ -34,5 +34,37 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Centro": {
+    "dataSource": "MysqlDB",
+    "public": true
+  },
+  "Objetivo": {
+    "dataSource": "MysqlDB",
+    "public": true
+  },
+  "TipoPedido": {
+    "dataSource": "MysqlDB",
+    "public": true
+  },
+  "Proveedor": {
+    "dataSource": "MysqlDB",
+    "public": true
+  },
+  "Producto": {
+    "dataSource": "MysqlDB",
+    "public": true
+  },
+  "Ingreso": {
+    "dataSource": "MysqlDB",
+    "public": true
+  },
+  "Pedido": {
+    "dataSource": "MysqlDB",
+    "public": true
+  },
+  "Usuario": {
+    "dataSource": "MysqlDB",
+    "public": true
   }
 }
