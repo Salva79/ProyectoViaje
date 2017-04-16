@@ -2,31 +2,33 @@
 
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var chalk = require('chalk');
+
 var app = module.exports = loopback();
 
 app.start = function(){
   // start the web server
   return app.listen(function() {
     app.emit('started');
-    console.log('---------------------------------------------------------------------------');
-    console.log('\tProyecto Gestión Económica del Viaje de Estudios');
-    console.log('\tTutor: Alberto Sierra Olmo');
-    console.log('\tRealizado por:');
-    console.log('\t\tRubén Fernández Fernández');
-    console.log('\t\tSalvador Eugenio Medina Muñoz');
-    console.log('\tPara I.E.S. Dos Mares');
-    console.log('---------------------------------------------------------------------------');
+    console.log(chalk.magenta('---------------------------------------------------------------------------'));
+    console.log(chalk.cyan('\tProyecto Gestión Económica del Viaje de Estudios'));
+    console.log(chalk.cyan('\tTutor: Alberto Sierra Olmo'));
+    console.log(chalk.cyan('\tRealizado por:'));
+    console.log(chalk.cyan('\t\tRubén Fernández Fernández'));
+    console.log(chalk.cyan('\t\tSalvador Eugenio Medina Muñoz'));
+    console.log(chalk.cyan('\tPara I.E.S. Dos Mares'));
+    console.log(chalk.magenta('---------------------------------------------------------------------------'));
     console.log('\tIniciando Web server');
-    console.log('---------------------------------------------------------------------------');
+    console.log(chalk.magenta('---------------------------------------------------------------------------'));
     var baseUrl = app.get('url').replace(/\/$/, '');
     console.log('\tWeb server escuchando en: %s', baseUrl);
-    console.log('---------------------------------------------------------------------------');
+    console.log(chalk.magenta('---------------------------------------------------------------------------'));
     if (app.get('loopback-component-explorer')) {
       var explorerPath = app.get('loopback-component-explorer').mountPath;
-      console.log('---------------------------------------------------------------------------');
+      console.log(chalk.magenta('---------------------------------------------------------------------------'));
       console.log('\tNavega por tu REST API en %s%s', baseUrl, explorerPath);
     }
-    console.log('---------------------------------------------------------------------------');
+    console.log(chalk.magenta('---------------------------------------------------------------------------'));
   });
 };
 
