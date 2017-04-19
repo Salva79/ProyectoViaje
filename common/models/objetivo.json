@@ -21,6 +21,16 @@
       "type": "hasMany",
       "model": "Usuario",
       "foreignKey": "objetivo"
+    },
+    "Ingresos": {
+      "type": "hasMany",
+      "model": "Ingreso",
+      "foreignKey": "Ingresos"
+    },
+    "Pedido": {
+      "type": "hasMany",
+      "model": "Pedido",
+      "foreignKey": "Pedido"
     }
   },
   "acls": [],

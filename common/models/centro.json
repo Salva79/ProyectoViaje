@@ -27,6 +27,16 @@
       "type": "hasOne",
       "model": "Usuario",
       "foreignKey": "coordinador"
+    },
+    "ingresos": {
+      "type": "hasMany",
+      "model": "Ingreso",
+      "foreignKey": ""
+    },
+    "Pedido": {
+      "type": "hasMany",
+      "model": "Pedido",
+      "foreignKey": "Pedido"
     }
   },
   "acls": [],

@@ -29,6 +29,16 @@
       "type": "hasOne",
       "model": "Producto",
       "foreignKey": "IdProducto"
+    },
+    "Objetivo": {
+      "type": "hasOne",
+      "model": "Objetivo",
+      "foreignKey": "Objetivo"
+    },
+    "Centro": {
+      "type": "hasOne",
+      "model": "Centro",
+      "foreignKey": "Centro"
     }
   },
   "acls": [],

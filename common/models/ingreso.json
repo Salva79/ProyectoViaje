@@ -21,10 +21,20 @@
       "model": "Usuario",
       "foreignKey": "alumno"
     },
-    "tipoPedidos": {
+    "tipoProductos": {
       "type": "hasOne",
-      "model": "TipoPedido",
+      "model": "TipoProductos",
       "foreignKey": "Tipo"
+    },
+    "Centro": {
+      "type": "hasOne",
+      "model": "Centro",
+      "foreignKey": "Centro"
+    },
+    "Objetivo": {
+      "type": "hasOne",
+      "model": "Objetivo",
+      "foreignKey": "Objetivo"
     }
   },
   "acls": [],

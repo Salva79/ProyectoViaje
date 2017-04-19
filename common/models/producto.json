@@ -35,10 +35,10 @@
       "model": "Proveedor",
       "foreignKey": "id"
     },
-    "tipoPedidos": {
+    "tipoProducto": {
       "type": "hasOne",
-      "model": "TipoPedido",
-      "foreignKey": "id"
+      "model": "TipoProducto",
+      "foreignKey": "tipo"
     }
   },
   "acls": [],

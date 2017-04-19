@@ -42,7 +42,7 @@
     "objetivo": {
       "type": "hasOne",
       "model": "Objetivo",
-      "foreignKey": "objetivo"
+      "foreignKey": "id"
     }
   },
   "acls": [],

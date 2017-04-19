@@ -50,8 +50,10 @@ CREATE  TABLE IF NOT EXISTS `proyectoviaje`.`Usuarios` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `Nombre` VARCHAR(45) NOT NULL ,
   `Apellidos` VARCHAR(45) NOT NULL ,
+  `Password` VARCHAR(45) NOT NULL ,
   `DNI` VARCHAR(45) NOT NULL ,
   `Telefono` VARCHAR(45) NOT NULL ,
+  `Email` VARCHAR(45) NOT NULL ,
   `Curso` VARCHAR(45) NOT NULL ,
   `Objetivo` INT NOT NULL ,
   `Centro` INT NOT NULL ,
@@ -72,11 +74,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proyectoviaje`.`TipoPedido`
+-- Table `proyectoviaje`.`TipoProducto`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `proyectoviaje`.`TipoPedido` ;
+DROP TABLE IF EXISTS `proyectoviaje`.`TipoProducto` ;
 
-CREATE  TABLE IF NOT EXISTS `proyectoviaje`.`TipoPedido` (
+CREATE  TABLE IF NOT EXISTS `proyectoviaje`.`TipoProducto` (
   `id` INT NOT NULL ,
   `Nombre` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`id`) )
@@ -106,17 +108,31 @@ CREATE  TABLE IF NOT EXISTS `proyectoviaje`.`Ingreso` (
   `Verificado` TINYINT(1) NULL ,
   `Tipo` INT NOT NULL ,
   `Alumno` INT NOT NULL ,
+  `Centro` INT NOT NULL ,
+  `Objetivo` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_Ingreso_TipoPedido1_idx` (`Tipo` ASC) ,
   INDEX `fk_Ingreso_Usuarios1_idx` (`Alumno` ASC) ,
+  INDEX `fk_Ingreso_Centro1_idx` (`Centro` ASC) ,
+  INDEX `fk_Ingreso_Objetivo1_idx` (`Objetivo` ASC) ,
   CONSTRAINT `fk_Ingreso_TipoPedido1`
     FOREIGN KEY (`Tipo` )
-    REFERENCES `proyectoviaje`.`TipoPedido` (`id` )
+    REFERENCES `proyectoviaje`.`TipoProducto` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Ingreso_Usuarios1`
     FOREIGN KEY (`Alumno` )
     REFERENCES `proyectoviaje`.`Usuarios` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Ingreso_Centro1`
+    FOREIGN KEY (`Centro` )
+    REFERENCES `proyectoviaje`.`Centro` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Ingreso_Objetivo1`
+    FOREIGN KEY (`Objetivo` )
+    REFERENCES `proyectoviaje`.`Objetivo` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -140,7 +156,7 @@ CREATE  TABLE IF NOT EXISTS `proyectoviaje`.`Producto` (
   INDEX `fk_Producto_Proveedor1_idx` (`Fabricante` ASC) ,
   CONSTRAINT `fk_Producto_TipoPedido`
     FOREIGN KEY (`Tipo` )
-    REFERENCES `proyectoviaje`.`TipoPedido` (`id` )
+    REFERENCES `proyectoviaje`.`TipoProducto` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Producto_Proveedor1`
@@ -163,9 +179,13 @@ CREATE  TABLE IF NOT EXISTS `proyectoviaje`.`Pedido` (
   `CantidadEntrega` INT NULL ,
   `IdProducto` INT NOT NULL ,
   `Alumno` INT NOT NULL ,
+  `Centro` INT NOT NULL ,
+  `Objetivo` INT NOT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_Pedido_Producto1_idx` (`IdProducto` ASC) ,
   INDEX `fk_Pedido_Usuarios1_idx` (`Alumno` ASC) ,
+  INDEX `fk_Pedido_Centro1_idx` (`Centro` ASC) ,
+  INDEX `fk_Pedido_Objetivo1_idx` (`Objetivo` ASC) ,
   CONSTRAINT `fk_Pedido_Producto1`
     FOREIGN KEY (`IdProducto` )
     REFERENCES `proyectoviaje`.`Producto` (`id` )
@@ -174,6 +194,16 @@ CREATE  TABLE IF NOT EXISTS `proyectoviaje`.`Pedido` (
   CONSTRAINT `fk_Pedido_Usuarios1`
     FOREIGN KEY (`Alumno` )
     REFERENCES `proyectoviaje`.`Usuarios` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Pedido_Centro1`
+    FOREIGN KEY (`Centro` )
+    REFERENCES `proyectoviaje`.`Centro` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Pedido_Objetivo1`
+    FOREIGN KEY (`Objetivo` )
+    REFERENCES `proyectoviaje`.`Objetivo` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
