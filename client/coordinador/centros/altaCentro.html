@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/estilos.css">
+		<script type="text/javascript" src="../../js/jquery-3.1.1.min.js" ></script>
+		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+		<link rel="icon" type="image/png" href="../../img/logo.png">
+		<title>Alta Centro</title>
+	</head>
+
+<body>
+	<div class="container-fluid">
+			<div id="contenido" class="row">
+
+				<h2>ALTA CENTRO</h2>
+
+				<form id="centros" name="centros" enctype="multipart/form-data" action="" method="post" class="form-inline">
+					<div class="col-xs-12">
+						<div class="form-group">
+						    <input type="text" id="nombre" name="nombre" class="form-control" size="50" placeholder="Nombre del centro" required="yes"/>
+
+						    <input type="text" id="codigo" name="codigo" class="form-control" size="15" placeholder="Código del centro" required="yes"/>
+
+						    <input type="text" id="localidad" name="localidad" class="form-control" size="15" placeholder="Localidad" required="yes"/>
+
+						    <input type="text" id="provincia" name="provincia" class="form-control" size="15" placeholder="Provincia" required="yes"/>
+						</div>
+					</div>
+			
+					<button type="button" id="insertar" class="btn btn-success botonForm">ALTA CENTRO</button>	
+				
+				</form>
+
+			</div>
+		</div>
+	</body>
+</html>

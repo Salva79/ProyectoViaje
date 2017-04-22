@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<link rel="icon" type="image/png" href="img/logo.png">
-		<title>Acceso Aplicación</title>
+		<title>Registro Nuevos Usuarios</title>
 	</head>
 
 	<body>
@@ -18,19 +18,30 @@
 			<div id="cajaAcceso">
 				<img id="imagenUser" src="img/imagenUsuario.png">
 
-				<form id="formAcceso" name="formAcceso" class="form-signin" autocomplete="off">		
+				<form id="formRegistro" name="formRegistro" class="form-signin" autocomplete="off">		
 					<div class="form-group">
-						<input type="text" id="usuario" name="usuario" class="form-control" required="yes" placeholder="USUARIO">
+						<input type="email" id="email" name="email" class="form-control" required="yes" placeholder="CORREO ELECTRÓNICO">
+					</div>
+
+					<div class="form-group">
+						<select id="rol" name="rol" class="form-control">
+					    	<option>ALUMNO</option>
+					    	<option>COORDINADOR</option>
+					    </select>
 					</div>
 
 					<div class="form-group">
 						<input type="password" id="password" name="password" class="form-control" required="yes" placeholder="CONTRASEÑA">
 					</div>
 
-					<button type="button" id="enviar" name="enviar" class="btn btn-success btn-block">INICIAR SESIÓN</button>
+					<div class="form-group">
+						<input type="password" id="password1" name="password1" class="form-control" required="yes" placeholder="CONTRASEÑA">
+					</div>
+
+					<button type="button" id="enviar" name="enviar" class="btn btn-success btn-block">REGISTRARSE</button>
 				</form>
 
-				<a href="registro.html" class="btn btn-info btn-block margenSuperior">REGISTRARSE</a>
+				<a href="index.html" class="btn btn-info btn-block margenSuperior">ACCEDER</a>
 			</div>
 			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
 		</div>

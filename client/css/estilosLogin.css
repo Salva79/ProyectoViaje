@@ -1,0 +1,31 @@
+@font-face {
+    font-family: tipoLetra;
+    src: url(../fonts/Dosis-Light.ttf);
+}
+
+body {
+	font-family: tipoLetra;
+	font-size: 24px;
+	text-align: center;
+	background: url("../img/fondo.jpg") no-repeat center center fixed;
+	background-size: cover;
+}
+
+#cajaAcceso {
+	margin: 5% auto;
+	width: 300px;
+    padding: 40px 40px;
+    background-color: #F7F7F7;
+}
+
+#imagenUser {
+	width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    border-radius: 50%;
+}
+
+.margenSuperior {
+	margin-top: 10%;
+}

@@ -1,0 +1,102 @@
+@font-face {
+    font-family: tipoLetra;
+    src: url(../fonts/Dosis-Light.ttf);
+}
+
+body {
+	font-family: tipoLetra;
+	font-size: 20px;
+	text-align: center;
+	background: url("../img/fondo.jpg") no-repeat center center fixed;
+	background-size: cover;
+}
+
+nav {
+	width: 100%;
+	color: #c7d1d8;
+}
+
+.navbar-inverse {
+	background-color: #283e4a;
+	border-color: #283e4a;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: #c7d1d8;
+}
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+	color: #ffffff;
+	background-color: #283e4a;
+	border-color: #283e4a;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+	color: #ffffff;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+	color: #ffffff;
+	background-color: #283e4a;
+	border-color: #283e4a;
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+	background-color: #283e4a;
+	border-color: #283e4a;
+}
+
+.navbar-inverse .navbar-nav .open .dropdown-menu>.active>a, .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:focus, .navbar-inverse .navbar-nav .open .dropdown-menu>.active>a:hover {
+	color: #ffffff;
+	background-color: #283e4a;
+	border-color: #283e4a;
+}
+
+#logo {
+	margin-right: 5px;
+}
+
+@media screen and (min-width: 768px) {
+	#botonSalir {
+		margin-right: 20px;
+	}
+}
+
+#contenido {
+	margin-top: 50px;
+}
+
+h2 {
+	margin-bottom: 20px;
+}
+
+.margenInput {
+	margin-top: 1%;
+}
+
+@media screen and (max-width: 946px) and (min-width: 768px) {
+	#email {
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+}
+
+.botonForm {
+	margin: 20px 0;
+}
+
+#info {
+	margin: 1% auto;
+}
+
+#tabla {
+	margin: 0 5%;
+}
+
+.negrita {
+	font-weight: bold;
+}
+
+.mayus {
+	text-transform: uppercase;
+}
