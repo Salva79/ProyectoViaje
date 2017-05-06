@@ -63,7 +63,7 @@ $(document).ready(function() {
 		$('#info').html("Las contraseñas no coinciden");
 		eliminarAlerta();
 	} else {
-		$('#insertar').click(function(e) {
+		$('#insertar').click(function() {
 			var envio = {
 				"email": email,
 				"rol": rol,
