@@ -1,3 +1,19 @@
+function vaciarCampos() {
+	$("#usuario").val("");
+	$("#password").val("");
+}
+
+function estilosAlerta() {
+	$('#info').removeClass();
+	$('#info').addClass('alert alert-danger');
+}
+
+function eliminarAlerta() {
+	setTimeout(function(){
+        $('#info').html("");
+        $('#info').removeClass('alert alert-danger');}, 2500);
+}
+
 function conexion(datos,url){
 	$.ajax({
 		async: true,
@@ -15,13 +31,25 @@ function conexion(datos,url){
 				sessionStorage.userCreated=respuesta.created;
 				window.location.href = "alumnos/inicio.html";
 			}else{
-				alert("No exite el usuario");
+				vaciarCampos();
+				estilosAlerta();
+				$('#info').html("No exite el usuario");
+				console.log("No exite el usuario");
+				eliminarAlerta();
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				alert('Error, usuario no registrado');	
+				vaciarCampos();
+				estilosAlerta();
+				$('#info').html("Error, usuario no registrado");
+				console.log("Error, usuario no registrado");
+				eliminarAlerta();
 			}else{
-				alert('Error en el envio de datos');
+				vaciarCampos();
+				estilosAlerta();
+				$('#info').html("Error en el envio de datos");
+				console.log("Error en el envio de datos");
+				eliminarAlerta();
 			}			
 	});		
 }

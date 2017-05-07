@@ -9,6 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/completarPerfil.js"></script>
 		<link rel="icon" type="image/png" href="img/logo.png">
 		<title>Completar Registro</title>
 	</head>
@@ -28,16 +29,18 @@
 				    <input type="text" id="nif" name="nif" class="form-control" size="10" placeholder="NIF" required="yes"/>
 
 				    <select id="centro" name="centro" class="form-control">
-				    	<option>Selecciona Centro</option>
+				    	<option value="valorInicio">Selecciona Centro</option>
 				    </select>
 
 				    <input type="text" id="curso" name="curso" class="form-control" size="8" placeholder="Curso"/>
 				</div>
 			</div>
 	
-			<button type="button" id="insertar" class="btn btn-success botonForm">GUARDAR DATOS</button>	
-		
+			<button type="button" id="enviar" class="btn btn-success botonForm">GUARDAR DATOS</button>
+
 		</form>
+
+		<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
 
 	</div>
 
