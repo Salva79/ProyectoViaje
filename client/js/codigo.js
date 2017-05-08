@@ -85,6 +85,7 @@ $(document).ready(function() {
 				"username": name,
 				"password": pass
 			}
+			sessionStorage.userpassword = pass;
 			var destino = '/api/Usuarios/login'
 			conexion('POST',envio,destino);
 		}		

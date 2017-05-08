@@ -1,11 +1,11 @@
 var direccion = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
 var nombre;
+var perfil;
 
 function estilosAlerta() {
 	$('#info').removeClass();
 	$('#info').addClass('alert alert-danger');
 }
-
 function eliminarAlerta() {
 	setTimeout(function(){
         $('#info').html("");
@@ -26,9 +26,15 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userpassword");
 }
 
-conexion('GET','',direccion);
-
-function conexion(metodo,datos,url){
+function cargaDatos(){
+	$("#botonPerfil").html("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre + " " + sessionStorage.userApellidos);
+	$("#dni").val(sessionStorage.userDNI);
+	$("#nombre").val(sessionStorage.userNombre);
+	$("#apellidos").val(sessionStorage.userApellidos);
+	$("#email").val(sessionStorage.userEmail);
+	$("#curso").val(sessionStorage.userCurso);
+}
+function actualizaDatos(metodo,datos,url){
 	$.ajax({
 		async: true,
 		dataType: 'json',
@@ -36,6 +42,7 @@ function conexion(metodo,datos,url){
 		method: metodo,
 		url: url,
 	}).done(function (respuesta){
+			alert(respuesta.id);
 			if(typeof(respuesta.id) !== undefined){
 				sessionStorage.userNombre = respuesta.Nombre;
 				sessionStorage.userApellidos = respuesta.Apellidos;
@@ -46,6 +53,7 @@ function conexion(metodo,datos,url){
 				sessionStorage.userEmail = respuesta.email;
 				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre + " " + sessionStorage.userApellidos;
 				$("#botonPerfil").html(nombre);
+				window.location.href = "inicio.html";
 			}else{
 				vaciarCampos();
 				estilosAlerta();
@@ -71,12 +79,30 @@ function conexion(metodo,datos,url){
 	});		
 }
 
+function recogeDatos(){
+	perfil = {
+	  "Nombre": $("#nombre").val(),
+	  "Apellidos": $("#apellidos").val(),
+	  "DNI": $("#dni").val(),
+	  "Telefono": sessionStorage.userTelefono,
+	  "Curso": $("#curso").val(),
+	  "username": sessionStorage.userusername,
+	  "password": sessionStorage.userpassword,
+	  "email": $("#email").val()
+	}
+}
+
 $(document).ready(function() {
+	cargaDatos();
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../index.html";
 	});
 	$("#botonPerfil").click(function(){
 		window.location.href = "perfil.html";
+	});
+	$("#insertar").click(function(){
+		recogeDatos();
+		actualizaDatos('PUT',perfil,direccion);
 	});
 })
