@@ -60,6 +60,8 @@ function obtenerCentrosDisponibles(metodo,datos,url){
 	});		
 }
 
+obtenerCentrosDisponibles("GET", "", "metodoCentros");
+
 function conexion(datos, url) {
 	$.ajax({
 		async: true,
