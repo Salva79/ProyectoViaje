@@ -37,8 +37,10 @@ module.exports = function(app) {
            	DNI: '00000000A',
            	Telefono: '000000000',
            	Curso: 'admin',
+            username: 'admin@admin.com',
            	password: '123456',
-           	email: 'admin@admin.com'              
+           	email: 'admin@admin.com',
+            emailVerified: true
           }], function(err, users) {
             if (err) throw err;
             console.log(chalk.green('\tUsuario Administrador Creado'));

@@ -22,10 +22,10 @@
       "model": "Usuario",
       "foreignKey": "objetivo"
     },
-    "Ingresos": {
+    "Objetivo": {
       "type": "hasMany",
       "model": "Ingreso",
-      "foreignKey": "Ingresos"
+      "foreignKey": "objetivo"
     },
     "Pedido": {
       "type": "hasMany",

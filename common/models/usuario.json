@@ -32,7 +32,12 @@
     "centros": {
       "type": "hasOne",
       "model": "Centro",
-      "foreignKey": "curso"
+      "foreignKey": "coordinador"
+    },
+    "usuarios": {
+      "type": "hasMany",
+      "model": "Ingreso",
+      "foreignKey": "alumno"
     },
     "pedidos": {
       "type": "hasMany",

@@ -108,6 +108,42 @@ function conexion(metodo,datos,url){
 	});		
 }
 
+function conexionInsertar(metodo,datos,url){
+	$.ajax({
+		async: true,
+		dataType: 'json',
+		data: datos,
+		method: metodo,
+		url: url,
+	}).done(function (respuesta){
+			if(typeof(respuesta.id) !== undefined){
+
+				/*window.location.href = "inicio.html";*/
+				
+			}else{
+				estilosAlerta();
+				$('#info').html("No exite el usuario");
+				console.log("No exite el usuario");
+				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
+				eliminarAlerta();
+			}
+	}).fail(function (xhr){
+			if(xhr.statusText === 'Unauthorized'){
+				estilosAlerta();
+				$('#info').html("Error, usuario no registrado");
+				console.log("Error, usuario no registrado");
+				eliminarAlerta();	
+			}else{
+				estilosAlerta();
+				$('#info').html("Error en el envio de datos");
+				console.log("Error en el envio de datos");
+				eliminarAlerta();
+			}
+			eliminarStorage();
+			window.location.href = "../index.html";			
+	});		
+}
+
 $(document).ready(function() {
 	$("#botonSalir").click(function(){
 		eliminarStorage();
@@ -115,5 +151,12 @@ $(document).ready(function() {
 	});
 	$("#botonPerfil").click(function(){
 		window.location.href = "perfil.html";
+	});
+	$("#insertar").click(function(){
+		var direccion3 = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken; 
+		alert($('#tipoProducto').val());
+		alert($('#cantidad').val());
+		/*conexionInsertar(metodo,datos,direccion3);*/
+		
 	});
 })
