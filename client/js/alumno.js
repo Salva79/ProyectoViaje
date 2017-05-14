@@ -47,7 +47,6 @@ function conexion(metodo,datos,url){
 				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre + " " + sessionStorage.userApellidos;
 				$("#botonPerfil").html(nombre);
 			}else{
-				vaciarCampos();
 				estilosAlerta();
 				$('#info').html("No exite el usuario");
 				console.log("No exite el usuario");

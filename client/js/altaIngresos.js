@@ -1,6 +1,6 @@
 var direccion = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
+var direccion2 = '/api/TipoProductos?access_token=' + sessionStorage.userToken;
 var nombre;
-var perfil;
 
 function estilosAlerta() {
 	$('#info').removeClass();
@@ -26,15 +26,7 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userpassword");
 }
 
-function cargaDatos(){
-	$("#botonPerfil").html("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre + " " + sessionStorage.userApellidos);
-	$("#dni").val(sessionStorage.userDNI);
-	$("#nombre").val(sessionStorage.userNombre);
-	$("#apellidos").val(sessionStorage.userApellidos);
-	$("#email").val(sessionStorage.userEmail);
-	$("#curso").val(sessionStorage.userCurso);
-}
-function actualizaDatos(metodo,datos,url){
+function conexion2(metodo,datos,url){
 	$.ajax({
 		async: true,
 		dataType: 'json',
@@ -42,7 +34,46 @@ function actualizaDatos(metodo,datos,url){
 		method: metodo,
 		url: url,
 	}).done(function (respuesta){
-			alert(respuesta.id);
+			var cadena = '<option value="0">Selecciona el tipo de producto</option>';
+			if(respuesta.length > 0){
+				for(var i = 0; i < respuesta.length; i++){
+					cadena = (cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>');
+				}
+				$('#tipoProducto').html(cadena);				
+			}else{
+				estilosAlerta();
+				$('#info').html("No exite el tipo de producto");
+				console.log("No exite el tipo de producto");
+				eliminarAlerta();
+			}
+	}).fail(function (xhr){
+			if(xhr.statusText === 'Unauthorized'){
+				estilosAlerta();
+				$('#info').html("Error, usuario no registrado");
+				console.log("Error, usuario no registrado");
+				eliminarAlerta();	
+			}else{
+				estilosAlerta();
+				$('#info').html("Error en el envio de datos");
+				console.log("Error en el envio de datos");
+				eliminarAlerta();
+			}
+			eliminarStorage();
+			window.location.href = "../index.html";			
+	});		
+}
+
+conexion2('GET','',direccion2);
+conexion('GET','',direccion);
+
+function conexion(metodo,datos,url){
+	$.ajax({
+		async: true,
+		dataType: 'json',
+		data: datos,
+		method: metodo,
+		url: url,
+	}).done(function (respuesta){
 			if(typeof(respuesta.id) !== undefined){
 				sessionStorage.userNombre = respuesta.Nombre;
 				sessionStorage.userApellidos = respuesta.Apellidos;
@@ -53,7 +84,6 @@ function actualizaDatos(metodo,datos,url){
 				sessionStorage.userEmail = respuesta.email;
 				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre + " " + sessionStorage.userApellidos;
 				$("#botonPerfil").html(nombre);
-				window.location.href = "inicio.html";
 			}else{
 				estilosAlerta();
 				$('#info').html("No exite el usuario");
@@ -78,30 +108,12 @@ function actualizaDatos(metodo,datos,url){
 	});		
 }
 
-function recogeDatos(){
-	perfil = {
-	  "Nombre": $("#nombre").val(),
-	  "Apellidos": $("#apellidos").val(),
-	  "DNI": $("#dni").val(),
-	  "Telefono": sessionStorage.userTelefono,
-	  "Curso": $("#curso").val(),
-	  "username": sessionStorage.userusername,
-	  "password": sessionStorage.userpassword,
-	  "email": $("#email").val()
-	}
-}
-
 $(document).ready(function() {
-	cargaDatos();
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../index.html";
 	});
 	$("#botonPerfil").click(function(){
 		window.location.href = "perfil.html";
-	});
-	$("#insertar").click(function(){
-		recogeDatos();
-		actualizaDatos('PUT',perfil,direccion);
 	});
 })
