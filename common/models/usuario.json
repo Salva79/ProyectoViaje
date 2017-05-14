@@ -75,6 +75,12 @@
       "principalType": "ROLE",
       "principalId": "coordinador",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "CREATE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}
