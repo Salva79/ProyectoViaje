@@ -31,7 +31,7 @@
     "ingresos": {
       "type": "hasMany",
       "model": "Ingreso",
-      "foreignKey": ""
+      "foreignKey": "centro"
     },
     "Pedido": {
       "type": "hasMany",

@@ -135,7 +135,8 @@ $(document).ready(function() {
 				"username": username,
 				"email": email,
 				"password": password,
-				"objetivo": objetivo "alumno": alumno.
+				"objetivo": objetivo,
+				"alumno": alumno,
 				"coordinador": coordinador
 			}
 
