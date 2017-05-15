@@ -100,3 +100,8 @@ h2 {
 .mayus {
 	text-transform: uppercase;
 }
+
+.listado{
+	border: 5px solid lightblue;
+    border-radius: 25%;
+}
