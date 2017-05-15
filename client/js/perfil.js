@@ -1,5 +1,4 @@
 var direccion = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
-var nombre;
 var perfil;
 
 function estilosAlerta() {
@@ -24,15 +23,18 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userusername");
 	sessionStorage.removeItem("userEmail");
 	sessionStorage.removeItem("userpassword");
+	sessionStorage.removeItem("userObjetivo");
+	sessionStorage.removeItem("userCetro");
 }
 
 function cargaDatos(){
-	$("#botonPerfil").html("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre + " " + sessionStorage.userApellidos);
+	$("#botonPerfil").html("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre);
 	$("#dni").val(sessionStorage.userDNI);
 	$("#nombre").val(sessionStorage.userNombre);
 	$("#apellidos").val(sessionStorage.userApellidos);
 	$("#email").val(sessionStorage.userEmail);
 	$("#curso").val(sessionStorage.userCurso);
+	$("#telefono").val(sessionStorage.userTelefono);
 }
 function actualizaDatos(metodo,datos,url){
 	$.ajax({
@@ -51,7 +53,7 @@ function actualizaDatos(metodo,datos,url){
 				sessionStorage.userCurso = respuesta.Curso;
 				sessionStorage.userusername = respuesta.username;
 				sessionStorage.userEmail = respuesta.email;
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre + " " + sessionStorage.userApellidos;
+				var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 				$("#botonPerfil").html(nombre);
 				window.location.href = "inicio.html";
 			}else{
@@ -79,15 +81,21 @@ function actualizaDatos(metodo,datos,url){
 }
 
 function recogeDatos(){
+	var name = $("#nombre").val();
+	var apellidos = $("#apellidos").val();
+	var dni = $("#dni").val();
+	var curso = $("#curso").val();
+	var email = $("#email").val();
+	var telefono = $("#telefono").val();
 	perfil = {
-	  "Nombre": $("#nombre").val(),
-	  "Apellidos": $("#apellidos").val(),
-	  "DNI": $("#dni").val(),
-	  "Telefono": sessionStorage.userTelefono,
-	  "Curso": $("#curso").val(),
+	  "Nombre": name,
+	  "Apellidos": apellidos,
+	  "DNI": dni,
+	  "Telefono": telefono,
+	  "Curso": curso,
 	  "username": sessionStorage.userusername,
 	  "password": sessionStorage.userpassword,
-	  "email": $("#email").val()
+	  "email": email
 	}
 }
 

@@ -24,6 +24,8 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userusername");
 	sessionStorage.removeItem("userEmail");
 	sessionStorage.removeItem("userpassword");
+	sessionStorage.removeItem("userObjetivo");
+	sessionStorage.removeItem("userCetro");
 }
 
 function conexion2(metodo,datos,url){
@@ -82,7 +84,7 @@ function conexion(metodo,datos,url){
 				sessionStorage.userCurso = respuesta.Curso;
 				sessionStorage.userusername = respuesta.username;
 				sessionStorage.userEmail = respuesta.email;
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre + " " + sessionStorage.userApellidos;
+				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 				$("#botonPerfil").html(nombre);
 			}else{
 				estilosAlerta();
@@ -153,10 +155,25 @@ $(document).ready(function() {
 		window.location.href = "perfil.html";
 	});
 	$("#insertar").click(function(){
-		var direccion3 = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken; 
-		alert($('#tipoProducto').val());
-		alert($('#cantidad').val());
-		/*conexionInsertar(metodo,datos,direccion3);*/
-		
+		var tipo = $('#tipoProducto').val();
+		var numero = $('#cantidad').val();
+
+		if((tipo > 0 ) && ((numero > 0 ) && (isNAN(numero) === false))){
+			var direccion3 = '/api/Ingresos?access_token=' + sessionStorage.userToken; 	
+			var datosIngreso = {
+				"Cantidad": numero,
+  				"Verificado": false,
+  				"centro": sessionStorage.userCetro,
+  				"objetivo": sessionStorage.userObjetivo,
+  				"tipo": tipo,
+  				"alumno": sessionStorage.userId
+			}
+			conexionInsertar('POST',datosIngreso,direccion3);
+		}else{
+			estilosAlerta();
+			$('#info').html("Por favor revisa los datos introducidos");
+			console.log("Por favor revisa los datos introducidos");
+			eliminarAlerta();
+		} 		
 	});
 })

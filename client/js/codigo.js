@@ -10,6 +10,9 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCurso");
 	sessionStorage.removeItem("userusername");
 	sessionStorage.removeItem("userEmail");
+	sessionStorage.removeItem("userpassword");
+	sessionStorage.removeItem("userObjetivo");
+	sessionStorage.removeItem("userCetro");
 }
 
 function vaciarCampos() {
@@ -72,6 +75,7 @@ function conexion(metodo,datos,url){
 }
 
 $(document).ready(function() {
+	eliminarStorage();
 	$('#enviar').click(function() {
 		var name = $("#usuario").val();
 		var pass = $("#password").val();

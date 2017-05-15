@@ -60,7 +60,7 @@ function obtenerCentrosDisponibles(metodo,datos,url){
 	});		
 }
 
-obtenerCentrosDisponibles("GET", "", "metodoCentros");
+obtenerCentrosDisponibles("GET", "", metodoCentros);
 
 function conexion(datos, url) {
 	$.ajax({
@@ -137,7 +137,8 @@ $(document).ready(function() {
 				"username": username,
 				"email": email,
 				"password": password,
-				"objetivo": objetivo "alumno": alumno.
+				"objetivo": objetivo,
+				"alumno": alumno,
 				"coordinador": coordinador
 			}
 
@@ -153,13 +154,5 @@ $(document).ready(function() {
 
 	$('#enviar').click(function(e) {
 		validarDatos();
-	});
-
-	$('#botonPerfil').click(function() {
-		window.location = "perfil.html";
-	}); 
-
-	$('#botonVolver').click(function() {
-		window.history.back();
 	});
 })

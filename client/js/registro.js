@@ -65,7 +65,7 @@ $(document).ready(function() {
 		}
 	}
 
-	$('#insertar').click(function() {
+	$('#enviar').click(function() {
 		validarDatos();
 	});	
 })
