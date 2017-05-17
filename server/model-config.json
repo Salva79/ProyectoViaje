@@ -63,6 +63,10 @@
     "dataSource": "db",
     "public": true
   },
+  "DetallePedido": {
+    "dataSource": "db",
+    "public": true
+  },
   "Usuario": {
     "dataSource": "db",
     "public": true

@@ -9,36 +9,30 @@
     "FechaPedido": {
       "type": "date",
       "required": true
-    },
-    "CantidadPedida": {
-      "type": "number",
-      "required": true
-    },
-    "CantidadEntrega": {
-      "type": "number"
     }
   },
   "validations": [],
   "relations": {
-    "usuarios": {
-      "type": "hasOne",
+    "userId": {
+      "type": "belongsTo",
       "model": "Usuario",
-      "foreignKey": "alumno"
+      "foreignKey": "userId"
     },
     "productos": {
-      "type": "hasOne",
+      "type": "hasMany",
       "model": "Producto",
-      "foreignKey": "IdProducto"
+      "foreignKey": "",
+      "through": "DetallePedido"
     },
-    "Objetivo": {
-      "type": "hasOne",
+    "objetivo": {
+      "type": "belongsTo",
       "model": "Objetivo",
-      "foreignKey": "Objetivo"
+      "foreignKey": ""
     },
-    "Centro": {
-      "type": "hasOne",
-      "model": "Centro",
-      "foreignKey": "Centro"
+    "detallesPedidos": {
+      "type": "hasMany",
+      "model": "DetallePedido",
+      "foreignKey": ""
     }
   },
   "acls": [

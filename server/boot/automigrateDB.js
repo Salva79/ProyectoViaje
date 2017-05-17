@@ -18,7 +18,7 @@ module.exports = function(app) {
 			console.log(chalk.green('Creadas las tablas de Loopback \n[' + lbTables + ']\n\ten ', app.dataSources.db.adapter.name));
 			console.log(chalk.magenta('---------------------------------------------------------------------------'));
 		});
-		var Tables = ['Objetivo', 'Centro', 'TipoProducto', 'Proveedor', 'Ingreso', 'Pedido', 'Producto', 'Usuario'];
+		var Tables = ['Objetivo', 'Centro', 'TipoProducto', 'Proveedor', 'Ingreso', 'DetallePedido', 'Pedido', 'Producto', 'Usuario'];
 		app.dataSources.db.automigrate(Tables, function(er) {
 			if (er) throw er;
 			console.log(chalk.magenta('---------------------------------------------------------------------------'));

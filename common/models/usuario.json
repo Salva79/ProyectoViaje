@@ -29,25 +29,20 @@
   },
   "validations": [],
   "relations": {
-    "centros": {
-      "type": "hasOne",
+    "centroCoordinador": {
+      "type": "belongsTo",
       "model": "Centro",
-      "foreignKey": "coordinador"
+      "foreignKey": "userId"
     },
-    "usuarios": {
+    "centroAlumno": {
+      "type": "belongsTo",
+      "model": "Centro",
+      "foreignKey": ""
+    },
+    "objetivos": {
       "type": "hasMany",
-      "model": "Ingreso",
-      "foreignKey": "alumno"
-    },
-    "pedidos": {
-      "type": "hasMany",
-      "model": "Pedido",
-      "foreignKey": "alumno"
-    },
-    "objetivo": {
-      "type": "hasOne",
       "model": "Objetivo",
-      "foreignKey": "objetivo"
+      "foreignKey": ""
     }
   },
   "acls": [

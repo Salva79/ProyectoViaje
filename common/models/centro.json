@@ -23,20 +23,15 @@
   },
   "validations": [],
   "relations": {
-    "usuarios": {
-      "type": "hasOne",
+    "userId": {
+      "type": "belongsTo",
       "model": "Usuario",
-      "foreignKey": "coordinador"
+      "foreignKey": "userId"
     },
-    "ingresos": {
+    "alumnos": {
       "type": "hasMany",
-      "model": "Ingreso",
-      "foreignKey": "centro"
-    },
-    "Pedido": {
-      "type": "hasMany",
-      "model": "Pedido",
-      "foreignKey": "Pedido"
+      "model": "Usuario",
+      "foreignKey": ""
     }
   },
   "acls": [

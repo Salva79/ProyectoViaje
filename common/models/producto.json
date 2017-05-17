@@ -25,20 +25,26 @@
   },
   "validations": [],
   "relations": {
+    "proveedores": {
+      "type": "belongsTo",
+      "model": "Proveedor",
+      "foreignKey": ""
+    },
+    "tipoProducto": {
+      "type": "belongsTo",
+      "model": "TipoProducto",
+      "foreignKey": ""
+    },
+    "detallesPedidos": {
+      "type": "hasMany",
+      "model": "DetallePedido",
+      "foreignKey": ""
+    },
     "pedidos": {
       "type": "hasMany",
       "model": "Pedido",
-      "foreignKey": "id"
-    },
-    "proveedores": {
-      "type": "hasOne",
-      "model": "Proveedor",
-      "foreignKey": "id"
-    },
-    "tipoProducto": {
-      "type": "hasOne",
-      "model": "TipoProducto",
-      "foreignKey": "tipo"
+      "foreignKey": "",
+      "through": "DetallePedido"
     }
   },
   "acls": [

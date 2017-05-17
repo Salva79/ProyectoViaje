@@ -16,25 +16,20 @@
   },
   "validations": [],
   "relations": {
-    "usuarios": {
-      "type": "hasOne",
+    "userId": {
+      "type": "belongsTo",
       "model": "Usuario",
-      "foreignKey": "alumno"
+      "foreignKey": "userId"
     },
     "tipoProductos": {
-      "type": "hasOne",
+      "type": "belongsTo",
       "model": "TipoProductos",
-      "foreignKey": "Tipo"
+      "foreignKey": ""
     },
-    "Centro": {
-      "type": "hasOne",
-      "model": "Centro",
-      "foreignKey": "Centro"
-    },
-    "Objetivo": {
-      "type": "hasOne",
+    "objetivo": {
+      "type": "belongsTo",
       "model": "Objetivo",
-      "foreignKey": "Objetivo"
+      "foreignKey": ""
     }
   },
   "acls": [
