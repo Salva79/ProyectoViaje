@@ -24,8 +24,10 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userusername");
 	sessionStorage.removeItem("userEmail");
 	sessionStorage.removeItem("userpassword");
-	sessionStorage.removeItem("userObjetivo");
-	sessionStorage.removeItem("userCetro");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId");
+	sessionStorage.removeItem("usernCentro");
+	sessionStorage.removeItem("usernObjetivo");
 }
 
 function conexion2(metodo,datos,url){

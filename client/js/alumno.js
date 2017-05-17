@@ -24,8 +24,10 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userusername");
 	sessionStorage.removeItem("userEmail");
 	sessionStorage.removeItem("userpassword");
-	sessionStorage.removeItem("userObjetivo");
-	sessionStorage.removeItem("userCetro");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId");
+	sessionStorage.removeItem("usernCentro");
+	sessionStorage.removeItem("usernObjetivo");
 }
 
 conexion('GET','',direccion);
@@ -46,8 +48,8 @@ function conexion(metodo,datos,url){
 				sessionStorage.userCurso = respuesta.Curso;
 				sessionStorage.userusername = respuesta.username;
 				sessionStorage.userEmail = respuesta.email;
-				sessionStorage.userObjetivo = respuesta.Objetivo;
-				sessionStorage.userCetro = respuesta.centro;
+				sessionStorage.userCentroId = respuesta.centroId;
+				sessionStorage.userObjetivoId = respuesta.objetivo;
 				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 				$("#botonPerfil").html(nombre);
 			}else{

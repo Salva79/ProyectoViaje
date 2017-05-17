@@ -1,9 +1,11 @@
 var direccion = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
+var direObjetivo = '/api/Objetivos/' + sessionStorage.userObjetivoId + '?access_token=' + sessionStorage.userToken;
+var direCentros = '/api/Centros/' + sessionStorage.userCentroId + '?access_token=' + sessionStorage.userToken;
 var perfil;
 
 function estilosAlerta() {
 	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
+	$('#info').addClass('alert alert-dapi/Objetivos/anger');
 }
 function eliminarAlerta() {
 	setTimeout(function(){
@@ -23,8 +25,10 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userusername");
 	sessionStorage.removeItem("userEmail");
 	sessionStorage.removeItem("userpassword");
-	sessionStorage.removeItem("userObjetivo");
-	sessionStorage.removeItem("userCetro");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId");
+	sessionStorage.removeItem("usernCentro");
+	sessionStorage.removeItem("usernObjetivo");
 }
 
 function cargaDatos(){
@@ -35,6 +39,8 @@ function cargaDatos(){
 	$("#email").val(sessionStorage.userEmail);
 	$("#curso").val(sessionStorage.userCurso);
 	$("#telefono").val(sessionStorage.userTelefono);
+	$("#ncentro").val(sessionStorage.usernCentro);
+	$("#objetivo").val(sessionStorage.usernObjetivo);
 }
 function actualizaDatos(metodo,datos,url){
 	$.ajax({
@@ -44,7 +50,6 @@ function actualizaDatos(metodo,datos,url){
 		method: metodo,
 		url: url,
 	}).done(function (respuesta){
-			alert(respuesta.id);
 			if(typeof(respuesta.id) !== undefined){
 				sessionStorage.userNombre = respuesta.Nombre;
 				sessionStorage.userApellidos = respuesta.Apellidos;
@@ -79,25 +84,123 @@ function actualizaDatos(metodo,datos,url){
 			window.location.href = "../index.html";			
 	});		
 }
-
+function cogeObjetivo(metodo,datos,url){
+	$.ajax({
+		async: true,
+		dataType: 'json',
+		data: datos,
+		method: metodo,
+		url: url,
+	}).done(function (respuesta){
+			if(typeof(respuesta.id) !== undefined){
+				sessionStorage.usernObjetivo = respuesta.Nombre;
+			}else{
+				estilosAlerta();
+				$('#info').html("No exite el objetivo");
+				console.log("No exite el objetivo");
+				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
+				eliminarAlerta();
+			}
+	}).fail(function (xhr){
+			if(xhr.statusText === 'Unauthorized'){
+				estilosAlerta();
+				$('#info').html("Error, usuario no registrado");
+				console.log("Error, usuario no registrado");
+				eliminarAlerta();	
+			}else{
+				estilosAlerta();
+				$('#info').html("Error en el envio de datos");
+				console.log("Error en el envio de datos");
+				eliminarAlerta();
+			}
+			eliminarStorage();
+			window.location.href = "../index.html";			
+	});		
+}
+function cogeCentro(metodo,datos,url){
+	$.ajax({
+		async: true,
+		dataType: 'json',
+		data: datos,
+		method: metodo,
+		url: url,
+	}).done(function (respuesta){
+			if(typeof(respuesta.id) !== undefined){
+				sessionStorage.usernCentro = respuesta.Nombre;
+			}else{
+				estilosAlerta();
+				$('#info').html("No exite el centro");
+				console.log("No exite el centro");
+				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
+				eliminarAlerta();
+			}
+	}).fail(function (xhr){
+			if(xhr.statusText === 'Unauthorized'){
+				estilosAlerta();
+				$('#info').html("Error, usuario no registrado");
+				console.log("Error, usuario no registrado");
+				eliminarAlerta();	
+			}else{
+				estilosAlerta();
+				$('#info').html("Error en el envio de datos");
+				console.log("Error en el envio de datos");
+				eliminarAlerta();
+			}		
+			eliminarStorage();
+			window.location.href = "../index.html";
+	});		
+}
 function recogeDatos(){
+	var error = "";
+	var correcto = true;
+	var patronNif = /(^([0-9]{8}[A-Z]{1})|^)$/;
+
 	var name = $("#nombre").val();
 	var apellidos = $("#apellidos").val();
 	var dni = $("#dni").val();
 	var curso = $("#curso").val();
 	var email = $("#email").val();
 	var telefono = $("#telefono").val();
-	perfil = {
-	  "Nombre": name,
-	  "Apellidos": apellidos,
-	  "DNI": dni,
-	  "Telefono": telefono,
-	  "Curso": curso,
-	  "username": sessionStorage.userusername,
-	  "password": sessionStorage.userpassword,
-	  "email": email
+
+	name = name.trim();
+	apellidos = apellidos.trim();
+	curso = curso.trim();
+	telefono = telefono.trim();
+	dni = dni.trim();
+
+	if (name == "" || apellidos == "" || dni == "" || curso == ""|| telefono == "") {
+		error = "El nombre, apellidos, nif, teléfono y curso son obligatorios";
+		correcto = false;
+	}else {
+		if (!(patronNif.test(dni))) {
+			error = "introduce un nif válido";
+			correcto = false;
+		}
 	}
+	if(correcto){
+		perfil = {
+		  "Nombre": name,
+		  "Apellidos": apellidos,
+		  "DNI": dni,
+		  "Telefono": telefono,
+		  "Curso": curso,
+		  "username": sessionStorage.userusername,
+		  "password": sessionStorage.userpassword,
+		  "email": email,
+		  "centroId": sessionStorage.userCentroId,
+		  "objetivo": sessionStorage.userObjetivoId
+		}
+		actualizaDatos('PUT',perfil,direccion);
+	}else{
+		cargaDatos();
+		estilosAlerta();
+		$('#info').html(error);
+		eliminarAlerta();
+	}
+			
 }
+cogeCentro('GET','',direCentros);
+cogeObjetivo('GET','',direObjetivo);
 
 $(document).ready(function() {
 	cargaDatos();
@@ -110,6 +213,5 @@ $(document).ready(function() {
 	});
 	$("#insertar").click(function(){
 		recogeDatos();
-		actualizaDatos('PUT',perfil,direccion);
 	});
 })

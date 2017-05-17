@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="css/estilos.css">
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/completarPerfil.js"></script>
+		<script type="text/javascript" src="js/completarPerfilAlumno.js"></script>
 		<link rel="icon" type="image/png" href="img/logo.png">
 		<title>Completar Registro</title>
 	</head>
@@ -28,8 +28,14 @@
 
 				    <input type="text" id="nif" name="nif" class="form-control" size="10" placeholder="NIF" required="yes"/>
 
+				    <input type="text" id="telefono" name="telefono" class="form-control" size="9" placeholder="Teléfono" required="yes"/>
+
 				    <select id="centro" name="centro" class="form-control">
 				    	<option value="valorInicio">Selecciona Centro</option>
+				    </select>
+
+				    <select id="objetivo" name="objetivo" class="form-control">
+				    	<option value="valorInicio">Selecciona Objetivo</option>
 				    </select>
 
 				    <input type="text" id="curso" name="curso" class="form-control" size="8" placeholder="Curso"/>
