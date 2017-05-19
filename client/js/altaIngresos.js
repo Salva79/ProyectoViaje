@@ -1,7 +1,15 @@
 var direccion = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
 var direccion2 = '/api/TipoProductos?access_token=' + sessionStorage.userToken;
 var nombre;
-
+function estilosinfo() {
+	$('#info').removeClass();
+	$('#info').addClass('alert alert-success');
+}
+function eliminarinfo() {
+	setTimeout(function(){
+        $('#info').html("");
+        $('#info').removeClass('alert alert-success');}, 2500);
+}
 function estilosAlerta() {
 	$('#info').removeClass();
 	$('#info').addClass('alert alert-danger');
@@ -121,8 +129,10 @@ function conexionInsertar(metodo,datos,url){
 		url: url,
 	}).done(function (respuesta){
 			if(typeof(respuesta.id) !== undefined){
-
-				/*window.location.href = "inicio.html";*/
+				estilosinfo();
+				$('#info').html("Has ingresado " + respuesta.Cantidad + "€");
+				eliminarinfo();
+				window.location.href = "inicio.html";
 				
 			}else{
 				estilosAlerta();
@@ -160,15 +170,15 @@ $(document).ready(function() {
 		var tipo = $('#tipoProducto').val();
 		var numero = $('#cantidad').val();
 
-		if((tipo > 0 ) && ((numero > 0 ) && (isNAN(numero) === false))){
+		if((tipo > 0 ) && ((numero > 0 ) && (isNaN(numero) === false))){
 			var direccion3 = '/api/Ingresos?access_token=' + sessionStorage.userToken; 	
 			var datosIngreso = {
 				"Cantidad": numero,
   				"Verificado": false,
-  				"centro": sessionStorage.userCetro,
-  				"objetivo": sessionStorage.userObjetivo,
+  				"objetivoId": sessionStorage.userObjetivoId,
+  				"objetivo": sessionStorage.userObjetivoId,
   				"tipo": tipo,
-  				"alumno": sessionStorage.userId
+  				"userId": sessionStorage.userId
 			}
 			conexionInsertar('POST',datosIngreso,direccion3);
 		}else{

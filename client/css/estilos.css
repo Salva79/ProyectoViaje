@@ -102,6 +102,7 @@ h2 {
 }
 
 .listado{
+	background-color: white;
 	border: 5px solid lightblue;
     border-radius: 25%;
 }

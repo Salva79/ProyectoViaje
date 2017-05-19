@@ -3,9 +3,18 @@ var direObjetivo = '/api/Objetivos/' + sessionStorage.userObjetivoId + '?access_
 var direCentros = '/api/Centros/' + sessionStorage.userCentroId + '?access_token=' + sessionStorage.userToken;
 var perfil;
 
+function estilosinfo() {
+	$('#info').removeClass();
+	$('#info').addClass('alert alert-success');
+}
+function eliminarinfo() {
+	setTimeout(function(){
+        $('#info').html("");
+        $('#info').removeClass('alert alert-success');}, 2500);
+}
 function estilosAlerta() {
 	$('#info').removeClass();
-	$('#info').addClass('alert alert-dapi/Objetivos/anger');
+	$('#info').addClass('alert alert-danger');
 }
 function eliminarAlerta() {
 	setTimeout(function(){
@@ -60,6 +69,9 @@ function actualizaDatos(metodo,datos,url){
 				sessionStorage.userEmail = respuesta.email;
 				var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 				$("#botonPerfil").html(nombre);
+				estilosinfo();
+				$('#info').html("Has actualizado tus datos");
+				eliminarinfo();
 				window.location.href = "inicio.html";
 			}else{
 				estilosAlerta();
@@ -173,7 +185,7 @@ function recogeDatos(){
 		correcto = false;
 	}else {
 		if (!(patronNif.test(dni))) {
-			error = "introduce un nif válido";
+			error = "Introduce un nif válido";
 			correcto = false;
 		}
 	}
