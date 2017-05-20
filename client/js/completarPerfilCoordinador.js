@@ -1,4 +1,3 @@
-var metodoCentros = '/api/Centros';
 var metodoObjetivos = '/api/Objetivos';
 
 function eliminarStorage(){
@@ -12,8 +11,6 @@ function vaciarCampos() {
 	$("#nombre").val("");
 	$("#apellidos").val("");
 	$("#nif").val("");
-	$('#centro > option[value="valorInicio"]').attr('selected', 'selected');
-	$("#curso").val("");
 	$("#telefono").val("");
 }
 function estilosAlerta() {
@@ -25,37 +22,6 @@ function eliminarAlerta() {
 		$('#info').html("");
 		$('#info').removeClass('alert alert-danger');
 	}, 2500);
-}
-function obtenerCentrosDisponibles(metodo,datos,url){
-	$.ajax({
-		async: true,
-		dataType: 'json',
-		data: datos,
-		method: metodo,
-		url: url,
-	}).done(function (respuesta){
-			var cadena = '<option value="0">Selecciona el centro</option>';
-			if(respuesta.length > 0){
-				for(var i = 0; i < respuesta.length; i++){
-					cadena = (cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>');
-				}
-				$('#centro').html(cadena);				
-			}
-	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
-			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
-			}
-			eliminarStorage();
-			window.location.href = "index.html";			
-	});		
 }
 function obtenerObjetivosDisponibles(metodo,datos,url){
 	$.ajax({
@@ -98,7 +64,7 @@ function conexion(envio, url) {
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
 			eliminarStorage();
-			window.location.href = "index.html";
+			window.location.href = "coordinador/altaCentro.html";
 			
 		} else {
 			alert("No exite el usuario");
@@ -119,8 +85,6 @@ function validarDatos() {
 	var nombre = $("#nombre").val();
 	var apellidos = $("#apellidos").val();
 	var nif = $("#nif").val();
-	var centro = $("#centro").val();
-	var curso = $("#curso").val();
 	var alumno = sessionStorage.alumnoRol;
 	var coordinador = sessionStorage.coordinadorRol;
 	var username = sessionStorage.email;
@@ -131,12 +95,11 @@ function validarDatos() {
 
 	nombre = nombre.trim();
 	apellidos = apellidos.trim();
-	curso = curso.trim();
 	telefono = telefono.trim();
 	nif = nif.trim();
 
-	if ((nombre == "" || apellidos == "" || nif == "" || curso == ""|| telefono == "") || (objetivo == 0 || centro == 0)) {
-		error = "El nombre, apellidos, nif, teléfono, objetivo, centro y curso son obligatorios";
+	if ((nombre == "" || apellidos == "" || nif == ""|| telefono == "") || (objetivo == 0)) {
+		error = "El nombre, apellidos, nif, teléfono y objetivo son obligatorios";
 		correcto = false;
 	} else {
 		if (!(patronNif.test(nif))) {
@@ -150,8 +113,7 @@ function validarDatos() {
 			"Nombre": nombre,
 			"Apellidos": apellidos,
 			"DNI": nif,
-			"centroId": centro,
-			"Curso": curso,
+			"Curso": "coordinador";
 			"username": username,
 			"email": email,
 			"password": password,
@@ -168,7 +130,6 @@ function validarDatos() {
 	}
 }
 
-obtenerCentrosDisponibles("GET", "", metodoCentros);
 obtenerObjetivosDisponibles("GET", "", metodoObjetivos);
 
 $(document).ready(function() {
