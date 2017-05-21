@@ -161,10 +161,10 @@ function conexionInsertar(metodo,datos,url){
 $(document).ready(function() {
 	$("#botonSalir").click(function(){
 		eliminarStorage();
-		window.location.href = "../index.html";
+		window.location.href = "../../index.html";
 	});
 	$("#botonPerfil").click(function(){
-		window.location.href = "perfil.html";
+		window.location.href = "../perfil.html";
 	});
 	$("#insertar").click(function(){
 		var tipo = $('#tipoProducto').val();

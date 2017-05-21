@@ -40,7 +40,7 @@ function conexion(envio, url) {
 			alert('Error en el envio de datos');
 		}
 		eliminarStorage();
-		window.location.href = "../index.html";
+		window.location.href = "../../index.html";
 	});
 }
 function validarDatos() {
@@ -81,5 +81,12 @@ conexion('GET','',direccion);
 $(document).ready(function() {
 	$('#enviar').click(function() {
 		validarDatos();
+	});
+	$("#botonSalir").click(function(){
+		eliminarStorage();
+		window.location.href = "../../index.html";
+	});
+	$("#botonPerfil").click(function(){
+		window.location.href = "../perfil.html";
 	});
 })

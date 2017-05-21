@@ -40,7 +40,7 @@ function obtenerPedidosDisponibles(metodo,datos,url){
 }
 function obtenerDetallesDisponibles(metodo,datos,url){
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		data: datos,
 		method: metodo,

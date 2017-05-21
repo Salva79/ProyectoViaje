@@ -56,7 +56,7 @@ function conexion(metodo,datos,url){
 				estilosAlerta();
 				$('#info').html("No exite el usuario");
 				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
+				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
 				eliminarAlerta();
 			}
 	}).fail(function (xhr){
@@ -82,6 +82,6 @@ $(document).ready(function() {
 		window.location.href = "../index.html";
 	});
 	$("#botonPerfil").click(function(){
-		window.location.href = "../perfil.html";
+		window.location.href = "perfil.html";
 	});
 })
