@@ -86,6 +86,7 @@ function validarDatos() {
 			"email": email,
 			"password": password,
 			"objetivo": 0,
+			"Curso": 0,
 			"Telefono": telefono
 		}
 		var destino = '/api/Usuarios';
