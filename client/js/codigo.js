@@ -46,7 +46,13 @@ function conexion(metodo,datos,url){
 				sessionStorage.userToken=respuesta.id;
 				sessionStorage.userTtl=respuesta.ttl;
 				sessionStorage.userCreated=respuesta.created;
-				window.location.href = "alumnos/inicio.html";
+
+				if (respuesta.alumnoRol == 1) {
+					window.location.href = "alumnos/inicio.html";
+				} else {
+					window.location.href = "coordinador/inicio.html";
+				}
+				
 			}else{
 				vaciarCampos();
 				estilosAlerta();

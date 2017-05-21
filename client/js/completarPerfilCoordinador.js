@@ -113,7 +113,7 @@ function validarDatos() {
 			"Nombre": nombre,
 			"Apellidos": apellidos,
 			"DNI": nif,
-			"Curso": "coordinador";
+			"Curso": "Coordinador";
 			"username": username,
 			"email": email,
 			"password": password,

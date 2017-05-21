@@ -41,15 +41,27 @@ function eliminarStorage(){
 }
 
 function cargaDatos(){
+	if (sessionStorage.userCurso == "Coordinador") {
+		$("#menu").html('<li><a href="coordinador/inicio.html">Inicio</a></li><li><a href="coordinador/centros/modificarCentro.html">Modificar Centro</a></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Alumnos<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/alumnos/altaAlumnos.html">Alta Alumnos</a></li><li><a href="coordinador/alumnos/listadoAlumnos.html">Listado Alumnos</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Ingresos<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/ingresos/altaIngresos.html">Alta Ingresos</a></li><li><a href="coordinador/ingresos/listadoIngresos.html">Listado Ingresos</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Pedidos<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/pedidos/altaPedidos.html">Alta Pedidos</a></li><li><a href="coordinador/pedidos/listadoPedidos.html">Listado Pedidos</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Productos<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/productos/altaProductos.html">Alta Productos</a></li><li><a href="coordinador/productos/listadoProductos.html">Listado Productos</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Tipos Producto<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/tiposProducto/altaTiposProducto.html">Alta Tipos Producto</a></li><li><a href="coordinador/tiposProducto/listadoTiposProducto.html">Listado Tipos Producto</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Proveedores<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/proveedores/altaProveedores.html">Alta Proveedores</a></li><li><a href="coordinador/proveedores/listadoProveedores.html">Listado Proveedores</a></li></ul></li>');
+	} else {
+		$("#menu").html('<li><a href="alumno/inicio.html">Inicio</a></li><li><a href="alumno/altaIngresos.html">Alta Ingreso</a></li><li><a href="alumno/listadoIngresos.html">Listado Ingresos</a></li><li><a href="alumno/listadoPedidos.html">Listado Pedidos</a></li>');
+	}
+
 	$("#botonPerfil").html("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre);
+	$("#perfil").text("Perfil de " + sessionStorage.userNombre);
 	$("#dni").val(sessionStorage.userDNI);
 	$("#nombre").val(sessionStorage.userNombre);
 	$("#apellidos").val(sessionStorage.userApellidos);
 	$("#email").val(sessionStorage.userEmail);
 	$("#curso").val(sessionStorage.userCurso);
+
+	if (sessionStorage.userCurso == "Coordinador") {
+		$("#curso").hide();
+	}
+
 	$("#telefono").val(sessionStorage.userTelefono);
-	$("#ncentro").val(sessionStorage.usernCentro);
-	$("#objetivo").val(sessionStorage.usernObjetivo);
+	$("#ncentro").val("Centro: " + sessionStorage.usernCentro);
+	$("#objetivo").val("Año: " + sessionStorage.usernObjetivo);
 }
 function actualizaDatos(metodo,datos,url){
 	$.ajax({
@@ -72,7 +84,9 @@ function actualizaDatos(metodo,datos,url){
 				estilosinfo();
 				$('#info').html("Has actualizado tus datos");
 				eliminarinfo();
-				window.location.href = "inicio.html";
+
+				window.location.href = "perfil.html";
+				
 			}else{
 				estilosAlerta();
 				$('#info').html("No exite el usuario");
@@ -88,12 +102,12 @@ function actualizaDatos(metodo,datos,url){
 				eliminarAlerta();	
 			}else{
 				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
+				$('#info').html("Error en el envio de datos 1");
 				console.log("Error en el envio de datos");
 				eliminarAlerta();
 			}
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "index.html";			
 	});		
 }
 function cogeObjetivo(metodo,datos,url){
@@ -180,15 +194,28 @@ function recogeDatos(){
 	telefono = telefono.trim();
 	dni = dni.trim();
 
-	if (name == "" || apellidos == "" || dni == "" || curso == ""|| telefono == "") {
-		error = "El nombre, apellidos, nif, teléfono y curso son obligatorios";
-		correcto = false;
-	}else {
-		if (!(patronNif.test(dni))) {
-			error = "Introduce un nif válido";
+	if (sessionStorage.userCurso == "Coordinador") {
+		if (name == "" || apellidos == "" || dni == "" || telefono == "") {
+		error = "El nombre, apellidos, nif y teléfono son obligatorios";
 			correcto = false;
+		}else {
+			if (!(patronNif.test(dni))) {
+				error = "Introduce un nif válido";
+				correcto = false;
+			}
+		}
+	}else {
+		if (name == "" || apellidos == "" || dni == "" || curso == ""|| telefono == "") {
+		error = "El nombre, apellidos, nif, teléfono y curso son obligatorios";
+			correcto = false;
+		}else {
+			if (!(patronNif.test(dni))) {
+				error = "Introduce un nif válido";
+				correcto = false;
+			}
 		}
 	}
+
 	if(correcto){
 		perfil = {
 		  "Nombre": name,
@@ -218,7 +245,7 @@ $(document).ready(function() {
 	cargaDatos();
 	$("#botonSalir").click(function(){
 		eliminarStorage();
-		window.location.href = "../index.html";
+		window.location.href = "index.html";
 	});
 	$("#botonPerfil").click(function(){
 		window.location.href = "perfil.html";
