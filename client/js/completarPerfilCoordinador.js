@@ -63,7 +63,6 @@ function conexion(envio, url) {
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
-			eliminarStorage();
 			window.location.href = "coordinador/altaCentro.html";
 			
 		} else {
