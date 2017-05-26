@@ -102,10 +102,8 @@ function conexion(metodo,datos,url){
 	});		
 }
 
-$(document).ready(function() {
-	eliminarStorage();
-	$('#enviar').click(function() {
-		var name = $("#usuario").val();
+function envio(){
+	var name = $("#usuario").val();
 		var pass = $("#password").val();
 		if (name == "" || pass == ""){
 			vaciarCampos();
@@ -120,11 +118,19 @@ $(document).ready(function() {
 			sessionStorage.userpassword = pass;
 			var destino = '/api/Usuarios/login'
 			conexion('POST',envio,destino);
-		}		
-	});	
-	$('#botonPerfil').click(function() {
-		window.location="perfil.html";
+		}
+}
+
+$(document).ready(function() {
+	eliminarStorage();
+	$('body').keyup(function(e){
+		if(e.keyCode === 13){
+			envio();
+		}
 	});
+	$('#enviar').click(function() {
+		envio();	
+	});	
 	$('#botonVolver').click(function() {
 		window.history.back();
 	});
