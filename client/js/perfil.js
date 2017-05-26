@@ -41,28 +41,26 @@ function eliminarStorage(){
 }
 
 function cargaDatos(){
-	if (sessionStorage.userCurso == "Coordinador") {
-		$("#menu").html('<li><a href="coordinador/inicio.html">Inicio</a></li><li><a href="coordinador/centros/datosCentro.html">Centro</a></li><li><a href="coordinador/alumnos/alumnos.html">Alumnos</a></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Objetivos<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/objetivos/altaObjetivos.html">Alta Objetivos</a></li><li><a href="coordinador/objetivos/listadoObjetivos.html">Listado Objetivos</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Ingresos<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/ingresos/ingresosVerificados.html">Ingresos Verificados</a></li><li><a href="coordinador/ingresos/ingresosSinVerificar.html">Ingresos Sin Verificar</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Pedidos<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/pedidos/altaPedidos.html">Alta Pedidos</a></li><li><a href="coordinador/pedidos/listadoPedidos.html">Listado Pedidos</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Productos<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/productos/altaProductos.html">Alta Productos</a></li><li><a href="coordinador/productos/listadoProductos.html">Listado Productos</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorías<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/categorias/altaCategorias.html">Alta Categorías</a></li><li><a href="coordinador/categorias/listadoCategorias.html">Listado Categorías</a></li></ul></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Proveedores<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="coordinador/proveedores/altaProveedores.html">Alta Proveedores</a></li><li><a href="coordinador/proveedores/listadoProveedores.html">Listado Proveedores</a></li></ul></li>');
-	} else {
-		$("#menu").html('<li><a href="alumno/inicio.html">Inicio</a></li><li><a href="alumno/altaIngresos.html">Alta Ingreso</a></li><li><a href="alumno/listadoIngresos.html">Listado Ingresos</a></li><li><a href="alumno/listadoPedidos.html">Listado Pedidos</a></li>');
-	}
-
 	$("#botonPerfil").html("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre);
 	$("#perfil").text("Perfil de " + sessionStorage.userNombre);
 	$("#dni").val(sessionStorage.userDNI);
 	$("#nombre").val(sessionStorage.userNombre);
 	$("#apellidos").val(sessionStorage.userApellidos);
 	$("#email").val(sessionStorage.userEmail);
+	$("#telefono").val(sessionStorage.userTelefono);
 	$("#curso").val(sessionStorage.userCurso);
-
+	$("#ncentro").val("Centro: " + sessionStorage.usernCentro);
 	if (sessionStorage.userCurso == "Coordinador") {
 		$("#curso").hide();
 		$("#objetivo").hide();
+
+	}else{
+		$("#curso").val(sessionStorage.userCurso);
+		$("#objetivo").val("Año: " + sessionStorage.usernObjetivo);
 	}
 
-	$("#telefono").val(sessionStorage.userTelefono);
-	$("#ncentro").val("Centro: " + sessionStorage.usernCentro);
-	$("#objetivo").val("Año: " + sessionStorage.usernObjetivo);
+	
+	
 }
 function actualizaDatos(metodo,datos,url){
 	$.ajax({
@@ -85,14 +83,13 @@ function actualizaDatos(metodo,datos,url){
 				estilosinfo();
 				$('#info').html("Has actualizado tus datos");
 				eliminarinfo();
-
-				window.location.href = "perfil.html";
+				window.location.href = "inicio.html";
 				
 			}else{
 				estilosAlerta();
 				$('#info').html("No exite el usuario");
 				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
+				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
 				eliminarAlerta();
 			}
 	}).fail(function (xhr){
@@ -108,12 +105,12 @@ function actualizaDatos(metodo,datos,url){
 				eliminarAlerta();
 			}
 			eliminarStorage();
-			window.location.href = "index.html";			
+			window.location.href = "../index.html";			
 	});		
 }
 function cogeObjetivo(metodo,datos,url){
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		data: datos,
 		method: metodo,
@@ -146,7 +143,7 @@ function cogeObjetivo(metodo,datos,url){
 }
 function cogeCentro(metodo,datos,url){
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		data: datos,
 		method: metodo,
@@ -239,17 +236,23 @@ function recogeDatos(){
 	}
 			
 }
-cogeCentro('GET','',direCentros);
-cogeObjetivo('GET','',direObjetivo);
+
+if(sessionStorage.userCurso !== "Coordinador"){
+	cogeCentro('GET','',direCentros);
+	cogeObjetivo('GET','',direObjetivo);
+}else{
+	cogeCentro('GET','',direCentros);
+}
+
 
 $(document).ready(function() {
 	cargaDatos();
 	$("#botonSalir").click(function(){
 		eliminarStorage();
-		window.location.href = "index.html";
+		window.location.href = "../index.html";
 	});
 	$("#botonPerfil").click(function(){
-		window.location.href = "perfil.html";
+		window.location.href = "perfil.html";		
 	});
 	$("#insertar").click(function(){
 		recogeDatos();

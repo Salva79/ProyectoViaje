@@ -40,19 +40,41 @@ function conexion(metodo,datos,url){
 		url: url,
 	}).done(function (respuesta){
 			if(typeof(respuesta.id) !== undefined){
-				/*Guardamos los datos del usuario para acceder desde otras html
-				sin pasar por url, siempre se pueden codificar los datos*/
 				sessionStorage.userId=respuesta.userId;
 				sessionStorage.userToken=respuesta.id;
 				sessionStorage.userTtl=respuesta.ttl;
 				sessionStorage.userCreated=respuesta.created;
-
-				if (respuesta.alumnoRol == 1) {
-					window.location.href = "alumnos/inicio.html";
-				} else {
-					window.location.href = "coordinador/inicio.html";
-				}
-				
+				var direccion = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken
+				$.ajax({
+				async: true,
+				dataType: 'json',
+				method: 'GET',
+				url: direccion,
+				}).done(function (respuesta){
+					sessionStorage.userNombre = respuesta.Nombre;
+					sessionStorage.userApellidos = respuesta.Apellidos;
+					sessionStorage.userDNI = respuesta.DNI;
+					sessionStorage.userTelefono = respuesta.Telefono;
+					sessionStorage.userCurso = respuesta.Curso;
+					sessionStorage.userusername = respuesta.username;
+					sessionStorage.userEmail = respuesta.email;
+					sessionStorage.userCentroId = respuesta.centroId;
+					sessionStorage.userObjetivoId = respuesta.objetivo;
+					switch (sessionStorage.userCurso){
+						case "Coordinador":{
+							window.location.href = "coordinador/inicio.html";
+							break;
+						}
+						case "admin":{
+							window.location.href = "coordinador/inicio.html";
+							break;
+						}
+						default:{
+							window.location.href = "alumnos/inicio.html";
+							break;	
+						}						
+					}
+				});					
 			}else{
 				vaciarCampos();
 				estilosAlerta();
@@ -80,39 +102,26 @@ function conexion(metodo,datos,url){
 	});		
 }
 
-function acceder() {
-	var name = $("#usuario").val();
-	var pass = $("#password").val();
-	if (name == "" || pass == ""){
-		vaciarCampos();
-		estilosAlerta();
-		$('#info').html("Debes completar los campos para entrar");
-		eliminarAlerta();
-	}else{
-		var envio = {
-			"username": name,
-			"password": pass
-	}
-	sessionStorage.userpassword = pass;
-	var destino = '/api/Usuarios/login'
-	conexion('POST',envio,destino);
-	}
-}
-
 $(document).ready(function() {
 	eliminarStorage();
-
 	$('#enviar').click(function() {
-			acceder();		
+		var name = $("#usuario").val();
+		var pass = $("#password").val();
+		if (name == "" || pass == ""){
+			vaciarCampos();
+			estilosAlerta();
+			$('#info').html("Debes completar los campos para entrar");
+			eliminarAlerta();
+		}else{
+			var envio = {
+				"username": name,
+				"password": pass
+			}
+			sessionStorage.userpassword = pass;
+			var destino = '/api/Usuarios/login'
+			conexion('POST',envio,destino);
+		}		
 	});	
-
-	 // Controlar tecla enter
-    $(document).keypress(function( event ) {
-        if ( event.which == 13 ) {
-          acceder();
-        }
-    });
-
 	$('#botonPerfil').click(function() {
 		window.location="perfil.html";
 	});
