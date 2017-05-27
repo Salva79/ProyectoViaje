@@ -77,6 +77,7 @@ function insertarProveedor(datos,url) {
 			estilosinfo();
 			$('#info').html("Tipo de producto insertado");
 			eliminarinfo();
+			window.location.href = "../inicio.html";
 			
 		} else {
 			estilosAlerta();
