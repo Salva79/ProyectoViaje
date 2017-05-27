@@ -1,52 +1,79 @@
-var direccion = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
+var metodoUsuario = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
 
-function eliminarStorage(){
+/* Eliminar los valores de sesión */
+function eliminarStorage(){ 
+	sessionStorage.removeItem("userToken");
 	sessionStorage.removeItem("Nombre");
-	sessionStorage.removeItem("username");
+	sessionStorage.removeItem("userId");  
 }
-function vaciarCampos() {
+
+/* Vaciar los campos, después de seleccionar el botón enviar */
+function reiniciarElementos() {
 	$("#nombre").val("");
 	$("#codigo").val("");
 	$("#localidad").val("");
 }
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
+
+/* Eliminar la alerta de información */
 function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
-		$('#info').removeClass('alert alert-danger');
+		$('#info').removeClass();
 	}, 2500);
 }
-function conexion(envio, url) {
+
+/* Función para comprobar el usuario */
+function conexion(metodo,datos,url){
 	$.ajax({
 		async: true,
 		dataType: 'json',
-		data: envio,
+		data: datos,
+		method: metodo,
+		url: url,
+	}).done(function (respuesta){
+			if(typeof(respuesta.id) !== undefined){
+				sessionStorage.userNombre = respuesta.Nombre;
+				sessionStorage.userId = respuesta.userId;
+				var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
+				$("#botonPerfil").html(nombre);
+			}else{
+				console.log("No exite el usuario");
+			}
+	}).fail(function (xhr){
+			if(xhr.statusText === 'Unauthorized'){
+				console.log("Error, usuario no registrado");	
+			}else{
+				console.log("Error en el envio de datos");
+			}
+
+			eliminarStorage();
+			window.location.href = "../../index.html";			
+	});		
+}
+
+conexion('GET','',metodoUsuario);
+
+/* Función para insertar centros */
+function insertarCentros(datos,url) {
+	$.ajax({
+		async: true,
+		dataType: 'json',
+		data: datos,
 		method: 'POST',
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
-			sessionStorage.Nombre = respuesta.Nombre;
-			sessionStorage.Username = respuesta.username;
+			$('#info').html("Centro insertado");
+			$('#info').addClass('alert alert-success');
 		} else {
-			alert("No exite el usuario");
+			$('#info').html("Error, centro no insertado");
+			$('#info').addClass('alert alert-danger');
 		}
-	}).fail(function(xhr) {
-		if (xhr.statusText === 'Unauthorized') {
-			alert('Error, usuario no registrado');
-		} else {
-			alert('Error en el envio de datos');
-		}
-		eliminarStorage();
-		window.location.href = "../../index.html";
 	});
 }
-function validarDatos() {
-	var error = "";
-	var correcto = true;
 
+/* Función para comprobar los datos introducidos */
+function validarDatos() {
 	var nombre = $("#nombre").val("");
 	var codigo = $("#codigo").val("");
 	var localidad = $("#localidad").val("");
@@ -56,37 +83,34 @@ function validarDatos() {
 	localidad = localidad.trim();
 
 	if (nombre == "" || codigo == "" || localidad == "") {
-		error = "El nombre, código y localidad son obligatorios";
-		correcto = false;
-	}
-
-	if (correcto) {
-		var envio = {
+		$('#info').html("El nombre, código del centro y localidad son obligatorios");
+		$('#info').addClass('alert alert-danger');
+	} else {
+		var datosEnvio = {
 			"Nombre": nombre,
 			"CodigoCentro": codigo,
-			"Localidad": localidad
+			"Localidad": localidad,
+			"userId": sessionStorage.userId
 		}
-		var destino = '/api/Usuarios';
-		conexion(envio, destino);
-	} else {
-		vaciarCampos();
-		estilosAlerta();
-		$('#info').html(error);
-		eliminarAlerta();
+		var destino = '/api/Centros?access_token=' + sessionStorage.userToken; 
+		insertarCentros(datosEnvio, destino);
 	}
+
+		reiniciarElementos();
+		eliminarAlerta();
 }
 
-conexion('GET','',direccion);
-
 $(document).ready(function() {
-	$('#enviar').click(function() {
-		validarDatos();
-	});
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";
 	});
+
 	$("#botonPerfil").click(function(){
-		window.location.href = "../perfil.html";
+		window.location.href = "../../perfil.html";
+	});
+
+	$('#enviar').click(function() {
+		validarDatos();
 	});
 })
