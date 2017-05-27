@@ -97,7 +97,7 @@ function conexion(metodo,datos,url){
 					cadena = cadena + "</div>";
 					$('#contienelistados').html(cadena);
 				}else{
-					alert("No hay");
+					$('#contienelistados').html("No tienes ningún ingreso realizado");
 				}
 			}else{
 				estilosAlerta();

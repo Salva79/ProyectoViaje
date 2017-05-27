@@ -1,5 +1,15 @@
 var metodoUsuario = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
 
+function estilosinfo() {
+	$('#info').removeClass();
+	$('#info').addClass('alert alert-success');
+}
+function eliminarinfo() {
+	setTimeout(function(){
+        $('#info').html("");
+        $('#info').removeClass('alert alert-success');}, 2500);
+}
+
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
@@ -9,6 +19,11 @@ function eliminarStorage(){
 /* Vaciar los campos, después de seleccionar el botón enviar */
 function reiniciarElementos() {
 	$("#nombre").val("");
+}
+
+function estilosAlerta() {
+	$('#info').removeClass();
+	$('#info').addClass('alert alert-danger');
 }
 
 /* Eliminar la alerta de información */
@@ -59,20 +74,22 @@ function insertarProveedor(datos,url) {
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
+			estilosinfo();
 			$('#info').html("Tipo de producto insertado");
-			$('#info').addClass('alert alert-success');
+			eliminarinfo();
+			
 		} else {
+			estilosAlerta();
 			$('#info').html("Error, tipo de producto no insertado");
-			$('#info').addClass('alert alert-danger');
+			eliminarAlerta();
 		}
 	});
 }
 
 /* Función para comprobar los datos introducidos */
 function validarDatos() {
-	var nombre = $("#nombre").val("");
+	var nombre = $("#nombre").val();
 	nombre = nombre.trim();
-
 	if (nombre == "") {
 		$('#info').html("El nombre es obligatorio");
 		$('#info').addClass('alert alert-danger');
@@ -80,10 +97,9 @@ function validarDatos() {
 		var datosEnvio = {
 			"Nombre": nombre
 		}
-		var destino = '/api/Proveedores?access_token=' + sessionStorage.userToken; 
+		var destino = '/api/Proveedores?access_token=' + sessionStorage.userToken;
 		insertarProveedor(datosEnvio, destino);
 	}
-
 		reiniciarElementos();
 		eliminarAlerta();
 }
@@ -97,7 +113,7 @@ $(document).ready(function() {
 		window.location.href = "../perfil.html";
 	});
 
-	$('#enviar').click(function() {
+	$('#insertar').click(function() {
 		validarDatos();
 	});
 })
