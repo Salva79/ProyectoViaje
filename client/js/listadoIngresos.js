@@ -41,7 +41,7 @@ function eliminarStorage(){
 
 function obtenerTiposDisponibles(metodo,datos,url){
 	$.ajax({
-		async: false,
+		async: true,
 		dataType: 'json',
 		data: datos,
 		method: metodo,
@@ -103,7 +103,7 @@ function conexion(metodo,datos,url){
 				estilosAlerta();
 				$('#info').html("No exite el usuario");
 				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
+				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
 				eliminarAlerta();
 			}
 	}).fail(function (xhr){
