@@ -3,8 +3,19 @@ var metodoUsuario = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' 
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
-	sessionStorage.removeItem("Nombre");
-	sessionStorage.removeItem("centroId");  
+	sessionStorage.removeItem("userId");
+	sessionStorage.removeItem("userTtl");
+	sessionStorage.removeItem("userCreated");
+	sessionStorage.removeItem("userNombre");
+	sessionStorage.removeItem("userApellidos");
+	sessionStorage.removeItem("userDNI");
+	sessionStorage.removeItem("userTelefono");
+	sessionStorage.removeItem("userCurso");
+	sessionStorage.removeItem("userusername");
+	sessionStorage.removeItem("userEmail");
+	sessionStorage.removeItem("userpassword");
+	sessionStorage.removeItem("userObjetivo");
+	sessionStorage.removeItem("userCetro"); 
 }
 
 /* Eliminar la alerta de información */

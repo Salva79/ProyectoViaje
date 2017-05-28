@@ -41,7 +41,7 @@ function eliminarStorage(){
 
 function obtenerTiposDisponibles(metodo,datos,url){
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		data: datos,
 		method: metodo,
@@ -128,7 +128,7 @@ conexion('GET','',direccion);
 
 $(document).ready(function() {
 	var nombre = ("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre);
-				$("#botonPerfil").html(nombre);
+	$("#botonPerfil").html(nombre);
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../index.html";

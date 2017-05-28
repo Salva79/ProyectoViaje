@@ -78,7 +78,13 @@ function conexion(metodo,datos,url){
 				var cadena = "<div class='listado'>";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' class='btn btn-danger botonForm btn-xs'>BORRAR</button><br>";
+						var inicio = respuesta[i].YearInicio;
+						var fin = respuesta[i].YearFin;
+						inicio = inicio + "";
+						inicio = inicio.substring(0,10);
+						fin = fin + "";
+						fin = fin.substring(0,10);
+						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + "<br>   " + inicio + " - " + fin + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' class='btn btn-danger botonForm btn-xs'>BORRAR</button><br>";
 					}
 					cadena = cadena + "</div>";
 					$('#contienelistados').html(cadena);
