@@ -13,9 +13,7 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCurso");
 	sessionStorage.removeItem("userusername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userpassword");
-	sessionStorage.removeItem("userObjetivo");
-	sessionStorage.removeItem("userCetro");  
+	sessionStorage.removeItem("userpassword");  
 }
 
 /* Vaciar los campos, después de seleccionar el botón enviar */
@@ -43,10 +41,7 @@ function conexion(metodo,datos,url){
 		url: url,
 	}).done(function (respuesta){
 			if(typeof(respuesta.id) !== undefined){
-				sessionStorage.userNombre = respuesta.Nombre;
 				sessionStorage.userId = respuesta.userId;
-				var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
-				$("#botonPerfil").html(nombre);
 			}else{
 				console.log("No exite el usuario");
 			}
@@ -76,6 +71,8 @@ function insertarCentros(datos,url) {
 		if (typeof(respuesta.id) !== undefined) {
 			$('#info').html("Centro insertado");
 			$('#info').addClass('alert alert-success');
+			eliminarStorage();
+			window.location.href = "../../index.html";
 		} else {
 			$('#info').html("Error, centro no insertado");
 			$('#info').addClass('alert alert-danger');
@@ -101,7 +98,7 @@ function validarDatos() {
 			"Nombre": nombre,
 			"CodigoCentro": codigo,
 			"Localidad": localidad,
-			"userId": sessionStorage.userId
+			"userId": sessionStorage.id
 		}
 		var destino = '/api/Centros?access_token=' + sessionStorage.userToken; 
 		insertarCentros(datosEnvio, destino);
@@ -112,15 +109,6 @@ function validarDatos() {
 }
 
 $(document).ready(function() {
-	$("#botonSalir").click(function(){
-		eliminarStorage();
-		window.location.href = "../../index.html";
-	});
-
-	$("#botonPerfil").click(function(){
-		window.location.href = "../../perfil.html";
-	});
-
 	$('#enviar').click(function() {
 		validarDatos();
 	});

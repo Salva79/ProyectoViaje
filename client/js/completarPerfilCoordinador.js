@@ -1,5 +1,3 @@
-var metodoObjetivos = '/api/Objetivos';
-
 function eliminarStorage(){
 	sessionStorage.removeItem("username");
 	sessionStorage.removeItem("email");
@@ -23,37 +21,7 @@ function eliminarAlerta() {
 		$('#info').removeClass('alert alert-danger');
 	}, 2500);
 }
-function obtenerObjetivosDisponibles(metodo,datos,url){
-	$.ajax({
-		async: true,
-		dataType: 'json',
-		data: datos,
-		method: metodo,
-		url: url,
-	}).done(function (respuesta){
-			var cadena = '<option value="0">Selecciona el Objetivo</option>';
-			if(respuesta.length > 0){
-				for(var i = 0; i < respuesta.length; i++){
-					cadena = (cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>');
-				}
-				$('#objetivo').html(cadena);				
-			}
-	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
-			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
-			}
-			eliminarStorage();
-			window.location.href = "index.html";			
-	});		
-}
+
 function conexion(envio, url) {
 	$.ajax({
 		async: true,
@@ -63,7 +31,7 @@ function conexion(envio, url) {
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
-			window.location.href = "coordinador/altaCentro.html";
+			window.location.href = "coordinador/centros/altaCentro.html";
 			
 		} else {
 			alert("No exite el usuario");
@@ -89,7 +57,6 @@ function validarDatos() {
 	var username = sessionStorage.email;
 	var email = sessionStorage.username;
 	var password = sessionStorage.password;
-	var objetivo = $("#objetivo").val();
 	var telefono = $("#telefono").val();
 
 	nombre = nombre.trim();
@@ -97,8 +64,8 @@ function validarDatos() {
 	telefono = telefono.trim();
 	nif = nif.trim();
 
-	if ((nombre == "" || apellidos == "" || nif == ""|| telefono == "") || (objetivo == 0)) {
-		error = "El nombre, apellidos, nif, teléfono y objetivo son obligatorios";
+	if (nombre == "" || apellidos == "" || nif == ""|| telefono == "") {
+		error = "El nombre, apellidos, nif y teléfono son obligatorios";
 		correcto = false;
 	} else {
 		if (!(patronNif.test(nif))) {
@@ -112,11 +79,10 @@ function validarDatos() {
 			"Nombre": nombre,
 			"Apellidos": apellidos,
 			"DNI": nif,
-			"Curso": "Coordinador";
+			"Curso": "Coordinador",
 			"username": username,
 			"email": email,
 			"password": password,
-			"objetivo": objetivo,
 			"Telefono": telefono
 		}
 		var destino = '/api/Usuarios';
@@ -128,8 +94,6 @@ function validarDatos() {
 		eliminarAlerta();
 	}
 }
-
-obtenerObjetivosDisponibles("GET", "", metodoObjetivos);
 
 $(document).ready(function() {
 	$('#enviar').click(function() {

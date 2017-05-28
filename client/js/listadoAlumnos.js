@@ -27,6 +27,7 @@ function conexion(metodo,datos,url){
 	}).done(function (respuesta){
 			if(typeof(respuesta.id) !== undefined){
 				sessionStorage.userNombre = respuesta.Nombre;
+				sessionStorage.userId = respuesta.userId;
 				sessionStorage.centroId = respuesta.centroId;
 				var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 				$("#botonPerfil").html(nombre);
@@ -59,10 +60,10 @@ function listaAlumos(datos,url) {
 		var cadena = "";
 		if(respuesta.length > 0){
 			for(var i = 0; i < respuesta.length; i++){
-				cadena = cadena + respuesta[i].DNI + " " + respuesta[i].Nombre + " " + respuesta[i].Apellidos +
-				 " " +respuesta[i].Curso + " " +  respuesta[i].Telefono + " " +  respuesta[i].email +
-				 '<button id= class="botonVerificar btn btn-success" title="Verificar"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>' +
-				 '<button id= class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
+				cadena = cadena + respuesta[i].DNI + ", " + respuesta[i].Nombre + ", " + respuesta[i].Apellidos +
+				 " " +respuesta[i].Curso + ", " +  respuesta[i].Telefono + ", " +  respuesta[i].email +
+				 '<button id="" class="botonVerificar btn btn-success" title="Verificar"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>' +
+				 '<button id="" class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
 				  "<br/>";
 			}
 		} else {
