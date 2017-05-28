@@ -1,13 +1,27 @@
-var direccionCategorias = '/api/TipoProductos?access_token=' + sessionStorage.userToken;
+var direccionObjetivos = '/api/Objetivos?filter={"where": {"usuarioId": "' + sessionStorage.userId + '"}}&access_token=' + sessionStorage.userToken;
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
-	sessionStorage.removeItem("Nombre"); 
+	sessionStorage.removeItem("userId");
+	sessionStorage.removeItem("userTtl");
+	sessionStorage.removeItem("userCreated");
+	sessionStorage.removeItem("userNombre");
+	sessionStorage.removeItem("userApellidos");
+	sessionStorage.removeItem("userDNI");
+	sessionStorage.removeItem("userTelefono");
+	sessionStorage.removeItem("userCurso");
+	sessionStorage.removeItem("userusername");
+	sessionStorage.removeItem("userEmail");
+	sessionStorage.removeItem("userpassword");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId");
+	sessionStorage.removeItem("usernCentro");
+	sessionStorage.removeItem("usernObjetivo"); 
 }
 
-/* Vaciar los campos, después de seleccionar el botón enviar */
-function reiniciarElementos() {
-	$("#nombre").val("");
+function estilosAlerta() {
+	$('#info').removeClass();
+	$('#info').addClass('alert alert-danger');
 }
 
 /* Eliminar la alerta de información */
@@ -18,8 +32,8 @@ function eliminarAlerta() {
 	}, 2500);
 }
 
-function borraCategoria(id){
-	var url = '/api/TipoProductos/' + id + '?access_token=' + sessionStorage.userToken;
+function borraObjetivo(id){
+	var url = '/api/Objetivos/' + id + '?access_token=' + sessionStorage.userToken;
 	$.ajax({
 		async: true,
 		dataType: 'json',
@@ -28,11 +42,11 @@ function borraCategoria(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			window.location.href = "listadoCategorias.html";	
+			window.location.href = "listadoObjetivos.html";	
 		}else{
 			estilosAlerta();
-			$('#info').html("Error, categoria no borrada");
-			console.log("Error, proveedor no borrado");
+			$('#info').html("Error, objetivo no borrado");
+			console.log("Error, objetivo no borrado");
 			eliminarAlerta();
 		}
 	}).fail(function (xhr){
@@ -48,7 +62,7 @@ function borraCategoria(id){
 				eliminarAlerta();
 			}
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -64,12 +78,12 @@ function conexion(metodo,datos,url){
 				var cadena = "<div class='listado'>";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraCategoria(" + respuesta[i].id + ")' class='btn btn-danger botonForm btn-xs'>BORRAR</button><br>";
+						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' class='btn btn-danger botonForm btn-xs'>BORRAR</button><br>";
 					}
 					cadena = cadena + "</div>";
 					$('#contienelistados').html(cadena);
 				}else{
-					$('#contienelistados').html("No hay categoria");
+					$('#contienelistados').html("No hay objetivos");
 				}
 			}else{
 				estilosAlerta();
@@ -96,7 +110,7 @@ function conexion(metodo,datos,url){
 }
 
 $(document).ready(function() {
-	conexion("GET","",direccionCategorias)
+	conexion("GET","",direccionObjetivos)
 	$("#botonPerfil").html(("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre));
 	$("#botonSalir").click(function(){
 		eliminarStorage();

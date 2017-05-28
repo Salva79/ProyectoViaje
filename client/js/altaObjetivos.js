@@ -29,6 +29,8 @@ function eliminarStorage(){
 /* Vaciar los campos, después de seleccionar el botón enviar */
 function reiniciarElementos() {
 	$("#nombre").val("");
+	$("#inicio").val("");
+	$("#fin").val("");
 }
 
 function estilosAlerta() {
@@ -45,7 +47,7 @@ function eliminarAlerta() {
 }
 
 /* Función para insertar proveedores */
-function insertarCategoria(datos,url) {
+function insertarObjetivo(datos,url) {
 	$.ajax({
 		async: true,
 		dataType: 'json',
@@ -55,13 +57,13 @@ function insertarCategoria(datos,url) {
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
 			estilosinfo();
-			$('#info').html("Categoria insertada");
+			$('#info').html("Objetivo insertado");
 			eliminarinfo();
 			window.location.href = "../inicio.html";
 			
 		} else {
 			estilosAlerta();
-			$('#info').html("Error, categoria no insertada");
+			$('#info').html("Error, objetivo no insertado");
 			eliminarAlerta();
 		}
 	});
@@ -70,16 +72,24 @@ function insertarCategoria(datos,url) {
 /* Función para comprobar los datos introducidos */
 function validarDatos() {
 	var nombre = $("#nombre").val();
+	var inicio = $("#inicio").val();
+	var fin = $("#fin").val();
 	nombre = nombre.trim();
-	if (nombre == "") {
-		$('#info').html("El nombre es obligatorio");
-		$('#info').addClass('alert alert-danger');
+	inicio = inicio.trim();
+	fin = fin.trim();
+	if (nombre == "" || inicio == "" || fin == "") {
+		estilosAlerta();
+		$('#info').html("El nombre y las fechas son obligatorios");
+		eliminarAlerta();
 	} else {
 		var datosEnvio = {
+			"YearInicio": inicio,
+  			"YearFin": fin,
+  			"usuarioId": sessionStorage.userId,
 			"Nombre": nombre
 		}
-		var destino = '/api/TipoProductos?access_token=' + sessionStorage.userToken;
-		insertarCategoria(datosEnvio, destino);
+		var destino = '/api/Objetivos?access_token=' + sessionStorage.userToken;
+		insertarObjetivo(datosEnvio, destino);
 	}
 		reiniciarElementos();
 		eliminarAlerta();
