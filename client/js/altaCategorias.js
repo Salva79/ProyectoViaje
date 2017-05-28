@@ -82,7 +82,7 @@ $(document).ready(function() {
 	});
 
 	$("#botonPerfil").click(function(){
-		window.location.href = "../../perfil.html";
+		window.location.href = "../perfil.html";
 	});
 
 	$('#insertar').click(function() {

@@ -102,26 +102,35 @@ function conexion(metodo,datos,url){
 	});		
 }
 
+function envio(){
+	var name = $("#usuario").val();
+	var pass = $("#password").val();
+	if (name == "" || pass == ""){
+		vaciarCampos();
+		estilosAlerta();
+		$('#info').html("Debes completar los campos para entrar");
+		eliminarAlerta();
+	}else{
+		var envio = {
+			"username": name,
+			"password": pass
+		}
+		sessionStorage.userpassword = pass;
+		var destino = '/api/Usuarios/login'
+		conexion('POST',envio,destino);
+	}
+}
+
 $(document).ready(function() {
 	eliminarStorage();
 	$('#enviar').click(function() {
-		var name = $("#usuario").val();
-		var pass = $("#password").val();
-		if (name == "" || pass == ""){
-			vaciarCampos();
-			estilosAlerta();
-			$('#info').html("Debes completar los campos para entrar");
-			eliminarAlerta();
-		}else{
-			var envio = {
-				"username": name,
-				"password": pass
-			}
-			sessionStorage.userpassword = pass;
-			var destino = '/api/Usuarios/login'
-			conexion('POST',envio,destino);
-		}		
-	});	
+		envio();		
+	});
+	$('body').keyup(function(e){
+		if(e.keyCode === 13){
+			envio();
+		}
+	});
 	$('#botonPerfil').click(function() {
 		window.location="perfil.html";
 	});
