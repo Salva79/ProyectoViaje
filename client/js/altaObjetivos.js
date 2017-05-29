@@ -29,8 +29,12 @@ function eliminarStorage(){
 /* Vaciar los campos, después de seleccionar el botón enviar */
 function reiniciarElementos() {
 	$("#nombre").val("");
-	$("#inicio").val("");
-	$("#fin").val("");
+	$("#dinicio").val("");
+	$("#dfin").val("");
+	$("#minicio").val("");
+	$("#mfin").val("");
+	$("#ainicio").val("");
+	$("#afin").val("");
 }
 
 function estilosAlerta() {
@@ -69,19 +73,66 @@ function insertarObjetivo(datos,url) {
 	});
 }
 
+
+function compruebafechas(){
+	var dinicio = $("#dinicio").val();
+	var minicio = $("#minicio").val();
+	var ainicio = $("#ainicio").val();
+	var dfin = $("#dfin").val();
+	var mfin = $("#mfin").val();
+	var afin = $("#afin").val();
+	if(ainicio<=afin){
+		if(ainicio===afin){
+			if(minicio<=mfin){
+				if(minicio===mfin){
+					if(dinicio<dfin){
+						return true;
+					}else{
+						return false;
+					}
+				}else{
+					return true;
+				}
+			}else{
+				return false;
+			}
+		}else{
+			return true;
+		}
+	}else{
+		return false;
+	}
+}
+
 /* Función para comprobar los datos introducidos */
 function validarDatos() {
 	var nombre = $("#nombre").val();
-	var inicio = $("#inicio").val();
-	var fin = $("#fin").val();
+	var dinicio = $("#dinicio").val();
+	var minicio = $("#minicio").val();
+	var ainicio = $("#ainicio").val();
+	var dfin = $("#dfin").val();
+	var mfin = $("#mfin").val();
+	var afin = $("#afin").val();
+	var inicio;
+	var fin;
 	nombre = nombre.trim();
-	inicio = inicio.trim();
-	fin = fin.trim();
+	dinicio = dinicio.trim();
+	minicio = minicio.trim();
+	ainicio = ainicio.trim();
+	dfin = dfin.trim();
+	mfin = mfin.trim();
+	afin = afin.trim();
 	if (nombre == "" || inicio == "" || fin == "") {
 		estilosAlerta();
 		$('#info').html("El nombre y las fechas son obligatorios");
 		eliminarAlerta();
-	} else {
+	} else if(!compruebafechas()){
+		estilosAlerta();
+		$('#info').html("Combrueba que la fecha fin sea mayor que la fecha inicio");
+		eliminarAlerta();
+	}else{
+		inicio = ainicio + "-" + minicio + "-" + dinicio;
+		fin = afin + "-" + mfin + "-" + dfin;
 		var datosEnvio = {
 			"YearInicio": inicio,
   			"YearFin": fin,
@@ -91,8 +142,8 @@ function validarDatos() {
 		var destino = '/api/Objetivos?access_token=' + sessionStorage.userToken;
 		insertarObjetivo(datosEnvio, destino);
 	}
-		reiniciarElementos();
-		eliminarAlerta();
+	reiniciarElementos();
+	eliminarAlerta();
 }
 
 $(document).ready(function() {
