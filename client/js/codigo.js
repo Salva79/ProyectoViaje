@@ -116,7 +116,7 @@ function envio(){
 			"password": pass
 		}
 		sessionStorage.userpassword = pass;
-		var destino = '/api/Usuarios/login'
+		var destino = '/api/Usuarios/login';
 		conexion('POST',envio,destino);
 	}
 }

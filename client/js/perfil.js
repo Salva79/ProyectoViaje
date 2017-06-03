@@ -49,14 +49,14 @@ function cargaDatos(){
 	$("#email").val(sessionStorage.userEmail);
 	$("#telefono").val(sessionStorage.userTelefono);
 	$("#curso").val(sessionStorage.userCurso);
-	$("#ncentro").val("Centro: " + sessionStorage.usernCentro);
 	if (sessionStorage.userCurso == "Coordinador") {
 		$("#curso").hide();
 		$("#objetivo").hide();
-
+		$("#ncentro").hide();
 	}else{
 		$("#curso").val(sessionStorage.userCurso);
 		$("#objetivo").val(sessionStorage.usernObjetivo);
+		$("#ncentro").val("Centro: " + sessionStorage.usernCentro);
 	}
 
 	
@@ -240,7 +240,6 @@ function recogeDatos(){
 if(sessionStorage.userCurso !== "Coordinador"){
 	cogeCentro('GET','',direCentros);
 	cogeObjetivo('GET','',direObjetivo);
-}else{
 	cogeCentro('GET','',direCentros);
 }
 

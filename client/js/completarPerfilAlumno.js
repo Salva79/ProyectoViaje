@@ -5,6 +5,8 @@ function eliminarStorage(){
 	sessionStorage.removeItem("username");
 	sessionStorage.removeItem("email");
 	sessionStorage.removeItem("password");
+	sessionStorage.removeItem("alumnoRol");
+	sessionStorage.removeItem("coordinadorRol");
 }
 function vaciarCampos() {
 	$("#nombre").val("");
@@ -99,13 +101,23 @@ function conexion(envio, url) {
 			window.location.href = "index.html";
 			
 		} else {
-			alert("No exite el usuario");
+			estilosAlerta();
+			$('#info').html("No exite el usuario");
+			console.log("No exite el usuario");
+			eliminarAlerta();
+			alert();
 		}
 	}).fail(function(xhr) {
 		if (xhr.statusText === 'Unauthorized') {
-			alert('Error, usuario no registrado');
+			estilosAlerta();
+			$('#info').html("Error, usuario no registrado");
+			console.log("Error, usuario no registrado");
+			eliminarAlerta();
 		} else {
-			alert('Error en el envio de datos');
+			estilosAlerta();
+			$('#info').html("Error en el envio de datos");
+			console.log("Error en el envio de datos");
+			eliminarAlerta();
 		}
 	});
 }
