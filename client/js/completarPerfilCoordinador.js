@@ -2,19 +2,20 @@ function eliminarStorage(){
 	sessionStorage.removeItem("username");
 	sessionStorage.removeItem("email");
 	sessionStorage.removeItem("password");
-	sessionStorage.removeItem("alumnoRol");
-	sessionStorage.removeItem("coordinadorRol");
 }
+
 function vaciarCampos() {
 	$("#nombre").val("");
 	$("#apellidos").val("");
 	$("#nif").val("");
 	$("#telefono").val("");
 }
+
 function estilosAlerta() {
 	$('#info').removeClass();
 	$('#info').addClass('alert alert-danger');
 }
+
 function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
@@ -31,7 +32,7 @@ function conexion(envio, url) {
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
-			window.location.href = "coordinador/centros/altaCentro.html";
+			window.location.href = "index.html";
 			
 		} else {
 			alert("No exite el usuario");
@@ -52,8 +53,6 @@ function validarDatos() {
 	var nombre = $("#nombre").val();
 	var apellidos = $("#apellidos").val();
 	var nif = $("#nif").val();
-	var alumno = sessionStorage.alumnoRol;
-	var coordinador = sessionStorage.coordinadorRol;
 	var username = sessionStorage.email;
 	var email = sessionStorage.username;
 	var password = sessionStorage.password;

@@ -1,5 +1,3 @@
-var metodoUsuario = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
-
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
@@ -29,39 +27,7 @@ function eliminarAlerta() {
 	}, 2500);
 }
 
-/* Función para comprobar el usuario */
-function conexion(metodo,datos,url){
-	$.ajax({
-		async: true,
-		dataType: 'json',
-		data: datos,
-		method: metodo,
-		url: url,
-	}).done(function (respuesta){
-			if(typeof(respuesta.id) !== undefined){
-				sessionStorage.userNombre = respuesta.Nombre;
-				sessionStorage.userId = respuesta.userId;
-				sessionStorage.centroId = respuesta.centroId;
-				var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
-				$("#botonPerfil").html(nombre);
-			}else{
-				console.log("No exite el usuario");
-			}
-	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");	
-			}else{
-				console.log("Error en el envio de datos");
-			}
-
-			eliminarStorage();
-			window.location.href = "../../index.html";			
-	});		
-}
-
-conexion('GET', '', metodoUsuario);
-
-/* Función para modificar centros */
+/* Función para obtener los datos centros */
 function obtenerDatosCentro(datos,url) {
 	$.ajax({
 		async: true,
@@ -72,7 +38,7 @@ function obtenerDatosCentro(datos,url) {
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
 			sessionStorage.NombreCentro = respuesta.Nombre;
-			sessionStorage.CodigoCentro = respuesta.Nombre;
+			sessionStorage.CodigoCentro = respuesta.CodigoCentro;
 			sessionStorage.LocalidadCentro = respuesta.Localidad;
 		} else {
 			$('#info').html("Error, centro no encontrado");
@@ -82,7 +48,7 @@ function obtenerDatosCentro(datos,url) {
 	});
 }
 
-var metodoObtenerDatosCentro = 'api/Centros/' + sessionStorage.centroId + '?access_token=' + sessionStorage.userToken;; 
+var metodoObtenerDatosCentro = '/api/Centros/' + sessionStorage.userCentroId + '?access_token=' + sessionStorage.userToken; 
 obtenerDatosCentro("", metodoObtenerDatosCentro);
 
 function mostrarDatosCentro() {
@@ -101,39 +67,37 @@ function modificarCentro(datos,url) {
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
-			$('#info').html("Datos del centro modificados");
 			$('#info').addClass('alert alert-success');
+			$('#info').html("Datos del centro modificados");
 			eliminarAlerta();
-			
+			window.location.href = "datosCentro.html";
 		} else {
-			$('#info').html("Error, centro no modificado");
 			$('#info').addClass('alert alert-danger');
-			eliminarAlerta();
+			$('#info').html("Error, centro no modificado");
 		}
 	});
 }
 
 /* Función para comprobar los datos introducidos */
 function validarDatos() {
-	var nombre = $("#nombre").val("");
-	var codigo = $("#codigo").val("");
-	var localidad = $("#localidad").val("");
+	var nombre = $("#nombre").val();
+	var codigo = $("#codigo").val();
+	var localidad = $("#localidad").val();
 
 	nombre = nombre.trim();
 	codigo = codigo.trim();
 	localidad = localidad.trim();
 
 	if (nombre == "" || codigo == "" || localidad == "") {
-		$('#info').html("El nombre del centro, el código del centro y localidad son obligatorios");
 		$('#info').addClass('alert alert-danger');
+		$('#info').html("El nombre del centro, el código del centro y localidad son obligatorios");
 	} else {
 		var datosEnvio = {
 			"Nombre": nombre,
 			"CodigoCentro": codigo,
-			"Localidad": localidad,
-			"userId": sessionStorage.userId
+			"Localidad": localidad
 		}
-		var destino = '/api/Centros/' + sessionStorage.centroId + '?access_token=' + sessionStorage.userToken; 
+		var destino = '/api/Centros/' + sessionStorage.userCentroId + '?access_token=' + sessionStorage.userToken; 
 		modificarCentro(datosEnvio, destino);
 	}
 
@@ -141,6 +105,9 @@ function validarDatos() {
 }
 
 $(document).ready(function() {
+	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
+	$("#botonPerfil").html(nombre);
+
 	mostrarDatosCentro();
 
 	$("#botonSalir").click(function(){
@@ -149,7 +116,7 @@ $(document).ready(function() {
 	});
 
 	$("#botonPerfil").click(function(){
-		window.location.href = "../../perfil.html";
+		window.location.href = "../perfil.html";
 	});
 
 	$('#enviar').click(function() {

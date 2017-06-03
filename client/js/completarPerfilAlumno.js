@@ -5,8 +5,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("username");
 	sessionStorage.removeItem("email");
 	sessionStorage.removeItem("password");
-	sessionStorage.removeItem("alumnoRol");
-	sessionStorage.removeItem("coordinadorRol");
 }
 function vaciarCampos() {
 	$("#nombre").val("");
@@ -121,8 +119,6 @@ function validarDatos() {
 	var nif = $("#nif").val();
 	var centro = $("#centro").val();
 	var curso = $("#curso").val();
-	var alumno = sessionStorage.alumnoRol;
-	var coordinador = sessionStorage.coordinadorRol;
 	var username = sessionStorage.email;
 	var email = sessionStorage.username;
 	var password = sessionStorage.password;
