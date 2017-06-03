@@ -10,9 +10,9 @@
 		<link rel="stylesheet" type="text/css" href="../../css/estilos.css">
 		<script type="text/javascript" src="../../js/jquery-3.1.1.min.js" ></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../../js/listadoAlumnos.js"></script>
+		<script type="text/javascript" src="../../js/perfilAlumno.js"></script>
 		<link rel="icon" type="image/png" href="../../img/logo.png">
-		<title>Listado de Alumnos</title>
+		<title>Perfil del Alumno</title>
 	</head>
 
 	<body>
@@ -93,11 +93,53 @@
 
 			<div id="contenido" class="row">
 
-				<h2>LISTADO DE ALUMNOS</h2>
+				<h2>PERFIL DEL ALUMNO</h2>
+				<form id="perfil" name="perfil" enctype="multipart/form-data" action="perfil.html" method="post" class="form-inline">
+					<div class="col-xs-12">
+						<div class="form-group">
+						    <input type="text" id="dni" name="dni" class="form-control" size="10" maxlength="10" placeholder="DNI" readonly/>
+						</div>
 
-				<div id="contienelistados" class="col-sm-4 col-sm-offset-4 listado">
-					
-				</div>
+						<div class="form-group">
+						    <input type="text" id="nombre" name="nombre" class="form-control" size="60" maxlength="90" placeholder="NOMBRE" readonly pattern="[a-zA-ZñÑ0-9 ]+"/>
+						</div>
+
+						<div class="form-group">
+						    <input type="text" id="apellidos" name="Apellidos" class="form-control" size="60" maxlength="90" placeholder="APELLIDOS" readonly pattern="[a-zA-ZñÑ0-9 ]+"/>
+						</div>
+					</div>
+
+					<div class="col-xs-12 margenInput">
+						<div class="form-group">
+						   <input type="email" id="email" name="email" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" size="45" maxlength="90" placeholder="EMAIL" readonly/>
+						</div>
+
+						<div class="form-group">
+						   <input type="text" id="curso" name="curso" class="form-control" size="5" maxlength="5" placeholder="CURSO" readonly/>
+						</div>
+
+						<div class="form-group">
+						   <input type="text" id="telefono" name="telefono" class="form-control" size="9" maxlength="9" placeholder="TELEFONO" readonly />
+						</div>
+
+					</div>
+					<div class="col-xs-12 margenInput">
+						<div class="form-group">
+						    <input type="text" id="username" name="username" class="form-control" size="60" maxlength="90" placeholder="USERNAME" readonly />
+						</div>
+						<div class="form-group">
+						    <input type="text" id="password" name="password" class="form-control" size="60" maxlength="90" placeholder="PASSWORD" required="yes"/>
+						</div>
+					</div>
+					<button type="button" id="insertar" class="btn btn-success botonForm">GUARDAR DATOS</button>
+					<div class="col-xs-12 margenInput">
+						<select id="objetivo" name="objetivo" class="form-control">
+				    		<option value="valorInicio">Selecciona Objetivo</option>
+				    	</select>
+					</div>	
+
+				</form>
+				
 
 			</div>
 			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>

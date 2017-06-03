@@ -31,37 +31,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCetro");
 }
 
-/* Función para comprobar el usuario */
-function conexion(metodo,datos,url){
-	$.ajax({
-		async: true,
-		dataType: 'json',
-		data: datos,
-		method: metodo,
-		url: url,
-	}).done(function (respuesta){
-			if(typeof(respuesta.id) !== undefined){
-				sessionStorage.userNombre = respuesta.Nombre;
-				sessionStorage.userId = respuesta.userId;
-				var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
-				$("#botonPerfil").html(nombre);
-			}else{
-				console.log("No exite el usuario");
-			}
-	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");	
-			}else{
-				console.log("Error en el envio de datos");
-			}
-
-			eliminarStorage();
-			window.location.href = "../../index.html";			
-	});		
-}
-
-conexion('GET','',metodoUsuario);
-
 /* Función para insertar proveedores */
 function insertarProveedor(datos,url) {
 	$.ajax({
@@ -100,7 +69,8 @@ function validarDatos() {
 }
 
 $(document).ready(function() {
-
+	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
+	$("#botonPerfil").html(nombre);
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";

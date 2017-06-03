@@ -84,7 +84,7 @@ function conexion(metodo,datos,url){
 						inicio = inicio.substring(0,10);
 						fin = fin + "";
 						fin = fin.substring(0,10);
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + "<br>   " + inicio + " a " + fin + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' class='btn btn-danger botonForm btn-xs'>BORRAR</button><br>";
+						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + "<br>   " + inicio + " a " + fin + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
 					}
 					cadena = cadena + "</div>";
 					$('#contienelistados').html(cadena);

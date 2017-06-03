@@ -64,7 +64,7 @@ function conexion(metodo,datos,url){
 				var cadena = "<div class='listado'>";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraCategoria(" + respuesta[i].id + ")' class='btn btn-danger botonForm btn-xs'>BORRAR</button><br>";
+						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraCategoria(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
 					}
 					cadena = cadena + "</div>";
 					$('#contienelistados').html(cadena);

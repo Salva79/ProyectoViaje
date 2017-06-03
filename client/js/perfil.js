@@ -56,7 +56,7 @@ function cargaDatos(){
 
 	}else{
 		$("#curso").val(sessionStorage.userCurso);
-		$("#objetivo").val("Año: " + sessionStorage.usernObjetivo);
+		$("#objetivo").val(sessionStorage.usernObjetivo);
 	}
 
 	
