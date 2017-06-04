@@ -5,14 +5,14 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCreated");
 	sessionStorage.removeItem("userNombre");
 	sessionStorage.removeItem("userApellidos");
-	sessionStorage.removeItem("userDNI");
+	sessionStorage.removeItem("userDni");
 	sessionStorage.removeItem("userTelefono");
 	sessionStorage.removeItem("userCurso");
-	sessionStorage.removeItem("userusername");
+	sessionStorage.removeItem("userUsername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userpassword");
-	sessionStorage.removeItem("userObjetivo");
-	sessionStorage.removeItem("userCetro");
+	sessionStorage.removeItem("userPassword");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId");
 }
 
 function vaciarCampos() {
@@ -53,10 +53,10 @@ function conexion(metodo,datos,url){
 				}).done(function (respuesta){
 					sessionStorage.userNombre = respuesta.Nombre;
 					sessionStorage.userApellidos = respuesta.Apellidos;
-					sessionStorage.userDNI = respuesta.DNI;
+					sessionStorage.userDni = respuesta.DNI;
 					sessionStorage.userTelefono = respuesta.Telefono;
 					sessionStorage.userCurso = respuesta.Curso;
-					sessionStorage.userusername = respuesta.username;
+					sessionStorage.userUsername = respuesta.username;
 					sessionStorage.userEmail = respuesta.email;
 					sessionStorage.userCentroId = respuesta.centroId;
 					sessionStorage.userObjetivoId = respuesta.objetivo;
@@ -115,7 +115,7 @@ function envio(){
 			"username": name,
 			"password": pass
 		}
-		sessionStorage.userpassword = pass;
+		sessionStorage.userPassword = pass;
 		var destino = '/api/Usuarios/login';
 		conexion('POST',envio,destino);
 	}

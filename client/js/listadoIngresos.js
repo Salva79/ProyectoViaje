@@ -2,6 +2,29 @@ var direccion = '/api/Ingresos?filter={"where":{"userId":"' + sessionStorage.use
 var direccion2 = '/api/TipoProductos?access_token=' + sessionStorage.userToken;
 var arrayTipos = [];
 
+/* Eliminar los valores de sesión */
+function eliminarStorage(){ 
+	sessionStorage.removeItem("userToken");
+	sessionStorage.removeItem("userId");
+	sessionStorage.removeItem("userTtl");
+	sessionStorage.removeItem("userCreated");
+	sessionStorage.removeItem("userNombre");
+	sessionStorage.removeItem("userApellidos");
+	sessionStorage.removeItem("userDni");
+	sessionStorage.removeItem("userTelefono");
+	sessionStorage.removeItem("userCurso");
+	sessionStorage.removeItem("userUsername");
+	sessionStorage.removeItem("userEmail");
+	sessionStorage.removeItem("userPassword");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId"); 
+	sessionStorage.removeItem("NombreCentro"); 
+	sessionStorage.removeItem("CodigoCentro");
+	sessionStorage.removeItem("LocalidadCentro");
+	sessionStorage.removeItem("userIdAlumnado");
+	sessionStorage.removeItem("NombreObjetivo");     
+}
+
 function estilosinfo() {
 	$('#info').removeClass();
 	$('#info').addClass('alert alert-success');
@@ -19,24 +42,6 @@ function eliminarAlerta() {
 	setTimeout(function(){
         $('#info').html("");
         $('#info').removeClass('alert alert-danger');}, 2500);
-}
-function eliminarStorage(){
-	sessionStorage.removeItem("userToken");
-	sessionStorage.removeItem("userId");
-	sessionStorage.removeItem("userTtl");
-	sessionStorage.removeItem("userCreated");
-	sessionStorage.removeItem("userNombre");
-	sessionStorage.removeItem("userApellidos");
-	sessionStorage.removeItem("userDNI");
-	sessionStorage.removeItem("userTelefono");
-	sessionStorage.removeItem("userCurso");
-	sessionStorage.removeItem("userusername");
-	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userpassword");
-	sessionStorage.removeItem("userObjetivoId");
-	sessionStorage.removeItem("userCentroId");
-	sessionStorage.removeItem("usernCentro");
-	sessionStorage.removeItem("usernObjetivo");
 }
 
 function obtenerTiposDisponibles(metodo,datos,url){

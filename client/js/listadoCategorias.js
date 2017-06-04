@@ -1,8 +1,26 @@
 var direccionCategorias = '/api/TipoProductos?access_token=' + sessionStorage.userToken;
+
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
-	sessionStorage.removeItem("Nombre"); 
+	sessionStorage.removeItem("userId");
+	sessionStorage.removeItem("userTtl");
+	sessionStorage.removeItem("userCreated");
+	sessionStorage.removeItem("userNombre");
+	sessionStorage.removeItem("userApellidos");
+	sessionStorage.removeItem("userDni");
+	sessionStorage.removeItem("userTelefono");
+	sessionStorage.removeItem("userCurso");
+	sessionStorage.removeItem("userUsername");
+	sessionStorage.removeItem("userEmail");
+	sessionStorage.removeItem("userPassword");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId"); 
+	sessionStorage.removeItem("NombreCentro"); 
+	sessionStorage.removeItem("CodigoCentro");
+	sessionStorage.removeItem("LocalidadCentro");
+	sessionStorage.removeItem("userIdAlumnado");
+	sessionStorage.removeItem("NombreObjetivo");     
 }
 
 /* Vaciar los campos, después de seleccionar el botón enviar */

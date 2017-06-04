@@ -6,16 +6,19 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCreated");
 	sessionStorage.removeItem("userNombre");
 	sessionStorage.removeItem("userApellidos");
-	sessionStorage.removeItem("userDNI");
+	sessionStorage.removeItem("userDni");
 	sessionStorage.removeItem("userTelefono");
 	sessionStorage.removeItem("userCurso");
-	sessionStorage.removeItem("userusername");
+	sessionStorage.removeItem("userUsername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userpassword");
+	sessionStorage.removeItem("userPassword");
 	sessionStorage.removeItem("userObjetivoId");
-	sessionStorage.removeItem("userCentroId");
-	sessionStorage.removeItem("usernCentro");
-	sessionStorage.removeItem("usernObjetivo");  
+	sessionStorage.removeItem("userCentroId"); 
+	sessionStorage.removeItem("NombreCentro"); 
+	sessionStorage.removeItem("CodigoCentro");
+	sessionStorage.removeItem("LocalidadCentro");
+	sessionStorage.removeItem("userIdAlumnado");
+	sessionStorage.removeItem("NombreObjetivo");     
 }
 
 /* Eliminar la alerta de información */
