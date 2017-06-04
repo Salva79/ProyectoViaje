@@ -116,13 +116,30 @@
 						</div>
 					</div>
 			
-					<button type="button" id="enviar" class="btn btn-success botonForm">MODIFICAR CENTRO</button>	
+					<button type="button" id="enviar" class="btn btn-success botonForm" data-target="#modalCaja" data-toggle="modal" data-backdrop="static" data-keyboard="false">MODIFICAR CENTRO</button>	
 				
 				</form>
 
 			</div>
+		</div>
 
-			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
+		<!-- Modal -->
+		<div id="modalCaja" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				 <!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal">&times;</button>
+					    <h4 class="modal-title">MODIFICAR CENTRO</h4>
+					</div>
+					<div class="modal-body">
+					    <div id="info"></div>
+					</div>
+					<div class="modal-footer">
+					    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

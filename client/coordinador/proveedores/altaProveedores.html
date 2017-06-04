@@ -99,7 +99,7 @@
 
 			<div id="contenido" class="row">
 
-				<h2>ALTA PROVEEDOR</h2>
+				<h2>ALTA PROVEEDORES</h2>
 
 				<form id="proveedores" name="proveedores" enctype="multipart/form-data" class="form-inline">
 					<div class="col-xs-12">
@@ -107,12 +107,30 @@
 					</div>
 			</div>
 			
-					<button type="button" id="enviar" class="btn btn-success botonForm">ALTA PROVEEDOR</button>	
+					<button type="button" id="enviar" class="btn btn-success botonForm" data-target="#modalCaja" data-toggle="modal" data-backdrop="static" data-keyboard="false">ALTA PROVEEDOR</button>	
 				</form>
 
 			</div>
-			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
+			
 		</div>
 
+		<!-- Modal -->
+		<div id="modalCaja" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				 <!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal">&times;</button>
+					    <h4 class="modal-title">ALTA PROVEEDORES</h4>
+					</div>
+					<div class="modal-body">
+					    <div id="info"></div>
+					</div>
+					<div class="modal-footer">
+					    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

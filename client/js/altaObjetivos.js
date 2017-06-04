@@ -132,11 +132,9 @@ function validarDatos() {
 	if (nombre == "" || inicio == "" || fin == "") {
 		estilosAlerta();
 		$('#info').html("El nombre y las fechas son obligatorios");
-		eliminarAlerta();
 	} else if(!compruebafechas()){
 		estilosAlerta();
 		$('#info').html("Combrueba que la fecha fin sea mayor que la fecha inicio");
-		eliminarAlerta();
 	}else{
 		inicio = ainicio + "-" + minicio + "-" + dinicio;
 		fin = afin + "-" + mfin + "-" + dfin;

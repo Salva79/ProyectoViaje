@@ -54,13 +54,12 @@ function insertarCentros(datos,url) {
 				"Telefono": sessionStorage.userTelefono,
 				"Curso": sessionStorage.userCurso,
 				"username": sessionStorage.userUsername,
-				"password": sessionStorage.userPassword,
 				"email": sessionStorage.userEmail,
 				"centroId": sessionStorage.userCentroId,
 				"objetivo": sessionStorage.userObjetivoId
 			}
 
-			var destinoModificarUser = '/api/Usuario' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken; 
+			var destinoModificarUser = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken; 
 			modificarCentroId(datosEnvioModificarUser, destinoModificarUser);
 		} else {
 			$('#info').html("Error, centro no insertado");
@@ -108,34 +107,39 @@ function modificarCentroId(datos,url) {
 
 /* Función para comprobar los datos introducidos */
 function validarDatos() {
-	var nombre = $("#nombre").val();
-	var codigo = $("#codigo").val();
-	var localidad = $("#localidad").val();
-
-	nombre = nombre.trim();
-	codigo = codigo.trim();
-	localidad = localidad.trim();
-
-	if (nombre == "" || codigo == "" || localidad == "") {
-		$('#info').html("El nombre, código del centro y localidad son obligatorios");
+	if (sessionStorage.userCentroId != null) {
+		$('#info').html("El usuario ya tiene un centro");
 		$('#info').addClass('alert alert-danger');
 	} else {
-		var datosEnvio = {
-			"Nombre": nombre,
-			"CodigoCentro": codigo,
-			"Localidad": localidad,
-			"userId": sessionStorage.userId
+		var nombre = $("#nombre").val();
+		var codigo = $("#codigo").val();
+		var localidad = $("#localidad").val();
+
+		nombre = nombre.trim();
+		codigo = codigo.trim();
+		localidad = localidad.trim();
+
+		if (nombre == "" || codigo == "" || localidad == "") {
+			$('#info').html("El nombre, código del centro y localidad son obligatorios");
+			$('#info').addClass('alert alert-danger');
+		} else {
+			var datosEnvio = {
+				"Nombre": nombre,
+				"CodigoCentro": codigo,
+				"Localidad": localidad,
+				"userId": sessionStorage.userId
+			}
+
+			var destino = '/api/Centros?access_token=' + sessionStorage.userToken; 
+			insertarCentros(datosEnvio, destino);
+
+			var destinoidUltimoCentro = '/api/Centros/count?access_token=' + sessionStorage.userToken; 
+			idUltimoCentro("", destinoidUltimoCentro);
 		}
-
-		var destino = '/api/Centros?access_token=' + sessionStorage.userToken; 
-		insertarCentros(datosEnvio, destino);
-
-		var destinoidUltimoCentro = '/api/Centros/count?access_token=' + sessionStorage.userToken; 
-		idUltimoCentro("", destinoidUltimoCentro);
 	}
-
-		reiniciarElementos();
-		eliminarAlerta();
+	
+	reiniciarElementos();
+	eliminarAlerta();
 }
 
 $(document).ready(function() {

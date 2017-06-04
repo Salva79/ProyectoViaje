@@ -103,21 +103,57 @@
 
 				<form id="objetivos" name="objetivos" enctype="multipart/form-data" class="form-inline">
 					<div class="col-xs-12">
-						 <input type="text" id="nombre" name="nombre" class="form-control" size="50" placeholder="Objetivo" required="yes"/><br>
-						 <input type="number" id="dinicio" name="dinicio" class="form-control" size="2" placeholder="Día Inicio" required="yes"/>
-						 <input type="number" id="minicio" name="minicio" class="form-control" size="2" placeholder="Mes Inicio" required="yes"/>
-						 <input type="number" id="ainicio" name="ainicio" class="form-control" size="4" placeholder="Año Inicio" required="yes"/><br>
-						 <input type="number" id="dfin" name="dfin" class="form-control" size="2" placeholder="Día Fin" required="yes"/>
-						 <input type="number" id="mfin" name="mfin" class="form-control" size="2" placeholder="Mes Fin" required="yes"/>
-						 <input type="number" id="afin" name="afin" class="form-control" size="4" placeholder="Año Fin " required="yes"/>
+						<div class="form-group">
+						 	<input type="text" id="nombre" name="nombre" class="form-control" size="50" placeholder="Objetivo" required="yes"/>
+						 </div>
+					<div class="col-xs-12 margenInput">	 
+						 <div class="form-group">
+						 	<input type="number" id="dinicio" name="dinicio" class="form-control" size="2" placeholder="Día Inicio" required="yes" min="1" max="31"/>
+						 </div>
+						 <div class="form-group">
+						 	<input type="number" id="minicio" name="minicio" class="form-control" size="2" placeholder="Mes Inicio" required="yes" min="1" max="12"/>
+						 </div>
+						 <div class="form-group">
+						 	<input type="number" id="ainicio" name="ainicio" class="form-control" size="4" placeholder="Año Inicio" required="yes" min="2017" max="2020"/>
+						 </div>
+					</div>
+					<div class="col-xs-12 margenInput">
+						<div class="form-group">
+							<input type="number" id="dfin" name="dfin" class="form-control" size="2" placeholder="Día Fin" required="yes" min="1" max="31"/>
+						</div>
+						<div class="form-group">
+						 	<input type="number" id="mfin" name="mfin" class="form-control" size="2" placeholder="Mes Fin" required="yes" min="1" max="31"/>
+						</div>
+						<div class="form-group">
+						 	<input type="number" id="afin" name="afin" class="form-control" size="4" placeholder="Año Fin " required="yes" min="2017" max="2020"/>
+						</div>
 					</div>
 			</div>
 			
-					<button type="button" id="insertar" class="btn btn-success botonForm">ALTA OBJETIVO</button>	
+					<button type="button" id="insertar" class="btn btn-success botonForm" data-target="#modalCaja" data-toggle="modal" data-backdrop="static" data-keyboard="false">ALTA OBJETIVO</button>	
 				</form>
 
 			</div>
-			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
+			
+		</div>
+
+		<!-- Modal -->
+		<div id="modalCaja" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				 <!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal">&times;</button>
+					    <h4 class="modal-title">ALTA OBJETIVOS</h4>
+					</div>
+					<div class="modal-body">
+					    <div id="info"></div>
+					</div>
+					<div class="modal-footer">
+					    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</body>

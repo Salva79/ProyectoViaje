@@ -100,7 +100,7 @@
 
 			<div id="contenido" class="row">
 
-				<h2>ALTA PRODUCTO</h2>
+				<h2>ALTA PRODUCTOS</h2>
 
 				<form id="productos" name="productos" enctype="multipart/form-data" class="form-inline">
 					<div class="col-xs-12">
@@ -135,11 +135,30 @@
 						</div>
 					</div>
 	
-					<button type="button" id="insertar" class="btn btn-success botonForm">ALTA PRODUCTO</button>	
+					<button type="button" id="insertar" class="btn btn-success botonForm" data-target="#modalCaja" data-toggle="modal" data-backdrop="static" data-keyboard="false">ALTA PRODUCTO</button>	
 				</form>
 
 			</div>
-			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
+			
+		</div>
+
+		<!-- Modal -->
+		<div id="modalCaja" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				 <!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal">&times;</button>
+					    <h4 class="modal-title">ALTA PRODUCTOS</h4>
+					</div>
+					<div class="modal-body">
+					    <div id="info"></div>
+					</div>
+					<div class="modal-footer">
+					    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</body>

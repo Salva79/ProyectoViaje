@@ -20,11 +20,6 @@ function vaciarCampos() {
 	$("#password").val("");
 }
 
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
-
 function eliminarAlerta() {
 	setTimeout(function(){
         $('#info').html("");
@@ -78,29 +73,26 @@ function conexion(metodo,datos,url){
 				});					
 			}else{
 				vaciarCampos();
-				estilosAlerta();
+				$('#info').addClass('alert alert-danger');
 				$('#info').html("No exite el usuario");
 				console.log("No exite el usuario");
-				eliminarAlerta();
-				eliminarStorage();
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
 				vaciarCampos();
-				estilosAlerta();
+				$('#info').addClass('alert alert-danger');
 				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();
-				eliminarStorage();
 			}else{
 				vaciarCampos();
-				estilosAlerta();
+				$('#info').addClass('alert alert-danger');
 				$('#info').html("Error en el envio de datos");
 				console.log("Error en el envio de datos");
-				eliminarAlerta();
-				eliminarStorage();
 			}			
-	});		
+	});	
+
+	eliminarAlerta();
+	eliminarStorage();	
 }
 
 function envio(){
@@ -108,7 +100,7 @@ function envio(){
 	var pass = $("#password").val();
 	if (name == "" || pass == ""){
 		vaciarCampos();
-		estilosAlerta();
+		$('#info').addClass('alert alert-danger');
 		$('#info').html("Debes completar los campos para entrar");
 		eliminarAlerta();
 	}else{

@@ -131,7 +131,8 @@
 
 					</div>
 
-					<button type="button" id="insertar" class="btn btn-success botonForm">GUARDAR DATOS</button>
+					<button type="button" id="insertar" class="btn btn-success botonForm" data-target="#modalCaja" data-toggle="modal" data-backdrop="static" data-keyboard="false">GUARDAR DATOS</button>
+
 					<div class="col-xs-12 margenInput">
 						<div class="form-group">
 						   <input type="text" id="ncentro" name="ncentro" class="form-control" readonly="yes" />
@@ -144,7 +145,26 @@
 				</form>
 					
 			</div>
-			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
 		</div>
+		
+		<!-- Modal -->
+		<div id="modalCaja" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				 <!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal">&times;</button>
+					    <h4 class="modal-title">PERFIL DE USUARIO</h4>
+					</div>
+					<div class="modal-body">
+					    <div id="info"></div>
+					</div>
+					<div class="modal-footer">
+					    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</body>
 </html>
