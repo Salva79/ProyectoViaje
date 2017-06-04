@@ -40,10 +40,69 @@ function eliminarAlerta() {
         $('#info').removeClass('alert alert-danger');}, 2500);
 }
 
-
+function conexionCentro(){
+	var url = '/api/Centros/' + sessionStorage.userCentroId + '/alumnos?access_token=' + sessionStorage.userToken;
+	$.ajax({
+		async: true,
+		dataType: 'json',
+		method: 'GET',
+		url: url,
+	}).done(function (respuesta){
+			var cadena = "<div class='listado'>";
+			var presunto = "";
+			if(respuesta.length>0){
+				for(var i = 0; i < respuesta.length; i++){
+					presunto = respuesta[i].Nombre + " " + respuesta[i].Apellidos;
+					var dire = '/api/Ingresos?filter={"where":{"userId":"' + respuesta[i].id + '","Verificado": true}}&access_token=' + sessionStorage.userToken;
+					$.ajax({
+						async: false,
+						dataType: 'json',
+						method: 'GET',
+						url: dire,
+					}).done(function (respuesta){
+						for(var i=0; i<respuesta.length; i++){
+							if(respuesta[i].Verificado === true){
+								cadena = cadena + presunto + '<br>Cantidad: ' + respuesta[i].Cantidad + "€ - ";
+								var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '?access_token=' + sessionStorage.userToken;
+								$.ajax({
+									async: false,
+									dataType: 'json',
+									method: 'GET',
+									url: urltipo,
+								}).done(function (respuesta){
+									cadena = cadena + respuesta.Nombre + "<br>";
+								});
+							}	
+						}
+					});
+				}
+				$('#contienelistados').html(cadena);						
+			}else{
+				estilosAlerta();
+				$('#info').html("No hay Ingresos sin Verificar");
+				console.log("No hay Ingresos sin Verificar");
+				eliminarAlerta();
+			}
+	}).fail(function (xhr){
+			if(xhr.statusText === 'Unauthorized'){
+				estilosAlerta();
+				$('#info').html("Error, usuario no registrado");
+				console.log("Error, usuario no registrado");
+				eliminarAlerta();	
+			}else{
+				estilosAlerta();
+				$('#info').html("Error en el envio de datos");
+				console.log("Error en el envio de datos");
+				eliminarAlerta();
+			}
+			eliminarStorage();
+			window.location.href = "../../index.html";			
+	});		
+}
 $(document).ready(function() {
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
+	conexionCentro();
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";
