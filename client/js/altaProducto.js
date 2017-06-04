@@ -32,7 +32,8 @@ function estilosinfo() {
 function eliminarinfo() {
 	setTimeout(function(){
         $('#info').html("");
-        $('#info').removeClass('alert alert-success');}, 2500);
+        $('#info').removeClass('alert alert-success');
+    	$('#modalCaja').modal('toggle');}, 2500);
 }
 function estilosAlerta() {
 	$('#info').removeClass();
@@ -41,7 +42,8 @@ function estilosAlerta() {
 function eliminarAlerta() {
 	setTimeout(function(){
         $('#info').html("");
-        $('#info').removeClass('alert alert-danger');}, 2500);
+        $('#info').removeClass('alert alert-danger');
+    	$('#modalCaja').modal('toggle');}, 2500);
 }
 
 function conexion2(metodo,datos,url){

@@ -15,7 +15,9 @@ $(document).ready(function() {
 	function eliminarAlerta() {
 		setTimeout(function(){
 	        $('#info').html("");
-	        $('#info').removeClass('alert alert-danger');}, 2500);
+	        $('#info').removeClass('alert alert-danger');
+	    	$('#modalCaja').modal('toggle');
+	    }, 2500);
 	}
 
 	function validarDatos() {

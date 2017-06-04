@@ -9,7 +9,8 @@ function estilosAlerta() {
 function eliminarAlerta() {
 	setTimeout(function(){
         $('#info').html("");
-        $('#info').removeClass('alert alert-danger');}, 2500);
+        $('#info').removeClass('alert alert-danger');
+    	$('#modalCaja').modal('toggle');}, 2500);
 }
 
 /* Eliminar los valores de sesión */
