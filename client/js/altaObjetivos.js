@@ -28,7 +28,8 @@ function estilosinfo() {
 function eliminarinfo() {
 	setTimeout(function(){
         $('#info').html("");
-        $('#info').removeClass('alert alert-success');}, 2500);
+        $('#info').removeClass('alert alert-success');
+    	$('#modalCaja').modal('toggle');}, 2500);
 }
 
 /* Vaciar los campos, después de seleccionar el botón enviar */
@@ -52,6 +53,7 @@ function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
 		$('#info').removeClass();
+		$('#modalCaja').modal('toggle');
 	}, 2500);
 }
 

@@ -18,6 +18,7 @@ function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
 		$('#info').removeClass('alert alert-danger');
+		$('#modalCaja').modal('toggle');
 	}, 2500);
 }
 
