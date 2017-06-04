@@ -1,9 +1,11 @@
+/* Eliminar los valores de sesión */
 function eliminarStorage(){
 	sessionStorage.removeItem("username");
 	sessionStorage.removeItem("email");
 	sessionStorage.removeItem("password");
 }
 
+/* Vaciar los campos, después de seleccionar el botón enviar */
 function vaciarCampos() {
 	$("#nombre").val("");
 	$("#apellidos").val("");
@@ -11,11 +13,7 @@ function vaciarCampos() {
 	$("#telefono").val("");
 }
 
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
-
+/* Eliminar la alerta de información */
 function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
@@ -23,7 +21,8 @@ function eliminarAlerta() {
 	}, 2500);
 }
 
-function conexion(envio, url) {
+/* Función para dar de alta un usuario que sea coordinador */
+function altaUsuario(envio, url) {
 	$.ajax({
 		async: true,
 		dataType: 'json',
@@ -45,6 +44,8 @@ function conexion(envio, url) {
 		}
 	});
 }
+
+/* Función para comprobar los datos introducidos */
 function validarDatos() {
 	var error = "";
 	var correcto = true;
@@ -85,10 +86,10 @@ function validarDatos() {
 			"Telefono": telefono
 		}
 		var destino = '/api/Usuarios';
-		conexion(envio, destino);
+		altaUsuario(envio, destino);
 	} else {
 		vaciarCampos();
-		estilosAlerta();
+		$('#info').addClass('alert alert-danger');
 		$('#info').html(error);
 		eliminarAlerta();
 	}

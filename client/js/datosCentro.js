@@ -6,17 +6,19 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCreated");
 	sessionStorage.removeItem("userNombre");
 	sessionStorage.removeItem("userApellidos");
-	sessionStorage.removeItem("userDNI");
+	sessionStorage.removeItem("userDni");
 	sessionStorage.removeItem("userTelefono");
 	sessionStorage.removeItem("userCurso");
-	sessionStorage.removeItem("userusername");
+	sessionStorage.removeItem("userUsername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userpassword");
-	sessionStorage.removeItem("userObjetivo");
-	sessionStorage.removeItem("userCentro");
-	sessionStorage.removeItem("NombreCentro");
+	sessionStorage.removeItem("userPassword");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId"); 
+	sessionStorage.removeItem("NombreCentro"); 
 	sessionStorage.removeItem("CodigoCentro");
 	sessionStorage.removeItem("LocalidadCentro");
+	sessionStorage.removeItem("userIdAlumnado");
+	sessionStorage.removeItem("NombreObjetivo");     
 }
 
 /* Eliminar la alerta de información */
@@ -27,7 +29,7 @@ function eliminarAlerta() {
 	}, 2500);
 }
 
-/* Función para obtener los datos centros */
+/* Función para obtener los datos del centro */
 function obtenerDatosCentro(datos,url) {
 	$.ajax({
 		async: true,
@@ -51,13 +53,14 @@ function obtenerDatosCentro(datos,url) {
 var metodoObtenerDatosCentro = '/api/Centros/' + sessionStorage.userCentroId + '?access_token=' + sessionStorage.userToken; 
 obtenerDatosCentro("", metodoObtenerDatosCentro);
 
+/* Función para mostrar los datos del centro */
 function mostrarDatosCentro() {
 	$("#nombre").val(sessionStorage.NombreCentro);
 	$("#codigo").val(sessionStorage.CodigoCentro);
 	$("#localidad").val(sessionStorage.LocalidadCentro);
 }
 
-/* Función para modificar centros */
+/* Función para modificar el centro */
 function modificarCentro(datos,url) {
 	$.ajax({
 		async: true,
@@ -105,16 +108,19 @@ function validarDatos() {
 }
 
 $(document).ready(function() {
+	/* Mostrar el nombre del usuario conectado */
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
 
 	mostrarDatosCentro();
 
+	/* Salir de la aplicación */
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";
 	});
 
+	/* Ver información del perfil del usuario */
 	$("#botonPerfil").click(function(){
 		window.location.href = "../perfil.html";
 	});

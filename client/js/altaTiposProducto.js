@@ -6,14 +6,19 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCreated");
 	sessionStorage.removeItem("userNombre");
 	sessionStorage.removeItem("userApellidos");
-	sessionStorage.removeItem("userDNI");
+	sessionStorage.removeItem("userDni");
 	sessionStorage.removeItem("userTelefono");
 	sessionStorage.removeItem("userCurso");
-	sessionStorage.removeItem("userusername");
+	sessionStorage.removeItem("userUsername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userpassword");
-	sessionStorage.removeItem("userObjetivo");
-	sessionStorage.removeItem("userCetro");
+	sessionStorage.removeItem("userPassword");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId"); 
+	sessionStorage.removeItem("NombreCentro"); 
+	sessionStorage.removeItem("CodigoCentro");
+	sessionStorage.removeItem("LocalidadCentro");
+	sessionStorage.removeItem("userIdAlumnado");
+	sessionStorage.removeItem("NombreObjetivo");     
 }
 
 /* Vaciar los campos, después de seleccionar el botón enviar */
@@ -69,15 +74,19 @@ function validarDatos() {
 }
 
 $(document).ready(function() {
+	/* Mostrar el nombre del usuario conectado */
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
+
+	/* Salir de la aplicación */
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";
 	});
 
+	/* Ver información del perfil del usuario */
 	$("#botonPerfil").click(function(){
-		window.location.href = "../../perfil.html";
+		window.location.href = "../perfil.html";
 	});
 
 	$('#enviar').click(function() {

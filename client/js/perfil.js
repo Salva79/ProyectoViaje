@@ -3,6 +3,29 @@ var direObjetivo = '/api/Objetivos/' + sessionStorage.userObjetivoId + '?access_
 var direCentros = '/api/Centros/' + sessionStorage.userCentroId + '?access_token=' + sessionStorage.userToken;
 var perfil;
 
+/* Eliminar los valores de sesión */
+function eliminarStorage(){ 
+	sessionStorage.removeItem("userToken");
+	sessionStorage.removeItem("userId");
+	sessionStorage.removeItem("userTtl");
+	sessionStorage.removeItem("userCreated");
+	sessionStorage.removeItem("userNombre");
+	sessionStorage.removeItem("userApellidos");
+	sessionStorage.removeItem("userDni");
+	sessionStorage.removeItem("userTelefono");
+	sessionStorage.removeItem("userCurso");
+	sessionStorage.removeItem("userUsername");
+	sessionStorage.removeItem("userEmail");
+	sessionStorage.removeItem("userPassword");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId"); 
+	sessionStorage.removeItem("NombreCentro"); 
+	sessionStorage.removeItem("CodigoCentro");
+	sessionStorage.removeItem("LocalidadCentro");
+	sessionStorage.removeItem("userIdAlumnado");
+	sessionStorage.removeItem("NombreObjetivo");     
+}
+
 function estilosinfo() {
 	$('#info').removeClass();
 	$('#info').addClass('alert alert-success');
@@ -21,29 +44,11 @@ function eliminarAlerta() {
         $('#info').html("");
         $('#info').removeClass('alert alert-danger');}, 2500);
 }
-function eliminarStorage(){
-	sessionStorage.removeItem("userToken");
-	sessionStorage.removeItem("userId");
-	sessionStorage.removeItem("userTtl");
-	sessionStorage.removeItem("userCreated");
-	sessionStorage.removeItem("userNombre");
-	sessionStorage.removeItem("userApellidos");
-	sessionStorage.removeItem("userDNI");
-	sessionStorage.removeItem("userTelefono");
-	sessionStorage.removeItem("userCurso");
-	sessionStorage.removeItem("userusername");
-	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userpassword");
-	sessionStorage.removeItem("userObjetivoId");
-	sessionStorage.removeItem("userCentroId");
-	sessionStorage.removeItem("usernCentro");
-	sessionStorage.removeItem("usernObjetivo");
-}
 
 function cargaDatos(){
 	$("#botonPerfil").html("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre);
 	$("#perfil").text("Perfil de " + sessionStorage.userNombre);
-	$("#dni").val(sessionStorage.userDNI);
+	$("#dni").val(sessionStorage.userDni);
 	$("#nombre").val(sessionStorage.userNombre);
 	$("#apellidos").val(sessionStorage.userApellidos);
 	$("#email").val(sessionStorage.userEmail);
@@ -55,8 +60,8 @@ function cargaDatos(){
 		$("#ncentro").hide();
 	}else{
 		$("#curso").val(sessionStorage.userCurso);
-		$("#objetivo").val(sessionStorage.usernObjetivo);
-		$("#ncentro").val("Centro: " + sessionStorage.usernCentro);
+		$("#objetivo").val(sessionStorage.NombreObjetivo);
+		$("#ncentro").val("Centro: " + sessionStorage.NombreCentro);
 	}
 
 	
@@ -73,10 +78,10 @@ function actualizaDatos(metodo,datos,url){
 			if(typeof(respuesta.id) !== undefined){
 				sessionStorage.userNombre = respuesta.Nombre;
 				sessionStorage.userApellidos = respuesta.Apellidos;
-				sessionStorage.userDNI = respuesta.DNI;
+				sessionStorage.userDni = respuesta.DNI;
 				sessionStorage.userTelefono = respuesta.Telefono;
 				sessionStorage.userCurso = respuesta.Curso;
-				sessionStorage.userusername = respuesta.username;
+				sessionStorage.userUsername = respuesta.username;
 				sessionStorage.userEmail = respuesta.email;
 				var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 				$("#botonPerfil").html(nombre);
@@ -117,7 +122,7 @@ function cogeObjetivo(metodo,datos,url){
 		url: url,
 	}).done(function (respuesta){
 			if(typeof(respuesta.id) !== undefined){
-				sessionStorage.usernObjetivo = respuesta.Nombre;
+				sessionStorage.NombreObjetivo = respuesta.Nombre;
 			}else{
 				estilosAlerta();
 				$('#info').html("No exite el objetivo");
@@ -150,7 +155,7 @@ function cogeCentro(metodo,datos,url){
 		url: url,
 	}).done(function (respuesta){
 			if(typeof(respuesta.id) !== undefined){
-				sessionStorage.usernCentro = respuesta.Nombre;
+				sessionStorage.NombreCentro = respuesta.Nombre;
 			}else{
 				estilosAlerta();
 				$('#info').html("No exite el centro");
@@ -221,8 +226,8 @@ function recogeDatos(){
 		  "DNI": dni,
 		  "Telefono": telefono,
 		  "Curso": curso,
-		  "username": sessionStorage.userusername,
-		  "password": sessionStorage.userpassword,
+		  "username": sessionStorage.userUsername,
+		  "password": sessionStorage.userPassword,
 		  "email": email,
 		  "centroId": sessionStorage.userCentroId,
 		  "objetivo": sessionStorage.userObjetivoId

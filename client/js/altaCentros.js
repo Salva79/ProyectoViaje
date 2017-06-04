@@ -1,5 +1,3 @@
-var metodoUsuario = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
-
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
@@ -8,12 +6,19 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCreated");
 	sessionStorage.removeItem("userNombre");
 	sessionStorage.removeItem("userApellidos");
-	sessionStorage.removeItem("userDNI");
+	sessionStorage.removeItem("userDni");
 	sessionStorage.removeItem("userTelefono");
 	sessionStorage.removeItem("userCurso");
-	sessionStorage.removeItem("userusername");
+	sessionStorage.removeItem("userUsername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userpassword");  
+	sessionStorage.removeItem("userPassword");
+	sessionStorage.removeItem("userObjetivoId");
+	sessionStorage.removeItem("userCentroId"); 
+	sessionStorage.removeItem("NombreCentro"); 
+	sessionStorage.removeItem("CodigoCentro");
+	sessionStorage.removeItem("LocalidadCentro");
+	sessionStorage.removeItem("userIdAlumnado");
+	sessionStorage.removeItem("NombreObjetivo");     
 }
 
 /* Vaciar los campos, después de seleccionar el botón enviar */
@@ -31,34 +36,6 @@ function eliminarAlerta() {
 	}, 2500);
 }
 
-/* Función para comprobar el usuario */
-function conexion(metodo,datos,url){
-	$.ajax({
-		async: true,
-		dataType: 'json',
-		data: datos,
-		method: metodo,
-		url: url,
-	}).done(function (respuesta){
-			if(typeof(respuesta.id) !== undefined){
-				sessionStorage.userId = respuesta.userId;
-			}else{
-				console.log("No exite el usuario");
-			}
-	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");	
-			}else{
-				console.log("Error en el envio de datos");
-			}
-
-			eliminarStorage();
-			window.location.href = "../../index.html";			
-	});		
-}
-
-conexion('GET','',metodoUsuario);
-
 /* Función para insertar centros */
 function insertarCentros(datos,url) {
 	$.ajax({
@@ -69,10 +46,58 @@ function insertarCentros(datos,url) {
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
+			var datosEnvioModificarUser = {
+				"Nombre": sessionStorage.userNombre,
+				"Apellidos": sessionStorage.userApellidos,
+				"DNI": sessionStorage.userDni,
+				"Telefono": sessionStorage.userTelefono,
+				"Curso": sessionStorage.userCurso,
+				"username": sessionStorage.userUsername,
+				"password": sessionStorage.userPassword,
+				"email": sessionStorage.userEmail,
+				"centroId": sessionStorage.userCentroId,
+				"objetivo": sessionStorage.userObjetivoId
+			}
+
+			var destinoModificarUser = '/api/Usuario' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken; 
+			modificarCentroId(datosEnvioModificarUser, destinoModificarUser);
+		} else {
+			$('#info').html("Error, centro no insertado");
+			$('#info').addClass('alert alert-danger');
+		}
+	});
+}
+
+/* Función para obtener el último id de centro */
+function idUltimoCentro(datos,url) {
+	$.ajax({
+		async: true,
+		dataType: 'json',
+		data: datos,
+		method: 'GET',
+		url: url,
+	}).done(function(respuesta) {
+		if (typeof(respuesta.id) !== undefined) {
+			sessionStorage.userCentroId = respuesta.count;
+		} else {
+			$('#info').html("Error, no hay centros disponibles");
+			$('#info').addClass('alert alert-danger');
+		}
+	});
+}
+
+/* Función modificar el centroId del usuario */
+function modificarCentroId(datos,url) {
+	$.ajax({
+		async: true,
+		dataType: 'json',
+		data: datos,
+		method: 'PUT',
+		url: url,
+	}).done(function(respuesta) {
+		if (typeof(respuesta.id) !== undefined) {
 			$('#info').html("Centro insertado");
 			$('#info').addClass('alert alert-success');
-			eliminarStorage();
-			window.location.href = "../../index.html";
 		} else {
 			$('#info').html("Error, centro no insertado");
 			$('#info').addClass('alert alert-danger');
@@ -82,9 +107,9 @@ function insertarCentros(datos,url) {
 
 /* Función para comprobar los datos introducidos */
 function validarDatos() {
-	var nombre = $("#nombre").val("");
-	var codigo = $("#codigo").val("");
-	var localidad = $("#localidad").val("");
+	var nombre = $("#nombre").val();
+	var codigo = $("#codigo").val();
+	var localidad = $("#localidad").val();
 
 	nombre = nombre.trim();
 	codigo = codigo.trim();
@@ -98,10 +123,14 @@ function validarDatos() {
 			"Nombre": nombre,
 			"CodigoCentro": codigo,
 			"Localidad": localidad,
-			"userId": sessionStorage.id
+			"userId": sessionStorage.userId
 		}
+
 		var destino = '/api/Centros?access_token=' + sessionStorage.userToken; 
 		insertarCentros(datosEnvio, destino);
+
+		var destinoidUltimoCentro = '/api/Centros/count?access_token=' + sessionStorage.userToken; 
+		idUltimoCentro("", destinoidUltimoCentro);
 	}
 
 		reiniciarElementos();
@@ -109,6 +138,21 @@ function validarDatos() {
 }
 
 $(document).ready(function() {
+	/* Mostrar el nombre del usuario conectado */
+	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
+	$("#botonPerfil").html(nombre);
+
+	/* Salir de la aplicación */
+	$("#botonSalir").click(function(){
+		eliminarStorage();
+		window.location.href = "../../index.html";
+	});
+
+	/* Ver información del perfil del usuario */
+	$("#botonPerfil").click(function(){
+		window.location.href = "../perfil.html";
+	});
+
 	$('#enviar').click(function() {
 		validarDatos();
 	});
