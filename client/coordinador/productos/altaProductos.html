@@ -10,6 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/estilos.css">
 		<script type="text/javascript" src="../../js/jquery-3.1.1.min.js" ></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../js/altaProducto.js"></script>
 		<link rel="icon" type="image/png" href="../../img/logo.png">
 		<title>Alta Productos</title>
 	</head>
@@ -114,17 +115,17 @@
 
 					<div class="col-xs-12 margenInput">
 						<div class="form-group">
-						    <input type="number" id="precioVenta" name="precioVenta" class="form-control" placeholder="Precio Venta" required="yes"/>
+						    <input type="number" id="precioVenta" name="precioVenta" class="form-control" placeholder="Precio Venta" min="0" required="yes"/>
 						</div>
 
 						<div class="form-group">
-						    <input type="number" id="beneficio" name="beneficio" class="form-control" placeholder="Beneficio" required="yes"/>
+						    <input type="number" id="beneficio" name="beneficio" class="form-control" placeholder="Beneficio" min="0" required="yes"/>
 						</div>
 
 						<div class="form-group">
 						     <select id="tipoProducto" name="tipoProducto" class="form-control">
-						    	<option>Selecciona el Tipo de Producto</option>
-						    </select>
+						    	<option>Selecciona la categoría</option>
+						    </select> 
 						</div>
 					</div>
 	
@@ -132,6 +133,7 @@
 				</form>
 
 			</div>
+			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
 		</div>
 
 	</body>
