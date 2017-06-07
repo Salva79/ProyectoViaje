@@ -43,20 +43,12 @@ function insertarCentros(datos,url) {
 		async: true,
 		dataType: 'json',
 		data: datos,
-		method: 'POST',
+		method: 'PATCH',
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
 			var datosEnvioModificarUser = {
-				"Nombre": sessionStorage.userNombre,
-				"Apellidos": sessionStorage.userApellidos,
-				"DNI": sessionStorage.userDni,
-				"Telefono": sessionStorage.userTelefono,
-				"Curso": sessionStorage.userCurso,
-				"username": sessionStorage.userUsername,
-				"email": sessionStorage.userEmail,
-				"centroId": sessionStorage.userCentroId,
-				"objetivo": sessionStorage.userObjetivoId
+				"centroId": sessionStorage.userCentroId
 			}
 
 			var destinoModificarUser = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken; 

@@ -67,7 +67,7 @@ function modificarCentro(datos,url) {
 		async: true,
 		dataType: 'json',
 		data: datos,
-		method: 'PUT',
+		method: 'PATCH',
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
