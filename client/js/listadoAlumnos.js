@@ -39,7 +39,7 @@ function borraUsuario(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			window.location.href = "listadoAlumnos.html";	
+			window.location.href = "alumnos.html";	
 		}else{
 			estilosAlerta();
 			$('#info').html("Error, alumno no borrado");
@@ -59,7 +59,7 @@ function borraUsuario(id){
 				eliminarAlerta();
 			}
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -116,6 +116,6 @@ $(document).ready(function() {
 	});
 
 	$("#botonPerfil").click(function(){
-		window.location.href = "../../perfil.html";
+		window.location.href = "../perfil.html";
 	});
 })

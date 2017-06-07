@@ -167,40 +167,22 @@ $(document).ready(function() {
 	});
 
 	$("#botonPerfil").click(function(){
-		window.location.href = "../../perfil.html";
+		window.location.href = "../perfil.html";
 	});
 
 	$('#insertar').click(function() {
 		var direccion = '/api/Usuarios/' + sessionStorage.idAlumnado + '?access_token=' + sessionStorage.userToken; 
-		var name = $("#nombre").val();
-		var apellidos = $("#apellidos").val();
-		var dni = $("#dni").val();
-		var curso = $("#curso").val();
-		var email = $("#email").val();
-		var telefono = $("#telefono").val();
 		var objetivo = $("#objetivo").val();
-		var username = $("#username").val();
-		var password = $("#password").val();
-		alert(objetivo);
 
-		if ((password.trim() ==="") || objetivo === 0){
+		if (objetivo === 0){
 			estilosAlerta();
-			$('#info').html('Debes introducir una nueva contraseña y marcar un objetivo');
+			$('#info').html('Debes introducir un nuevo objetivo');
 			eliminarAlerta();
 		}else{
 			perfil = {
-			  "Nombre": name,
-			  "Apellidos": apellidos,
-			  "DNI": dni,
-			  "Telefono": telefono,
-			  "Curso": curso,
-			  "username": username,
-			  "password": password,
-			  "email": email,
-			  "centroId": sessionStorage.userCentroId,
 			  "objetivo": objetivo
 			}
-			actualizaDatos('PUT',perfil,direccion);
+			actualizaDatos('PATCH',perfil,direccion);
 		}		
 	});
 })

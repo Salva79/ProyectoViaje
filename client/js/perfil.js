@@ -228,13 +228,10 @@ function recogeDatos(){
 		  "DNI": dni,
 		  "Telefono": telefono,
 		  "Curso": curso,
-		  "username": sessionStorage.userUsername,
-		  "password": sessionStorage.userPassword,
-		  "email": email,
-		  "centroId": sessionStorage.userCentroId,
-		  "objetivo": sessionStorage.userObjetivoId
+		  "username": email,
+		  "email": email
 		}
-		actualizaDatos('PUT',perfil,direccion);
+		actualizaDatos('PATCH',perfil,direccion);
 	}else{
 		cargaDatos();
 		estilosAlerta();

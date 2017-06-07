@@ -111,8 +111,3 @@ $(document).ready(function() {
 		window.location.href = "../perfil.html";
 	});
 })
-
-
-
-
-

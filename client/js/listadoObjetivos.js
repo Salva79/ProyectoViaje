@@ -115,7 +115,7 @@ function conexion(metodo,datos,url){
 				eliminarAlerta();
 			}
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../../index.html";			
 	});		
 }
 
