@@ -14,7 +14,7 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userEmail");
 	sessionStorage.removeItem("userpassword");
 	sessionStorage.removeItem("userObjetivo");
-	sessionStorage.removeItem("userCentro");
+	sessionStorage.removeItem("userCentroId");
 	sessionStorage.removeItem("idAlumnado");
 }
 function estilosinfo() {
@@ -90,7 +90,7 @@ function listarPedidos(){
 						}).done(function(respuesta) {
 							cadena =  cadena + respuesta.Descripcion + "<br>";
 						})
-						cadena =  cadena + respuesta[0].CantidadPedido + " - " + respuesta[0].CantidadEntrega + "<br>";
+						cadena =  cadena + "Total: " + respuesta[0].CantidadPedido + " - Entregado: " + respuesta[0].CantidadEntrega + "<br>";
 					})
 					cadena =  cadena + fecha + "<br>";
 				}

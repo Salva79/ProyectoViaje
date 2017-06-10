@@ -82,7 +82,6 @@ function conexion(){
 						for(var i=0; i<respuesta.length; i++){
 							if(respuesta[i].Verificado === true){
 								cadena = cadena + presunto + '<br>Cantidad: ' + respuesta[i].Cantidad + "€";
-								alert(respuesta[i].tipo);
 								var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '/productos?access_token=' + sessionStorage.userToken;
 								$.ajax({               
 									async: false,

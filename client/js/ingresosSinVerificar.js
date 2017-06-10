@@ -43,67 +43,82 @@ function eliminarAlerta() {
         $('#info').removeClass('alert alert-danger');}, 2500);
 }
 
-function verificando(alumno){
-	alert("Revisando");
-	var urlIngreso = '/api/Ingresos/' + alumno + '?access_token=' + sessionStorage.userToken;
+function verificando(id){
+	var urlIngreso = '/api/Ingresos/' + id + '?access_token=' + sessionStorage.userToken;
+	var cIngreso = "";
+	var producto = "";
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		method: 'GET',
 		url: urlIngreso,
 	}).done(function (respuesta){
 		if(respuesta.Verificado === false){
-			var urlPedido = '/api/Pedidos?filter={"where":{"' + respuesta.userId + '"}}&access_token=' + sessionStorage.userToken;
+			cIngreso = respuesta.Cantidad;
+			var urlProducto = '/api/TipoProductos/' + respuesta.tipo +'/productos?access_token=' + sessionStorage.userToken;
 			$.ajax({
-				async: true,
-				dataType: 'json',
-				method: 'GET',
-				url: urlPedido,
-			}).done(function (respuesta){
-				if(respuesta.length>0){
-					for(var i = 0; i < respuesta.length; i++){
-						Pedido[i] = respuesta[i].id
-					}
-				}
-			})
-			var urlProducto = '/api/TipoProductos/' + respuesta.tipo + '/productos?access_token=' + sessionStorage.userToken;
-			$.ajax({
-				async: true,
+				async: false,
 				dataType: 'json',
 				method: 'GET',
 				url: urlProducto,
 			}).done(function (respuesta){
-				Producto = respuesta[0].id;
+				producto = respuesta[0].id;
 			})
-			var urlDetalle = '/api/Productos/' + Producto + '/detallesPedidos?access_token=' + sessionStorage.userToken;
+			var urlPedidos = '/api/Pedidos?filter={"where": {"userId": "' + respuesta.userId +'"}}&access_token=' + sessionStorage.userToken;
 			$.ajax({
-				async: true,
+				async: false,
 				dataType: 'json',
-
 				method: 'GET',
-				url: urlDetalle,
+				url: urlPedidos,
 			}).done(function (respuesta){
-				var hecho = true;
-				var i = 0;
-				do{
-					if(respuesta[i].CantidadEntrega<respuesta[i].CantidadPedido){
-						hecho = false;
-						Cantidad = Cantidad + respuesta[i].CantidadEntrega;
-						iddetalle = respuesta[i].id;
+				if(respuesta.length>0){
+					for(var i=0; i<respuesta.length; i++){
+						var urlDetalles = '/api/DetallesPedidos?filter={"where": {"pedidoId": "' + respuesta[i].id + '" , "productoId":"' + producto + '"}}&access_token=' + sessionStorage.userToken;
+						$.ajax({
+							async: false,
+							dataType: 'json',
+							method: 'GET',
+							url: urlDetalles,
+						}).done(function (respuesta){
+							if(respuesta.length>0){
+								for(var i=0; i<respuesta.length; i++){
+									if((respuesta[i].CantidadEntrega + cIngreso) < respuesta[i].CantidadPedido){
+										cIngreso = cIngreso + respuesta[i].CantidadEntrega;
+										urlActualiza = '/api/DetallesPedidos/' + respuesta[i].id + '?access_token=' + sessionStorage.userToken; 
+										var entregado = {
+											"CantidadEntrega": cIngreso
+										}
+										$.ajax({
+											async: false,
+											dataType: 'json',
+											method: 'PATCH',
+											data: entregado,
+											url: urlActualiza,
+										}).done(function (respuesta){
+											var date = {
+												"Verificado": true
+											}
+											$.ajax({
+												async: false,
+												dataType: 'json',
+												method: 'PATCH',
+												data: date,
+												url: urlIngreso,
+											}).done(function (respuesta){
+												estilosinfo();
+												$('#info').html("Ingreso Verificado");
+												eliminarinfo();
+												window.location.href = "ingresosSinVerificar.html";
+											})
+										})
+
+									}									
+								}
+							}
+						})
 					}
-					i++;
-				}while((hecho) && (i < respuesta.length));
-				var urlDetalle = '/api/Productos/' + Producto + '/detallesPedidos?access_token=' + sessionStorage.userToken;
-				$.ajax({
-					async: true,
-					dataType: 'json',
-					data: '{"CantidadEntrega":' + Cantidad +'}',
-					method: 'PATCH',
-					url: urlDetalle,
-				}).done(function (respuesta){
-					alert("Cantdad Entregada");
-				})
-			})			
+				}
+			})
 		}
 	})
 }
