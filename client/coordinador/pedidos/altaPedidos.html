@@ -111,6 +111,11 @@
 						</div>
 
 						<div class="form-group">
+							<select id="objetivo" name="objetivo" class="form-control">
+						    </select>
+						</div>
+
+						<div class="form-group">
 							<select id="producto" name="producto" class="form-control">
 						    </select>
 						</div>
@@ -118,15 +123,11 @@
 
 					<div class="col-xs-12 margenInput">
 						<div class="form-group">
-						    <input type="text" id="fecha" name="fecha" class="form-control" size="10" maxlength="10" placeholder="dd-mm-aaaa" required="yes"/>
+						    <input type="number" id="cantidad" name="cantidad" class="form-control" placeholder="Cantidad" required="yes" min="1" />
 						</div>
 
 						<div class="form-group">
-						    <input type="number" id="cantidadPedida" name="cantidadPedida" class="form-control" placeholder="Cantidad pedida" required="yes" min="1" />
-						</div>
-
-						<div class="form-group">
-						    <input type="number" id="cantidadEntrega" name="cantidadEntrega" class="form-control" placeholder="Cantidad entrega" required="yes" min="0" value="0" />
+						    <input type="text" id="total" name="total" class="form-control" placeholder="0€" readonly/>
 						</div>
 					</div>
 			
