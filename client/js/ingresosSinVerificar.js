@@ -1,3 +1,7 @@
+var Cantidad;
+var Pedido = [];
+var Producto;
+
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
@@ -39,8 +43,69 @@ function eliminarAlerta() {
         $('#info').removeClass('alert alert-danger');}, 2500);
 }
 
-function verificando(){
-	alert("Falta esto");
+function verificando(alumno){
+	alert("Revisando");
+	var urlIngreso = '/api/Ingresos/' + alumno + '?access_token=' + sessionStorage.userToken;
+	$.ajax({
+		async: true,
+		dataType: 'json',
+		method: 'GET',
+		url: urlIngreso,
+	}).done(function (respuesta){
+		if(respuesta.Verificado === false){
+			var urlPedido = '/api/Pedidos?filter={"where":{"' + respuesta.userId + '"}}&access_token=' + sessionStorage.userToken;
+			$.ajax({
+				async: true,
+				dataType: 'json',
+				method: 'GET',
+				url: urlPedido,
+			}).done(function (respuesta){
+				if(respuesta.length>0){
+					for(var i = 0; i < respuesta.length; i++){
+						Pedido[i] = respuesta[i].id
+					}
+				}
+			})
+			var urlProducto = '/api/TipoProductos/' + respuesta.tipo + '/productos?access_token=' + sessionStorage.userToken;
+			$.ajax({
+				async: true,
+				dataType: 'json',
+				method: 'GET',
+				url: urlProducto,
+			}).done(function (respuesta){
+				Producto = respuesta[0].id;
+			})
+			var urlDetalle = '/api/Productos/' + Producto + '/detallesPedidos?access_token=' + sessionStorage.userToken;
+			$.ajax({
+				async: true,
+				dataType: 'json',
+
+				method: 'GET',
+				url: urlDetalle,
+			}).done(function (respuesta){
+				var hecho = true;
+				var i = 0;
+				do{
+					if(respuesta[i].CantidadEntrega<respuesta[i].CantidadPedido){
+						hecho = false;
+						Cantidad = Cantidad + respuesta[i].CantidadEntrega;
+						iddetalle = respuesta[i].id;
+					}
+					i++;
+				}while((hecho) && (i < respuesta.length));
+				var urlDetalle = '/api/Productos/' + Producto + '/detallesPedidos?access_token=' + sessionStorage.userToken;
+				$.ajax({
+					async: true,
+					dataType: 'json',
+					data: '{"CantidadEntrega":' + Cantidad +'}',
+					method: 'PATCH',
+					url: urlDetalle,
+				}).done(function (respuesta){
+					alert("Cantdad Entregada");
+				})
+			})			
+		}
+	})
 }
 
 function conexionCentro(){
