@@ -39,39 +39,22 @@ function eliminarAlerta() {
 /* Función para insertar centros */
 function insertarCentros(datos,url) {
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		data: datos,
-		method: 'PATCH',
+		method: 'POST',
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
+			sessionStorage.userCentroId = respuesta.id;
 			var datosEnvioModificarUser = {
-				"centroId": sessionStorage.userCentroId
+				"centroId": respuesta.id,
+				"centroAlumnoId": respuesta.id
 			}
-
 			var destinoModificarUser = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken; 
 			modificarCentroId(datosEnvioModificarUser, destinoModificarUser);
 		} else {
 			$('#info').html("Error, centro no insertado");
-			$('#info').addClass('alert alert-danger');
-		}
-	});
-}
-
-/* Función para obtener el último id de centro */
-function idUltimoCentro(datos,url) {
-	$.ajax({
-		async: true,
-		dataType: 'json',
-		data: datos,
-		method: 'GET',
-		url: url,
-	}).done(function(respuesta) {
-		if (typeof(respuesta.id) !== undefined) {
-			sessionStorage.userCentroId = respuesta.count;
-		} else {
-			$('#info').html("Error, no hay centros disponibles");
 			$('#info').addClass('alert alert-danger');
 		}
 	});
@@ -83,7 +66,7 @@ function modificarCentroId(datos,url) {
 		async: true,
 		dataType: 'json',
 		data: datos,
-		method: 'PUT',
+		method: 'PATCH',
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
@@ -98,7 +81,7 @@ function modificarCentroId(datos,url) {
 
 /* Función para comprobar los datos introducidos */
 function validarDatos() {
-	if (sessionStorage.userCentroId != null) {
+	if (sessionStorage.userCentroId != 'null') {
 		$('#info').html("El usuario ya tiene un centro");
 		$('#info').addClass('alert alert-danger');
 	} else {

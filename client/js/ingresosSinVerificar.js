@@ -81,7 +81,7 @@ function verificando(id){
 						}).done(function (respuesta){
 							if(respuesta.length>0){
 								for(var i=0; i<respuesta.length; i++){
-									if((respuesta[i].CantidadEntrega + cIngreso) < respuesta[i].CantidadPedido){
+									if((respuesta[i].CantidadEntrega + cIngreso) <= respuesta[i].CantidadPedido){
 										cIngreso = cIngreso + respuesta[i].CantidadEntrega;
 										urlActualiza = '/api/DetallesPedidos/' + respuesta[i].id + '?access_token=' + sessionStorage.userToken; 
 										var entregado = {

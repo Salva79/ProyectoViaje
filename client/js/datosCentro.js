@@ -32,7 +32,7 @@ function eliminarAlerta() {
 /* Función para obtener los datos del centro */
 function obtenerDatosCentro(datos,url) {
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		data: datos,
 		method: 'GET',
@@ -50,8 +50,7 @@ function obtenerDatosCentro(datos,url) {
 	});
 }
 
-var metodoObtenerDatosCentro = '/api/Centros/' + sessionStorage.userCentroId + '?access_token=' + sessionStorage.userToken; 
-obtenerDatosCentro("", metodoObtenerDatosCentro);
+
 
 /* Función para mostrar los datos del centro */
 function mostrarDatosCentro() {
@@ -109,7 +108,8 @@ $(document).ready(function() {
 	/* Mostrar el nombre del usuario conectado */
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
-
+	var metodoObtenerDatosCentro = '/api/Centros/' + sessionStorage.userCentroId + '?access_token=' + sessionStorage.userToken; 
+	obtenerDatosCentro("", metodoObtenerDatosCentro);
 	mostrarDatosCentro();
 
 	/* Salir de la aplicación */
