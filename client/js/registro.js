@@ -7,11 +7,6 @@ $(document).ready(function() {
 		$('#rol > option[value="alumno"]').attr('selected', 'selected');
 	}
 
-	function estilosAlerta() {
-		$('#info').removeClass();
-		$('#info').addClass('alert alert-danger');
-	}
-
 	function eliminarAlerta() {
 		setTimeout(function(){
 	        $('#info').html("");
@@ -38,9 +33,14 @@ $(document).ready(function() {
 			error = "El email y las contraseñas son obligatorios";
 			correcto = false;
 		} else {
-			if (password != password1) {
-				error = "Las contraseñas no coinciden";
+			if (!patronEmail.test(email))  {
+				error = "Introduce un email válido";
 				correcto = false;
+			} else {
+				if (password != password1) {
+					error = "Las contraseñas no coinciden";
+					correcto = false;
+				}
 			}
 		}
 
@@ -61,8 +61,11 @@ $(document).ready(function() {
 
 		} else {
 			vaciarCampos();
-			estilosAlerta();
+			$('#info').addClass('alert alert-danger');
 			$('#info').html(error);
+			$('#modalCaja').modal({
+		        show: 'true'
+		    });
 			eliminarAlerta();
 		}
 	}

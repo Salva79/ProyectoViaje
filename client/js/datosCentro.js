@@ -11,7 +11,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCurso");
 	sessionStorage.removeItem("userUsername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userPassword");
 	sessionStorage.removeItem("userObjetivoId");
 	sessionStorage.removeItem("userCentroId"); 
 	sessionStorage.removeItem("NombreCentro"); 
@@ -73,8 +72,6 @@ function modificarCentro(datos,url) {
 		if (typeof(respuesta.id) !== undefined) {
 			$('#info').addClass('alert alert-success');
 			$('#info').html("Datos del centro modificados");
-			eliminarAlerta();
-			window.location.href = "datosCentro.html";
 		} else {
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, centro no modificado");

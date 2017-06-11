@@ -13,7 +13,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCurso");
 	sessionStorage.removeItem("userUsername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userPassword");
 	sessionStorage.removeItem("userObjetivoId");
 	sessionStorage.removeItem("userCentroId"); 
 	sessionStorage.removeItem("NombreCentro"); 
@@ -70,6 +69,29 @@ function borraObjetivo(id){
 	});
 }
 
+// Función para mostrar la fecha adecuadamente
+function invertir(cadena) {
+	var longitudCadena = cadena.length;
+    var cadenaMostrar = "";
+
+    // DIA
+    cadenaMostrar = cadenaMostrar + cadena.charAt(8);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(9);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(7);
+
+    // MES
+    cadenaMostrar = cadenaMostrar + cadena.charAt(5);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(6);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(4);
+
+    // AÑO
+    for (var i = 0; i < 4; i++) {
+    	cadenaMostrar = cadenaMostrar + cadena.charAt(i);
+    }
+
+    return cadenaMostrar;
+}
+
 function conexion(metodo,datos,url){
 	$.ajax({
 		async: true,
@@ -86,9 +108,11 @@ function conexion(metodo,datos,url){
 						var fin = respuesta[i].YearFin;
 						inicio = inicio + "";
 						inicio = inicio.substring(0,10);
+						var inicioMostrar = invertir(inicio);
 						fin = fin + "";
 						fin = fin.substring(0,10);
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + "<br>   " + inicio + " a " + fin + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
+						var finMostrar = invertir(fin);
+						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + "<br>   " + inicioMostrar + " a " + finMostrar + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
 					}
 					cadena = cadena + "</div>";
 					$('#contienelistados').html(cadena);

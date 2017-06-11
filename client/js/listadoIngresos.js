@@ -15,7 +15,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCurso");
 	sessionStorage.removeItem("userUsername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userPassword");
 	sessionStorage.removeItem("userObjetivoId");
 	sessionStorage.removeItem("userCentroId"); 
 	sessionStorage.removeItem("NombreCentro"); 

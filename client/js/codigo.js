@@ -10,11 +10,10 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userCurso");
 	sessionStorage.removeItem("userUsername");
 	sessionStorage.removeItem("userEmail");
-	sessionStorage.removeItem("userPassword");
 	sessionStorage.removeItem("userObjetivoId");
 	sessionStorage.removeItem("userCentroId");
 }
-
+ 
 function vaciarCampos() {
 	$("#usuario").val("");
 	$("#password").val("");
@@ -89,8 +88,11 @@ function conexion(metodo,datos,url){
 				$('#info').html("Error en el envio de datos");
 				console.log("Error en el envio de datos");
 			}			
-	});	
-
+	});
+		
+	$('#modalCaja').modal({
+		show: 'true'
+	});
 	eliminarAlerta();
 	eliminarStorage();	
 }
@@ -102,13 +104,15 @@ function envio(){
 		vaciarCampos();
 		$('#info').addClass('alert alert-danger');
 		$('#info').html("Debes completar los campos para entrar");
+		$('#modalCaja').modal({
+		    show: 'true'
+		});
 		eliminarAlerta();
 	}else{
 		var envio = {
 			"username": name,
 			"password": pass
 		}
-		sessionStorage.userPassword = pass;
 		var destino = '/api/Usuarios/login';
 		conexion('POST',envio,destino);
 	}
