@@ -1,8 +1,10 @@
 /* Eliminar los valores de sesión */
 function eliminarStorage(){
-	sessionStorage.removeItem("username");
-	sessionStorage.removeItem("email");
-	sessionStorage.removeItem("password");
+	sessionStorage.removeItem("Username");
+	sessionStorage.removeItem("Email");
+	sessionStorage.removeItem("Password");
+	sessionStorage.removeItem("alumnoRol");
+	sessionStorage.removeItem("coordinadorRol");
 }
 
 /* Vaciar los campos, después de seleccionar el botón enviar */
@@ -32,17 +34,28 @@ function altaUsuario(envio, url) {
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
+			eliminarStorage();
 			window.location.href = "index.html";
-			
 		} else {
-			alert("No exite el usuario");
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("No se ha podido realizar el registro del usuario");
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			eliminarAlerta();
 		}
 	}).fail(function(xhr) {
 		if (xhr.statusText === 'Unauthorized') {
-			alert('Error, usuario no registrado');
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("No se ha podido realizar el registro del usuario");
 		} else {
-			alert('Error en el envio de datos');
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("No se ha podido realizar el registro del usuario");
 		}
+		$('#modalCaja').modal({
+			show: 'true'
+		});
+		eliminarAlerta();
 	});
 }
 
@@ -55,9 +68,9 @@ function validarDatos() {
 	var nombre = $("#nombre").val();
 	var apellidos = $("#apellidos").val();
 	var nif = $("#nif").val();
-	var username = sessionStorage.email;
-	var email = sessionStorage.username;
-	var password = sessionStorage.password;
+	var username = sessionStorage.Email;
+	var email = sessionStorage.Username;
+	var password = sessionStorage.Password;
 	var telefono = $("#telefono").val();
 
 	nombre = nombre.trim();
@@ -92,6 +105,9 @@ function validarDatos() {
 		vaciarCampos();
 		$('#info').addClass('alert alert-danger');
 		$('#info').html(error);
+		$('#modalCaja').modal({
+			show: 'true'
+		});
 		eliminarAlerta();
 	}
 }
@@ -100,4 +116,10 @@ $(document).ready(function() {
 	$('#enviar').click(function() {
 		validarDatos();
 	});
+
+	$('body').keyup(function(e){
+		if(e.keyCode === 13){
+			validarDatos();
+		}
+	});	
 })

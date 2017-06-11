@@ -45,9 +45,9 @@ $(document).ready(function() {
 		}
 
 		if (correcto) {
-			sessionStorage.username=email;
-			sessionStorage.email=email;
-			sessionStorage.password=password;
+			sessionStorage.Username = email;
+			sessionStorage.Email = email;
+			sessionStorage.Password = password;
 
 			if (rol == "alumno") {
 				sessionStorage.alumnoRol=1;
@@ -72,5 +72,11 @@ $(document).ready(function() {
 
 	$('#enviar').click(function() {
 		validarDatos();
+	});
+
+	$('body').keyup(function(e){
+		if(e.keyCode === 13){
+			validarDatos();
+		}
 	});	
 })

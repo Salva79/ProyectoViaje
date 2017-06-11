@@ -2,12 +2,13 @@ var metodoCentros = '/api/Centros';
 var metodoObjetivos = '/api/Objetivos';
 
 function eliminarStorage(){
-	sessionStorage.removeItem("username");
-	sessionStorage.removeItem("email");
-	sessionStorage.removeItem("password");
+	sessionStorage.removeItem("Username");
+	sessionStorage.removeItem("Email");
+	sessionStorage.removeItem("Password");
 	sessionStorage.removeItem("alumnoRol");
 	sessionStorage.removeItem("coordinadorRol");
 }
+
 function vaciarCampos() {
 	$("#nombre").val("");
 	$("#apellidos").val("");
@@ -16,10 +17,7 @@ function vaciarCampos() {
 	$("#curso").val("");
 	$("#telefono").val("");
 }
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
+
 function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
@@ -27,6 +25,7 @@ function eliminarAlerta() {
 		$('#modalCaja').modal('toggle');
 	}, 2500);
 }
+
 function obtenerCentrosDisponibles(metodo,datos,url){
 	$.ajax({
 		async: true,
@@ -44,16 +43,18 @@ function obtenerCentrosDisponibles(metodo,datos,url){
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
+				$('#info').addClass('alert alert-danger');
 				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
+				console.log("Error, usuario no registrado");	
 			}else{
-				estilosAlerta();
+				$('#info').addClass('alert alert-danger');
 				$('#info').html("Error en el envio de datos");
 				console.log("Error en el envio de datos");
-				eliminarAlerta();
 			}
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			eliminarAlerta();
 			eliminarStorage();
 			window.location.href = "index.html";			
 	});		
@@ -75,16 +76,18 @@ function obtenerObjetivosDisponibles(metodo,datos,url){
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
+				$('#info').addClass('alert alert-danger');
 				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
+				console.log("Error, usuario no registrado");	
 			}else{
-				estilosAlerta();
+				$('#info').addClass('alert alert-danger');
 				$('#info').html("Error en el envio de datos");
 				console.log("Error en el envio de datos");
-				eliminarAlerta();
 			}
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			eliminarAlerta();
 			eliminarStorage();
 			window.location.href = "index.html";			
 	});		
@@ -100,28 +103,29 @@ function conexion(envio, url) {
 		if (typeof(respuesta.id) !== undefined) {
 			eliminarStorage();
 			window.location.href = "index.html";
-			
 		} else {
-			estilosAlerta();
-			$('#info').html("No exite el usuario");
-			console.log("No exite el usuario");
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("No se ha podido realizar el registro del usuario");
+			$('#modalCaja').modal({
+				show: 'true'
+			});
 			eliminarAlerta();
-			alert();
 		}
 	}).fail(function(xhr) {
 		if (xhr.statusText === 'Unauthorized') {
-			estilosAlerta();
-			$('#info').html("Error, usuario no registrado");
-			console.log("Error, usuario no registrado");
-			eliminarAlerta();
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("No se ha podido realizar el registro del usuario");
 		} else {
-			estilosAlerta();
-			$('#info').html("Error en el envio de datos");
-			console.log("Error en el envio de datos");
-			eliminarAlerta();
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("No se ha podido realizar el registro del usuario");
 		}
+		$('#modalCaja').modal({
+			show: 'true'
+		});
+		eliminarAlerta();
 	});
 }
+
 function validarDatos() {
 	var error = "";
 	var correcto = true;
@@ -132,9 +136,9 @@ function validarDatos() {
 	var nif = $("#nif").val();
 	var centro = $("#centro").val();
 	var curso = $("#curso").val();
-	var username = sessionStorage.email;
-	var email = sessionStorage.username;
-	var password = sessionStorage.password;
+	var username = sessionStorage.Email;
+	var email = sessionStorage.Username;
+	var password = sessionStorage.Password;
 	var objetivo = $("#objetivo").val();
 	var telefono = $("#telefono").val();
 
@@ -171,8 +175,11 @@ function validarDatos() {
 		conexion(envio, destino);
 	} else {
 		vaciarCampos();
-		estilosAlerta();
+		$('#info').addClass('alert alert-danger');
 		$('#info').html(error);
+		$('#modalCaja').modal({
+			show: 'true'
+		});
 		eliminarAlerta();
 	}
 }
@@ -183,5 +190,11 @@ obtenerObjetivosDisponibles("GET", "", metodoObjetivos);
 $(document).ready(function() {
 	$('#enviar').click(function() {
 		validarDatos();
+	});
+
+	$('body').keyup(function(e){
+		if(e.keyCode === 13){
+			validarDatos();
+		}
 	});
 })
