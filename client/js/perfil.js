@@ -63,10 +63,7 @@ function cargaDatos(){
 		$("#curso").val(sessionStorage.userCurso);
 		$("#objetivo").val(sessionStorage.NombreObjetivo);
 		$("#ncentro").val("Centro: " + sessionStorage.NombreCentro);
-	}
-
-	
-	
+	}	
 }
 function actualizaDatos(metodo,datos,url){
 	$.ajax({

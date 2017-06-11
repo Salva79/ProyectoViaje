@@ -22,7 +22,7 @@ function vaciarCampos() {
 function eliminarAlerta() {
 	setTimeout(function(){
         $('#info').html("");
-        $('#info').removeClass('alert alert-danger');
+        $('#info').removeClass();
     	$('#modalCaja').modal('toggle');}, 2500);
 }
 
@@ -75,6 +75,11 @@ function conexion(metodo,datos,url){
 				$('#info').addClass('alert alert-danger');
 				$('#info').html("No exite el usuario");
 				console.log("No exite el usuario");
+				$('#modalCaja').modal({
+					show: 'true'
+				});
+				
+				eliminarAlerta();
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
@@ -87,13 +92,15 @@ function conexion(metodo,datos,url){
 				$('#info').addClass('alert alert-danger');
 				$('#info').html("Error en el envio de datos");
 				console.log("Error en el envio de datos");
-			}			
+			}
+
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			
+			eliminarAlerta();			
 	});
 		
-	$('#modalCaja').modal({
-		show: 'true'
-	});
-	eliminarAlerta();
 	eliminarStorage();	
 }
 

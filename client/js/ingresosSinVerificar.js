@@ -2,7 +2,7 @@ var Cantidad;
 var Pedido = [];
 var Producto;
 
-/* Eliminar los valores de sesión */
+/* Eliminar los valores de sesión */ 
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
 	sessionStorage.removeItem("userId");
@@ -23,23 +23,12 @@ function eliminarStorage(){
 	sessionStorage.removeItem("userIdAlumnado");
 	sessionStorage.removeItem("NombreObjetivo");     
 }
-function estilosinfo() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-success');
-}
-function eliminarinfo() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-success');}, 2500);
-}
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
+
 function eliminarAlerta() {
 	setTimeout(function(){
         $('#info').html("");
-        $('#info').removeClass('alert alert-danger');}, 2500);
+        $('#info').removeClass();
+    	$('#modalCaja').modal('toggle');}, 2500);
 }
 
 function verificando(id){
@@ -104,9 +93,12 @@ function verificando(id){
 												data: date,
 												url: urlIngreso,
 											}).done(function (respuesta){
-												estilosinfo();
+												$('#info').addClass('alert alert-success');
 												$('#info').html("Ingreso Verificado");
-												eliminarinfo();
+												$('#modalCaja').modal({
+													show: 'true'
+												});
+												eliminarAlerta();
 												window.location.href = "ingresosSinVerificar.html";
 											})
 										})

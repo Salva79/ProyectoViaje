@@ -18,13 +18,14 @@ function eliminarStorage(){
 	sessionStorage.removeItem("LocalidadCentro");
 	sessionStorage.removeItem("userIdAlumnado");
 	sessionStorage.removeItem("NombreObjetivo");     
-}
+} 
 
 /* Eliminar la alerta de información */
 function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
 		$('#info').removeClass();
+		$('#modalCaja').modal('toggle');
 	}, 2500);
 }
 
@@ -38,27 +39,26 @@ function borraUsuario(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			window.location.href = "alumnos.html";	
+			$('#info').addClass('alert alert-success');
+			$('#info').html("Alumno eliminado");	
 		}else{
-			estilosAlerta();
+			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, alumno no borrado");
-			console.log("Error, alumno no borrado");
-			eliminarAlerta();
 		}
+		$('#modalCaja').modal({
+			show: 'true'
+		});
+		eliminarAlerta();
+		window.location.href = "alumnos.html";
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
-			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
-			}
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+		if(xhr.statusText === 'Unauthorized'){
+			console.log("Error, usuario no registrado");
+		}else{
+			console.log("Error, en el envio de datos");
+		}
+
+		eliminarStorage();
+		window.location.href = "../../index.html";			
 	});
 }
 
@@ -93,7 +93,7 @@ function listaAlumos(datos,url) {
 							objetivo = "Sin Objetivo";
 						}
 					});
-					cadena = cadena + respuesta[i].Nombre + " " + respuesta[i].Apellidos + '  <button onclick="veralumnado(' + respuesta[i].id +')" class="botonVerificar btn btn-success" title="Ver"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>'				 	 + '<button onclick="borraUsuario(' + respuesta[i].id + ')"  class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
+					cadena = cadena + respuesta[i].DNI + " " + respuesta[i].Nombre + " " + respuesta[i].Apellidos + '  <button onclick="veralumnado(' + respuesta[i].id +')" class="botonVerificar btn btn-success" title="Ver"><i class="fa fa-info-circle" aria-hidden="true"></i></button>' + ' <button onclick="borraUsuario(' + respuesta[i].id + ')"  class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
 				  	"<br>";
 				}				
 			}

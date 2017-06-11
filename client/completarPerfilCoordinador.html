@@ -16,29 +16,43 @@
 
 <body>
 	<div class="container-fluid">
+		<header>
+			<nav class="navbar navbar-inverse navbar-fixed-top">
+				<div class="container-fluid">
+				    <div class="navbar-header">
+				      	<img id="logo" class="img-responsive" src="../../img/logo.png">
+				    </div>
+				 </div>
+			</nav> 
+		</header>
 
-		<h2>COMPLETAR REGISTRO</h2>
+		<div id="contenido" class="row">
+			<h2>COMPLETAR REGISTRO</h2>
 
-		<form id="centros" name="centros" enctype="multipart/form-data" class="form-inline">
-			<div class="row col-xs-12">
-				<div class="form-group">
-				    <input type="text" id="nombre" name="nombre" class="form-control" size="30" placeholder="Nombre" required="yes"/>
+			<form id="perfilCoordinador" name="perfilCoordinador" enctype="multipart/form-data" class="form-inline">
+				<div class="col-xs-12">
+					<div class="form-group">
+					    <input type="text" id="nombre" name="nombre" class="form-control" size="30" placeholder="Nombre" required="yes"/>
+					</div>
+
+					<div class="form-group">
+					     <input type="text" id="apellidos" name="apellidos" class="form-control" size="40" placeholder="Apellidos" required="yes"/>
+					</div>     
+
+					<div class="form-group">
+					    <input type="text" id="nif" name="nif" class="form-control" size="10" placeholder="NIF" required="yes"/>
+					</div>
+		
+					<div class="form-group">
+					    <input type="text" id="telefono" name="telefono" class="form-control" size="9" placeholder="Teléfono" required="yes"/>
+					</div>
 				</div>
-				<div class="form-group">
-				     <input type="text" id="apellidos" name="apellidos" class="form-control" size="40" placeholder="Apellidos" required="yes"/>
-				</div>
-				<div class="form-group">
-				    <input type="text" id="nif" name="nif" class="form-control" size="10" placeholder="NIF" required="yes"/>
-				</div>
-				<div class="form-group">
-				    <input type="text" id="telefono" name="telefono" class="form-control" size="9" placeholder="Teléfono" required="yes"/>
-				</div>
-			</div>
 	
 			<button type="button" id="enviar" class="btn btn-success botonForm">GUARDAR DATOS</button>
 
-		</form>
+			</form>
 
+		</div>
 	</div>
 
 	<!-- Modal -->

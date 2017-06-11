@@ -95,7 +95,7 @@ function listarPedidos(){
 						}).done(function(respuesta) {
 							cadena =  cadena + respuesta.Descripcion + "<br>";
 						})
-						cadena =  cadena + "Total: " + respuesta[0].CantidadPedido + " - Entregado: " + respuesta[0].CantidadEntrega + "<br>";
+						cadena =  cadena + "Total: " + respuesta[0].CantidadPedido + "€ - Entregado: " + respuesta[0].CantidadEntrega + "€<br>";
 					})
 					cadena =  cadena + fecha + "<br>";
 				}
