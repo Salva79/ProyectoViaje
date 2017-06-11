@@ -55,14 +55,14 @@ function obtenerAlumnos(datos,url) {
 	}).done(function(respuesta) {
 		var cadena = '<option value="0">Selecciona un alumno</option>';
 		if(respuesta.length > 0){
+			var cadena = '<option value="0">Selecciona un alumno</option>';
 			for(var i = 0; i < respuesta.length; i++){
 				cadena = cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].DNI + " " + respuesta[i].Nombre + " " + respuesta[i].Apellidos + '</option>';
 			}
-			$("#alumno").html(cadena);
 		} else {
-			$('#info').addClass('alert alert-danger');
-			$('#info').html("No hay alumnos disponibles");
+			var cadena = '<option value="0">No hay alumnos disponibles</option>';
 		}
+		$("#alumno").html(cadena);
 	});
 }
 
@@ -75,16 +75,16 @@ function obtenerProductos(datos,url) {
 		method: 'GET',
 		url: url,
 	}).done(function(respuesta) {
-		var cadena = '<option value="0">Selecciona un producto</option>';
 		if(respuesta.length > 0){
+			var cadena = '<option value="0">Selecciona un producto</option>';
 			for(var i = 0; i < respuesta.length; i++){
 				Precio[i] = respuesta[i].PrecioiVenta;
 				cadena = cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Descripcion + '</option>';
 			}
-			$("#producto").html(cadena);
 		} else {
-			$("#producto").html("No hay productos disponibles");
+			var cadena = '<option value="0">No hay productos disponibles</option>';
 		}
+		$("#producto").html(cadena);
 	});
 }
 
@@ -96,15 +96,15 @@ function obtenerObjetivo(datos,url) {
 		method: 'GET',
 		url: url,
 	}).done(function(respuesta) {
-		var cadena = '<option value="0">Selecciona un objetivo</option>';
 		if(respuesta.length > 0){
+			var cadena = '<option value="0">Selecciona un objetivo</option>';
 			for(var i = 0; i < respuesta.length; i++){
 				cadena = cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>';
 			}
-			$("#objetivo").html(cadena);
 		} else {
-			$("#objetivo").html("No hay Objetivos disponibles");
+			var cadena = '<option value="0">No hay objetivos disponibles</option>';
 		}
+		$("#objetivo").html(cadena);
 	});
 }
 
@@ -224,5 +224,11 @@ $(document).ready(function() {
 
 	$('#insertar').click(function() {
 		validarDatos();
+	});
+
+	$('body').keyup(function(e){
+		if(e.keyCode === 13){
+			validarDatos();
+		}
 	});
 })

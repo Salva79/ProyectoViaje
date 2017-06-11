@@ -92,4 +92,10 @@ $(document).ready(function() {
 	$('#enviar').click(function() {
 		validarDatos();
 	});
+
+	$('body').keyup(function(e){
+		if(e.keyCode === 13){
+			validarDatos();
+		}
+	});
 })

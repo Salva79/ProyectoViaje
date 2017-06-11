@@ -75,27 +75,15 @@ function conexionCentro(){
 						}
 					});
 				}
-				$('#contienelistados').html(cadena);						
+										
 			}else{
-				estilosAlerta();
-				$('#info').html("No hay Ingresos sin Verificar");
-				console.log("No hay Ingresos sin Verificar");
-				eliminarAlerta();
+				cadena = "No hay ingresos sin verificar");
 			}
+			$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
-			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
-			}
+			console.log("Error Ingresos");
 			eliminarStorage();
-			window.location.href = "../../index.html";			
+			window.location.href = "../../index.html";		
 	});		
 }
 $(document).ready(function() {

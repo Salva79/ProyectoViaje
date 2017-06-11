@@ -45,27 +45,26 @@ function borraCategoria(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			window.location.href = "listadoCategorias.html";	
+			$('#info').addClass('alert alert-success');
+			$('#info').html("Categoría eliminada");	
 		}else{
-			estilosAlerta();
+			$('#info').addClass('alert alert-danger'); 
 			$('#info').html("Error, categoria no borrada");
-			console.log("Error, proveedor no borrado");
-			eliminarAlerta();
 		}
+		$('#modalCaja').modal({
+			show: 'true'
+		}); 
+		eliminarAlerta();
+		window.location.href = "listadoCategorias.html";
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
+
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../../index.html";		
 	});
 }
 
@@ -84,29 +83,18 @@ function conexion(metodo,datos,url){
 						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraCategoria(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
 					}
 					cadena = cadena + "</div>";
-					$('#contienelistados').html(cadena);
 				}else{
-					$('#contienelistados').html("No hay categoria");
+					cadena = "No hay categorías disponibles </div>";
 				}
-			}else{
-				estilosAlerta();
-				$('#info').html("No exite el usuario");
-				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
-				eliminarAlerta();
+				$('#contienelistados').html(cadena);
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
+
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		

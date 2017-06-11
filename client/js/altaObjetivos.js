@@ -20,15 +20,13 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-function estilosinfo() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-success');
-}
-function eliminarinfo() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-success');
-    	$('#modalCaja').modal('toggle');}, 2500);
+/* Eliminar la alerta de información */
+function eliminarAlerta() {
+	setTimeout(function() {
+		$('#info').html("");
+		$('#info').removeClass();
+		$('#modalCaja').modal('toggle');
+	}, 2500);
 }
 
 /* Vaciar los campos, después de seleccionar el botón enviar */
@@ -42,20 +40,6 @@ function reiniciarElementos() {
 	$("#afin").val("");
 }
 
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
-
-/* Eliminar la alerta de información */
-function eliminarAlerta() {
-	setTimeout(function() {
-		$('#info').html("");
-		$('#info').removeClass();
-		$('#modalCaja').modal('toggle');
-	}, 2500);
-}
-
 /* Función para insertar proveedores */
 function insertarObjetivo(datos,url) {
 	$.ajax({
@@ -66,15 +50,11 @@ function insertarObjetivo(datos,url) {
 		url: url,
 	}).done(function(respuesta) {
 		if (typeof(respuesta.id) !== undefined) {
-			estilosinfo();
-			$('#info').html("Objetivo insertado");
-			eliminarinfo();
-			window.location.href = "../inicio.html";
-			
+			$('#info').addClass('alert alert-success');
+			$('#info').html("Objetivo insertado");	
 		} else {
-			estilosAlerta();
+			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, objetivo no insertado");
-			eliminarAlerta();
 		}
 	});
 }
@@ -129,10 +109,10 @@ function validarDatos() {
 	mfin = mfin.trim();
 	afin = afin.trim();
 	if (nombre == "" || inicio == "" || fin == "") {
-		estilosAlerta();
+		$('#info').addClass('alert alert-danger');
 		$('#info').html("El nombre y las fechas son obligatorios");
 	} else if(!compruebafechas()){
-		estilosAlerta();
+		$('#info').addClass('alert alert-danger');
 		$('#info').html("Combrueba que la fecha fin sea mayor que la fecha inicio");
 	}else{
 		inicio = ainicio + "-" + minicio + "-" + dinicio;
@@ -164,5 +144,11 @@ $(document).ready(function() {
 
 	$('#insertar').click(function() {
 		validarDatos();
+	});
+
+	$('body').keyup(function(e){
+		if(e.keyCode === 13){
+			validarDatos();
+		}
 	});
 })

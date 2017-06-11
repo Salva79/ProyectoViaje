@@ -47,7 +47,7 @@ function borraUsuario(id){
 		}
 		$('#modalCaja').modal({
 			show: 'true'
-		});
+		}); 
 		eliminarAlerta();
 		window.location.href = "alumnos.html";
 	}).fail(function (xhr){

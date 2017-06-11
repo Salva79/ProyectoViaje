@@ -36,27 +36,18 @@ function obtenerCentrosDisponibles(metodo,datos,url){
 	}).done(function (respuesta){
 			var cadena = '<option value="0">Selecciona el centro</option>';
 			if(respuesta.length > 0){
+				var cadena = '<option value="0">Selecciona el centro</option>';
 				for(var i = 0; i < respuesta.length; i++){
 					cadena = (cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>');
-				}
-				$('#centro').html(cadena);				
+				}			
+			} else {
+				var cadena = '<option value="0">No hay centros disponibles</option>';
 			}
+			$('#centro').html(cadena);
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				$('#info').addClass('alert alert-danger');
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");	
-			}else{
-				$('#info').addClass('alert alert-danger');
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-			}
-			$('#modalCaja').modal({
-				show: 'true'
-			});
-			eliminarAlerta();
+			console.log("Error Centros");
 			eliminarStorage();
-			window.location.href = "index.html";			
+			window.location.href = "../../index.html";			
 	});		
 }
 function obtenerObjetivosDisponibles(metodo,datos,url){
@@ -67,29 +58,19 @@ function obtenerObjetivosDisponibles(metodo,datos,url){
 		method: metodo,
 		url: url,
 	}).done(function (respuesta){
-			var cadena = '<option value="0">Selecciona el Objetivo</option>';
 			if(respuesta.length > 0){
+				var cadena = '<option value="0">Selecciona el Objetivo</option>';
 				for(var i = 0; i < respuesta.length; i++){
 					cadena = (cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>');
-				}
-				$('#objetivo').html(cadena);				
+				}				
+			} else {
+				var cadena = '<option value="0">No hay objetivos disponibles</option>';
 			}
+			$('#objetivo').html(cadena);
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				$('#info').addClass('alert alert-danger');
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");	
-			}else{
-				$('#info').addClass('alert alert-danger');
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-			}
-			$('#modalCaja').modal({
-				show: 'true'
-			});
-			eliminarAlerta();
+			console.log("Error Objetivos");
 			eliminarStorage();
-			window.location.href = "index.html";			
+			window.location.href = "../../index.html";			
 	});		
 }
 function conexion(envio, url) {
@@ -112,17 +93,14 @@ function conexion(envio, url) {
 			eliminarAlerta();
 		}
 	}).fail(function(xhr) {
-		if (xhr.statusText === 'Unauthorized') {
-			$('#info').addClass('alert alert-danger');
-			$('#info').html("No se ha podido realizar el registro del usuario");
-		} else {
-			$('#info').addClass('alert alert-danger');
-			$('#info').html("No se ha podido realizar el registro del usuario");
-		}
-		$('#modalCaja').modal({
-			show: 'true'
-		});
-		eliminarAlerta();
+			if(xhr.statusText === 'Unauthorized'){
+				console.log("Error, usuario no registrado");
+			}else{
+				console.log("Error, en el envio de datos");
+			}
+
+			eliminarStorage();
+			window.location.href = "../../index.html";
 	});
 }
 

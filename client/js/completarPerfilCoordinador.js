@@ -45,17 +45,14 @@ function altaUsuario(envio, url) {
 			eliminarAlerta();
 		}
 	}).fail(function(xhr) {
-		if (xhr.statusText === 'Unauthorized') {
-			$('#info').addClass('alert alert-danger');
-			$('#info').html("No se ha podido realizar el registro del usuario");
-		} else {
-			$('#info').addClass('alert alert-danger');
-			$('#info').html("No se ha podido realizar el registro del usuario");
-		}
-		$('#modalCaja').modal({
-			show: 'true'
-		});
-		eliminarAlerta();
+			if(xhr.statusText === 'Unauthorized'){
+				console.log("Error, usuario no registrado");
+			}else{
+				console.log("Error, en el envio de datos");
+			}
+
+			eliminarStorage();
+			window.location.href = "../../index.html";
 	});
 }
 
