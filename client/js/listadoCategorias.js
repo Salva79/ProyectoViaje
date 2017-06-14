@@ -32,6 +32,7 @@ function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
 		$('#info').removeClass();
+		$('#modalCaja').modal('toggle');
 	}, 2500);
 }
 

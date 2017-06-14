@@ -24,23 +24,12 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-function estilosinfo() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-success');
-}
-function eliminarinfo() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-success');}, 2500);
-}
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
 function eliminarAlerta() {
 	setTimeout(function(){
         $('#info').html("");
-        $('#info').removeClass('alert alert-danger');}, 2500);
+        $('#info').removeClass('alert alert-danger');
+        $('#modalCaja').modal('toggle');
+    }, 2500);
 }
 
 function obtenerTiposDisponibles(metodo,datos,url){
@@ -63,18 +52,13 @@ function obtenerTiposDisponibles(metodo,datos,url){
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
+
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../../index.html";		
 	});		
 }
 
@@ -99,10 +83,10 @@ function conexion(metodo,datos,url){
 						cadena = cadena + (i+1) + " -   Tipo: " + arrayTipos[respuesta[i].tipo-1] + "  -  Cantidad: " + respuesta[i].Cantidad + " €<br>Verificado: " + verify + "<br>";
 					}
 					cadena = cadena + "</div>";
-					$('#contienelistados').html(cadena);
 				}else{
-					$('#contienelistados').html("No tienes ningún ingreso realizado");
+					cadena = cadena + "No tienes ningún ingreso realizado </div>";
 				}
+				$('#contienelistados').html(cadena);
 			}else{
 				estilosAlerta();
 				$('#info').html("No exite el usuario");
@@ -112,18 +96,13 @@ function conexion(metodo,datos,url){
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
+
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../../index.html";			
 	});		
 }
 
@@ -135,9 +114,9 @@ $(document).ready(function() {
 	$("#botonPerfil").html(nombre);
 	$("#botonSalir").click(function(){
 		eliminarStorage();
-		window.location.href = "../index.html";
+		window.location.href = "../../index.html";
 	});
 	$("#botonPerfil").click(function(){
-		window.location.href = "perfil.html";
+		window.location.href = "../perfil.html";
 	});
 })

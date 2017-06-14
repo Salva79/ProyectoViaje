@@ -22,16 +22,12 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
-
 /* Eliminar la alerta de información */
 function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
 		$('#info').removeClass();
+		$('#modalCaja').modal('toggle');
 	}, 2500);
 }
 
@@ -47,22 +43,18 @@ function borraObjetivo(id){
 		if(respuesta.count === 1){
 			window.location.href = "listadoObjetivos.html";	
 		}else{
-			estilosAlerta();
+			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, objetivo no borrado");
-			console.log("Error, objetivo no borrado");
+			$('#modalCaja').modal({
+				show: 'true'
+			});
 			eliminarAlerta();
 		}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
 			eliminarStorage();
 			window.location.href = "../../index.html";			
@@ -115,28 +107,19 @@ function conexion(metodo,datos,url){
 						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + "<br>   " + inicioMostrar + " a " + finMostrar + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
 					}
 					cadena = cadena + "</div>";
-					$('#contienelistados').html(cadena);
 				}else{
-					$('#contienelistados').html("No hay objetivos");
+					cadena = "No hay objetivos disponibles.</div>";
 				}
+				$('#contienelistados').html(cadena);
 			}else{
-				estilosAlerta();
-				$('#info').html("No exite el usuario");
 				console.log("No exite el usuario");
 				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
-				eliminarAlerta();
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
 			eliminarStorage();
 			window.location.href = "../../index.html";			

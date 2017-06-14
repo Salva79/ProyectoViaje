@@ -16,23 +16,16 @@ function eliminarStorage(){
 	sessionStorage.removeItem("usernCentro");
 	sessionStorage.removeItem("usernObjetivo"); 
 }
-function estilosinfo() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-success');
-}
-function eliminarinfo() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-success');}, 2500);
-}
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
+
+/* Eliminar la alerta de información */
 function eliminarAlerta() {
 	setTimeout(function() {
+		$('#info').html("");
+		$('#info').removeClass();
+		$('#modalCaja').modal('toggle');
 	}, 2500);
 }
+
 function borraProductos(id){
 	var url = '/api/Productos/' + id + '?access_token=' + sessionStorage.userToken;
 	$.ajax({
@@ -45,22 +38,18 @@ function borraProductos(id){
 		if(respuesta.count === 1){
 			window.location.href = "listadoProductos.html";	
 		}else{
-			estilosAlerta();
+			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, categoria no borrada");
-			console.log("Error, proveedor no borrado");
+			$('#modalCaja').modal({
+				show: 'true'
+			});
 			eliminarAlerta();
 		}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
 			eliminarStorage();
 			window.location.href = "../../index.html";			
@@ -103,10 +92,10 @@ function conexion(metodo,datos,url){
 						cadena = cadena + "<br>"
 					}
 					cadena = cadena + "</div>";
-					$('#contienelistados').html(cadena);
 				}else{
-					$('#contienelistados').html("No hay productos");
+					cadena = "No hay productos disponbles</div>";
 				}
+				$('#contienelistados').html(cadena);
 			}else{
 				estilosAlerta();
 				$('#info').html("No hay productos");
@@ -115,15 +104,9 @@ function conexion(metodo,datos,url){
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
 			eliminarStorage();
 			window.location.href = "../../index.html";			

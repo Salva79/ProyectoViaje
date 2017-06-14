@@ -22,11 +22,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-/* Vaciar los campos, después de seleccionar el botón enviar */
-function reiniciarElementos() {
-	$("#nombre").val("");
-}
-
 /* Eliminar la alerta de información */
 function eliminarAlerta() {
 	setTimeout(function() {
@@ -47,25 +42,21 @@ function borraProveedor(id){
 		if(respuesta.count === 1){
 			window.location.href = "listadoProveedores.html";	
 		}else{
-			estilosAlerta();
+			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, proveedor no borrado");
-			console.log("Error, proveedor no borrado");
+			$('#modalCaja').modal({
+				show: 'true'
+			});
 			eliminarAlerta();
 		}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -84,10 +75,10 @@ function conexion(metodo,datos,url){
 						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraProveedor(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
 					}
 					cadena = cadena + "</div>";
-					$('#contienelistados').html(cadena);
 				}else{
-					$('#contienelistados').html("No hay proveedores");
+					cadena = "No hay proveedores disponibles</div>";
 				}
+				$('#contienelistados').html(cadena);
 			}else{
 				estilosAlerta();
 				$('#info').html("No exite el usuario");
@@ -97,15 +88,9 @@ function conexion(metodo,datos,url){
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
 			eliminarStorage();
 			window.location.href = "../../index.html";			

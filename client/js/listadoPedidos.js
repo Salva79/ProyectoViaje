@@ -24,18 +24,12 @@ function obtenerPedidosDisponibles(metodo,datos,url){
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../../index.html";			
 	});		
 }
 function obtenerDetallesDisponibles(metodo,datos,url){
@@ -59,18 +53,12 @@ function obtenerDetallesDisponibles(metodo,datos,url){
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
 				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
 			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
+				console.log("Error, en el envio de datos");
 			}
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../../index.html";			
 	});		
 }
 function obtenerDetallesPedido(){
@@ -82,25 +70,6 @@ function obtenerDetallesPedido(){
 
 obtenerPedidosDisponibles('GET','',direccionPedidos);
 obtenerDetallesPedido();
-
-function estilosinfo() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-success');
-}
-function eliminarinfo() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-success');}, 2500);
-}
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
-function eliminarAlerta() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-danger');}, 2500);
-}
 
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
@@ -136,20 +105,19 @@ function cargarDatos(){
 			cadena = cadena + (i+1) + " - Fecha de Pedido: " + dia + " - " + mes + " - " + anyo + "<br>       Cantidad: " + arrayDetalles[i][0] + "€    -    Entregado: " + arrayDetalles[i][1] + "€<br>";
 		}
 		cadena = cadena + "</div>";
-		$("#contienelistados").html(cadena);
 	}else{
-		$("#contienelistados").html("No tienes ningún pedido");
+		cadena = "No dispones de pedidos realizados. </div>";
 	}
-	
+	$("#contienelistados").html(cadena);
 }
 
 $(document).ready(function() {
 	cargarDatos();
 	$("#botonSalir").click(function(){
 		eliminarStorage();
-		window.location.href = "../index.html";
+		window.location.href = "../../index.html";
 	});
 	$("#botonPerfil").click(function(){
-		window.location.href = "perfil.html";
+		window.location.href = "../perfil.html";
 	});
 })
