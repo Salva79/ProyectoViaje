@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/estilos.css">
+		<script type="text/javascript" src="../../js/jquery-3.1.1.min.js" ></script>
+		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../js/.js"></script>
+		<link rel="icon" type="image/png" href="../../img/logo.png">
+		<title>Listado de Pedidos</title>
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<header>
+				<nav class="navbar navbar-inverse navbar-fixed-top">
+
+					<div class="container-fluid">
+				    	<div class="navbar-header">
+				        	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					         	<span class="icon-bar"></span>
+					        	<span class="icon-bar"></span>
+					        	<span class="icon-bar"></span>                        
+				      		</button>
+				      		<img id="logo" class="img-responsive" src="../../img/logo.png">
+				    	</div>
+				    
+					    <div class="collapse navbar-collapse" id="myNavbar">
+					    	<ul class="nav navbar-nav">
+						    	<li><a href="../inicio.html">Inicio</a></li>
+						    	<li class="dropdown">
+			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Centro<span class="caret"></span></a>
+			        				<ul class="dropdown-menu">
+			          						<li><a href="../centros/altaCentro.html">Alta Centros</a></li>
+			          						<li><a href="../centros/listadoCentro.html">Listado Centros</a></li>
+			        				</ul>
+			      				</li>
+						    	<li class="dropdown">
+			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Alumnos<span class="caret"></span></a>
+			        				<ul class="dropdown-menu">
+			          						<li><a href="../alumnos/altaAlumnos.html">Alta Alumnos</a></li>
+			          						<li><a href="../alumnos/listadoAlumnos.html">Listados Alumnos</a></li>
+			        				</ul>
+			      				</li>
+						    	<li class="dropdown">
+			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Objetivos<span class="caret"></span></a>
+			        				<ul class="dropdown-menu">
+			          						<li><a href="../objetivos/altaObjetivos.html">Alta Objetivos</a></li>
+			          						<li><a href="../objetivos/listadoObjetivos.html">Listado Objetivos</a></li>
+			        				</ul>
+			      				</li>
+			      				<li class="dropdown">
+			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ingresos<span class="caret"></span></a>
+			        				<ul class="dropdown-menu">
+			          						<li><a href="../ingresos/altaIngresos.html">Alta Ingresos</a></li>
+			          						<li><a href="../ingresos/listadoIngresos.html">Listado Ingresos</a></li>
+			        				</ul>
+			      				</li>
+			      				<li class="dropdown active">
+			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Pedidos<span class="caret"></span></a>
+			        				<ul class="dropdown-menu">
+			          						<li><a href="altaPedidos.html">Alta Pedidos</a></li>
+			          						<li class="active"><a href="listadoPedidos.html">Listado Pedidos</a></li>
+			        				</ul>
+			      				</li>
+			      				<li class="dropdown">
+			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Productos<span class="caret"></span></a>
+			        				<ul class="dropdown-menu">
+			          						<li><a href="../productos/altaProductos.html">Alta Productos</a></li>
+			          						<li><a href="../productos/listadoProductos.html">Listado Productos</a></li>
+			        				</ul>
+			      				</li>
+			      				<li class="dropdown">
+			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorías<span class="caret"></span></a>
+			        				<ul class="dropdown-menu">
+			          						<li><a href="../categorias/altaCategorias.html">Alta Categorías</a></li>
+			          						<li><a href="../categorias/listadoCategorias.html">Listado Categorías</a></li>
+			        				</ul>
+			      				</li>
+			      				<li class="dropdown">
+			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Proveedores<span class="caret"></span></a>
+			        				<ul class="dropdown-menu">
+			          						<li><a href="../proveedores/altaProveedores.html">Alta Proveedores</a></li>
+			          						<li><a href="../proveedores/listadoProveedores.html">Listado Proveedores</a></li>
+			        				</ul>
+			      				</li>
+						    </ul>
+
+					        <ul class="nav navbar-nav navbar-right">
+					        	<button id="botonPerfil" class="btn btn-info navbar-btn">
+					        	</button>
+					        	<button id="botonSalir" class="btn btn-danger navbar-btn">
+					        		<i class="fa fa-power-off" aria-hidden="true"></i> Salir
+					        	</button>
+						    </ul>
+					    </div>
+				    </div>
+				</nav> 
+			</header>
+
+			<div id="contenido" class="row">
+
+				<h2>LISTADO DE PEDIDOS</h2>
+
+				<div id="contienelistados" class="col-sm-4 col-sm-offset-4 listado">
+					
+				</div>
+
+			</div>
+			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
+		</div>
+
+	</body>
+</html>
