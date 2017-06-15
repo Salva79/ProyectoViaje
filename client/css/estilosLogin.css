@@ -11,6 +11,15 @@ body {
 	background-size: cover;
 }
 
+.navbar-inverse {
+	background-color: #283e4a;
+	border-color: #283e4a;
+}
+
+#logo {
+	margin-right: 5px;
+}
+
 #cajaAcceso {
 	margin: 5% auto;
 	width: 300px;

@@ -52,6 +52,7 @@ function conexion(metodo,datos,url){
 				sessionStorage.userObjetivoId = respuesta.objetivo;
 				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 				$("#botonPerfil").html(nombre);
+				$('#mensajeInicio').html("BIENVENIDO " + sessionStorage.userNombre + " A LA APLICACIÓN DE GESTIÓN DEL VIAJE DE ESTUDIOS");
 			}else{
 				$('#info').addClass('alert alert-danger');
 				$('#info').html("No exite el usuario");
