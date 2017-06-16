@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../../css/estilos.css">
 		<script type="text/javascript" src="../../js/jquery-3.1.1.min.js" ></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../../js/listadoObjetivos.js"></script>
+		<script type="text/javascript" src="../../js/.js"></script>
 		<link rel="icon" type="image/png" href="../../img/logo.png">
 		<title>Listado de Objetivos</title>
 	</head>
@@ -37,23 +37,28 @@
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Centro<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
 			          						<li><a href="../centros/altaCentro.html">Alta Centros</a></li>
-			          						<li><a href="../centros/datosCentro.html">Modificar Centro</a></li>
+			          						<li><a href="../centros/listadoCentro.html">Listado Centros</a></li>
 			        				</ul>
 			      				</li>
-						    	<li><a href="../alumnos/alumnos.html">Alumnos</a></li>
 						    	<li class="dropdown">
+			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Alumnos<span class="caret"></span></a>
+			        				<ul class="dropdown-menu">
+			          						<li><a href="../alumnos/altaAlumnos.html">Alta Alumnos</a></li>
+			          						<li><a href="../alumnos/listadoAlumnos.html">Listados Alumnos</a></li>
+			        				</ul>
+			      				</li>
+						    	<li class="dropdown active">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Objetivos<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
 			          						<li><a href="altaObjetivos.html">Alta Objetivos</a></li>
-			          						<li><a href="listadoObjetivos.html">Listado Objetivos</a></li>
+			          						<li class="active"><a href="listadoObjetivos.html">Listado Objetivos</a></li>
 			        				</ul>
 			      				</li>
 			      				<li class="dropdown">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Ingresos<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
-			          						<li><a href="../ingresos/ingresosVerificados.html">Ingresos Verificados</a></li>
-			          						<li><a href="../ingresos/ingresosSinVerificar.html">Ingresos Sin Verificar</a></li>
-			          						<li><a href="../ingresos/ingresosProveedores.html">Ingresos por Proveedor</a></li>
+			          						<li><a href="../ingresos/altaIngresos.html">Alta Ingresos</a></li>
+			          						<li><a href="../ingresos/listadoIngresos.html">Listado Ingresos</a></li>
 			        				</ul>
 			      				</li>
 			      				<li class="dropdown">
@@ -77,11 +82,11 @@
 			          						<li><a href="../categorias/listadoCategorias.html">Listado Categorías</a></li>
 			        				</ul>
 			      				</li>
-			      				<li class="dropdown active">
+			      				<li class="dropdown">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Proveedores<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
 			          						<li><a href="../proveedores/altaProveedores.html">Alta Proveedores</a></li>
-			          						<li class="active"><a href="../proveedores/listadoProveedores.html">Listado Proveedores</a></li>
+			          						<li><a href="../proveedores/listadoProveedores.html">Listado Proveedores</a></li>
 			        				</ul>
 			      				</li>
 						    </ul>
@@ -107,7 +112,25 @@
 				</div>
 
 			</div>
-			<div id="info" class="col-xs-12 col-sm-4 col-sm-offset-4"></div>
+		</div>
+
+		<!-- Modal -->
+		<div id="modalCaja" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				 <!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal">&times;</button>
+					    <h4 class="modal-title">LISTADO DE OBJETIVOS</h4>
+					</div>
+					<div class="modal-body">
+					    <div id="info"></div>
+					</div>
+					<div class="modal-footer">
+					    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</body>

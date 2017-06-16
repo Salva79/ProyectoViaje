@@ -12,7 +12,7 @@
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../../js/.js"></script>
 		<link rel="icon" type="image/png" href="../../img/logo.png">
-		<title>Listado de Categorias</title>
+		<title>Listado de Centros</title>
 	</head>
 
 	<body>
@@ -33,11 +33,11 @@
 					    <div class="collapse navbar-collapse" id="myNavbar">
 					    	<ul class="nav navbar-nav">
 						    	<li><a href="../inicio.html">Inicio</a></li>
-						    	<li class="dropdown">
+						    	<li class="dropdown active">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Centro<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
-			          						<li><a href="../centros/altaCentro.html">Alta Centros</a></li>
-			          						<li><a href="../centros/listadoCentro.html">Listado Centros</a></li>
+			          						<li><a href="altaCentro.html">Alta Centros</a></li>
+			          						<li class="active"><a href="listadoCentro.html">Listado Centros</a></li>
 			        				</ul>
 			      				</li>
 						    	<li class="dropdown">
@@ -75,11 +75,11 @@
 			          						<li><a href="../productos/listadoProductos.html">Listado Productos</a></li>
 			        				</ul>
 			      				</li>
-			      				<li class="dropdown active">
+			      				<li class="dropdown">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorías<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
-			          						<li><a href="altaCategorias.html">Alta Categorías</a></li>
-			          						<li class="active"><a href="listadoCategorias.html">Listado Categorías</a></li>
+			          						<li><a href="../categorias/altaCategorias.html">Alta Categorías</a></li>
+			          						<li><a href="../categorias/listadoCategorias.html">Listado Categorías</a></li>
 			        				</ul>
 			      				</li>
 			      				<li class="dropdown">
@@ -105,13 +105,14 @@
 
 			<div id="contenido" class="row">
 
-				<h2>LISTADO DE CATEGORIAS</h2>
+				<h2>LISTADO DE CENTROS</h2>
 
 				<div id="contienelistados" class="col-sm-4 col-sm-offset-4">
 					
 				</div>
 
 			</div>
+			
 		</div>
 
 		<!-- Modal -->
@@ -121,7 +122,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 					    <button type="button" class="close" data-dismiss="modal">&times;</button>
-					    <h4 class="modal-title">LISTADO DE CATEGORÍAS</h4>
+					    <h4 class="modal-title">LISTADO DE CENTROS</h4>
 					</div>
 					<div class="modal-body">
 					    <div id="info"></div>
