@@ -84,11 +84,6 @@ $(document).ready(function() {
 		window.location.href = "../../index.html";
 	});
 
-	/* Ver información del perfil del usuario */
-	$("#botonPerfil").click(function(){
-		window.location.href = "../perfil.html";
-	});
-
 	$('#enviar').click(function() {
 		validarDatos();
 	});

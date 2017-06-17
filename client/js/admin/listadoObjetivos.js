@@ -133,7 +133,5 @@ $(document).ready(function() {
 		eliminarStorage();
 		window.location.href = "../../index.html";
 	});
-	$("#botonPerfil").click(function(){
-		window.location.href = "../perfil.html";
-	});
+	
 })

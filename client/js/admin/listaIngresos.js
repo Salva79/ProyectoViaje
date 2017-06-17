@@ -70,7 +70,7 @@ function conexionCentro() {
 										
 				}
 			} else{
-				cadena = "No hay ingresos por proveedor";
+				cadena = "No hay ingresos";
 			}
 			$('#contienelistados').html(cadena);
 										

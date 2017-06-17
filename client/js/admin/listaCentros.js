@@ -1,6 +1,4 @@
-var direccionProveedores = '/api/Proveedores?access_token=' + sessionStorage.userToken;
-
-/* Eliminar los valores de sesión */
+/* Eliminar los valores de sesión */ 
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
 	sessionStorage.removeItem("userId");
@@ -22,16 +20,15 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-/* Eliminar la alerta de información */
 function eliminarAlerta() {
-	setTimeout(function() {
-		$('#info').html("");
-		$('#info').removeClass();
-	}, 2500);
+	setTimeout(function(){
+        $('#info').html("");
+        $('#info').removeClass();
+    	$('#modalCaja').modal('toggle');}, 2500);
 }
 
-function borraProveedor(id){
-	var url = '/api/Proveedores/' + id + '?access_token=' + sessionStorage.userToken;
+function borraCentro(id){
+	var url = '/api/Centros/' + id + '?access_token=' + sessionStorage.userToken;
 	$.ajax({
 		async: true,
 		dataType: 'json',
@@ -40,29 +37,32 @@ function borraProveedor(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			window.location.href = "listadoProveedores.html";	
+			$('#info').addClass('alert alert-success');
+			$('#info').html("Centro eliminado");	
 		}else{
 			$('#info').addClass('alert alert-danger');
-			$('#info').html("Error, proveedor no borrado");
-			$('#modalCaja').modal({
-				show: 'true'
-			});
-			eliminarAlerta();
+			$('#info').html("Error, alumno no borrado");
 		}
+		$('#modalCaja').modal({
+			show: 'true'
+		}); 
+		eliminarAlerta();
+		window.location.href = "listadoCentro.html";
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+		if(xhr.statusText === 'Unauthorized'){
+			console.log("Error, usuario no registrado");
+		}else{
+			console.log("Error, en el envio de datos");
+		}
+
+		eliminarStorage();
+		window.location.href = "../../index.html";			
 	});
 }
 
 function conexion(metodo,datos,url){
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		data: datos,
 		method: metodo,
@@ -72,19 +72,24 @@ function conexion(metodo,datos,url){
 				var cadena = "<div class='listado'>";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraProveedor(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
+						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraCentro(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button>";
+						cadena = cadena + "<br>Codigo: " + respuesta[i].CodigoCentro;
+						cadena = cadena + "<br>Localidad: " + respuesta[i].Localidad;
+						urlCoordinador = '/api/Usuarios/' + respuesta[i].userId + '?access_token=' + sessionStorage.userToken;;
+						$.ajax({
+							async: false,
+							dataType: 'json',
+							method: 'GET',
+							url: urlCoordinador,
+						}).done(function (respuesta){
+							cadena = cadena + "<br>Coordinador: " + respuesta.Nombre + " " + respuesta.Apellidos + "<br>";
+						});
 					}
 					cadena = cadena + "</div>";
 				}else{
-					cadena = "No hay proveedores disponibles</div>";
+					cadena = "No hay Centros disponibles </div>";
 				}
 				$('#contienelistados').html(cadena);
-			}else{
-				estilosAlerta();
-				$('#info').html("No exite el usuario");
-				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
-				eliminarAlerta();
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
@@ -92,14 +97,17 @@ function conexion(metodo,datos,url){
 			}else{
 				console.log("Error, en el envio de datos");
 			}
+
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		
 }
 
 $(document).ready(function() {
-	conexion("GET","",direccionProveedores)
-	$("#botonPerfil").html(("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre));
+	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
+	$("#botonPerfil").html(nombre);
+	var centrosurl = '/api/Centros?access_token=' + sessionStorage.userToken;
+	conexion('GET','',centrosurl);
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";
