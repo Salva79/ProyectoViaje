@@ -21,25 +21,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-function estilosinfo() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-success');
-}
-function eliminarinfo() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-success');}, 2500);
-}
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
-function eliminarAlerta() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-danger');}, 2500);
-}
-
 function ListaProveedores(){
 	var urlProvvedores = '/api/Proveedores?access_token=' + sessionStorage.userToken;;
 	$.ajax({
@@ -66,10 +47,10 @@ function conexion(){
 		method: 'GET',
 		url: url,
 	}).done(function (respuesta){
+			var total;
 			var cadena = "";
 			if(respuesta.length>0){
 				for(var i = 0; i < respuesta.length; i++){
-					presunto = respuesta[i].Nombre + " " + respuesta[i].Apellidos;
 					var dire = '/api/Ingresos?filter={"where":{"userId":"' + respuesta[i].id + '","Verificado": true}}&access_token=' + sessionStorage.userToken;
 					$.ajax({
 						async: false,
@@ -78,9 +59,10 @@ function conexion(){
 						url: dire,
 					}).done(function (respuesta){
 						if(respuesta.length>0){
+							total = 0;
 							for(var i=0; i<respuesta.length; i++){
 								if(respuesta[i].Verificado === true){
-									cadena = cadena + presunto + '<br>Cantidad: ' + respuesta[i].Cantidad + "€";
+									total = total + respuesta[i].Cantidad;
 									var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '/productos?access_token=' + sessionStorage.userToken;
 									$.ajax({               
 										async: false,
@@ -88,17 +70,17 @@ function conexion(){
 										method: 'GET',
 										url: urltipo,
 									}).done(function (respuesta){
-										cadena = cadena + proveedores[(respuesta[0].Fabricante-1)] + "<br>" + cadena;
+										cadena = cadena + proveedores[(respuesta[0].Fabricante-1)] + ": " + total + " € <br>";
 									});
 								}	
 							}
-						} else{
-							cadena = "No hay ingresos por proveedor";
 						}
-						$('#contienelistados').html(cadena);
 					});
 				}						
+			} else{
+				cadena = "No hay ingresos por proveedor";
 			}
+			$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
 			console.log("Error Ingresos");
 			eliminarStorage();

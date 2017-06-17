@@ -34,7 +34,7 @@ function eliminarAlerta() {
 
 function obtenerObjetivosDisponibles(metodo,datos,url){
 	$.ajax({
-		async: false,
+		async: true,
 		dataType: 'json',
 		data: datos,
 		method: metodo,
@@ -91,7 +91,7 @@ function conexion(metodo,datos,url){
 
 function actualizaDatos(metodo,datos,url){
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		data: datos,
 		method: metodo,

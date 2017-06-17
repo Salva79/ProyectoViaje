@@ -149,14 +149,14 @@ function conexionCentro() {
 									});
 								}
 							}	
-						}else{
-							cadena = "No hay ingresos sin verificar";
 						}
-						$('#contienelistados').html(cadena);
 					});
 										
 				}
+			} else{
+				cadena = "No hay ingresos por proveedor";
 			}
+			$('#contienelistados').html(cadena);
 										
 	}).fail(function (xhr){
 			console.log("Error Ingresos");

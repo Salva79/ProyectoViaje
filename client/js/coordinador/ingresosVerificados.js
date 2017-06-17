@@ -75,14 +75,14 @@ function conexionCentro(){
 									});
 								}	
 							}
-						} else{
-							cadena = "No hay ingresos verificados";
 						}
-						$('#contienelistados').html(cadena);
 					});
 				}
 										
+			} else{
+				cadena = "No hay ingresos por proveedor";
 			}
+			$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
 			console.log("Error Ingresos");
 			eliminarStorage();
