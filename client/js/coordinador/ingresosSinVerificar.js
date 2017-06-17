@@ -114,7 +114,7 @@ function verificando(id){
 	})
 }
 
-function conexionCentro(){
+function conexionCentro() {
 	var url = '/api/Centros/' + sessionStorage.userCentroId + '/alumnos?access_token=' + sessionStorage.userToken;
 	$.ajax({
 		async: true,
@@ -134,33 +134,37 @@ function conexionCentro(){
 						method: 'GET',
 						url: dire,
 					}).done(function (respuesta){
-						for(var i=0; i<respuesta.length; i++){
-							if(respuesta[i].Verificado === false){
-								cadena = cadena + presunto +  '<button onclick="verificando(' + respuesta[i].id +')" class="botonVerificar btn btn-warning" title="Verificar"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>' + '<br>Cantidad: ' + respuesta[i].Cantidad + "€ - ";
-								var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '?access_token=' + sessionStorage.userToken;
-								$.ajax({
-									async: false,
-									dataType: 'json',
-									method: 'GET',
-									url: urltipo,
-								}).done(function (respuesta){
-									cadena = cadena + respuesta.Nombre + "<br>";
-								});
+						if(respuesta.length>0){
+							for(var i=0; i<respuesta.length; i++){
+								if(respuesta[i].Verificado === false){
+									cadena = cadena + presunto +  '<button onclick="verificando(' + respuesta[i].id +')" class="botonVerificar btn btn-warning" title="Verificar"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>' + '<br>Cantidad: ' + respuesta[i].Cantidad + "€ - ";
+									var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '?access_token=' + sessionStorage.userToken;
+									$.ajax({
+										async: false,
+										dataType: 'json',
+										method: 'GET',
+										url: urltipo,
+									}).done(function (respuesta){
+										cadena = cadena + respuesta.Nombre + "<br>";
+									});
+								}
 							}	
+						}else{
+							cadena = "No hay ingresos sin verificar";
 						}
+						$('#contienelistados').html(cadena);
 					});
+										
 				}
-				$('#contienelistados').html(cadena);						
-			}else{
-				cadena = "No hay ingresos sin verificar");
 			}
-		$('#contienelistados').html(cadena);
+										
 	}).fail(function (xhr){
 			console.log("Error Ingresos");
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		
 }
+
 $(document).ready(function() {
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);

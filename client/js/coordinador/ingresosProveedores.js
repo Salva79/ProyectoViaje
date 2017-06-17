@@ -66,7 +66,6 @@ function conexion(){
 		method: 'GET',
 		url: url,
 	}).done(function (respuesta){
-			var inicio = "<div class='listado'>";
 			var cadena = "";
 			if(respuesta.length>0){
 				for(var i = 0; i < respuesta.length; i++){
@@ -78,26 +77,28 @@ function conexion(){
 						method: 'GET',
 						url: dire,
 					}).done(function (respuesta){
-						for(var i=0; i<respuesta.length; i++){
-							if(respuesta[i].Verificado === true){
-								cadena = cadena + presunto + '<br>Cantidad: ' + respuesta[i].Cantidad + "€";
-								var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '/productos?access_token=' + sessionStorage.userToken;
-								$.ajax({               
-									async: false,
-									dataType: 'json',
-									method: 'GET',
-									url: urltipo,
-								}).done(function (respuesta){
-									cadena = inicio + proveedores[(respuesta[0].Fabricante-1)] + "<br>" + cadena;
-								});
-							}	
+						if(respuesta.length>0){
+							for(var i=0; i<respuesta.length; i++){
+								if(respuesta[i].Verificado === true){
+									cadena = cadena + presunto + '<br>Cantidad: ' + respuesta[i].Cantidad + "€";
+									var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '/productos?access_token=' + sessionStorage.userToken;
+									$.ajax({               
+										async: false,
+										dataType: 'json',
+										method: 'GET',
+										url: urltipo,
+									}).done(function (respuesta){
+										cadena = cadena + proveedores[(respuesta[0].Fabricante-1)] + "<br>" + cadena;
+									});
+								}	
+							}
+						} else{
+							cadena = "No hay ingresos por proveedor";
 						}
+						$('#contienelistados').html(cadena);
 					});
 				}						
-			}else{
-				cadena = "No hay ingresos sin verificar");
 			}
-			$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
 			console.log("Error Ingresos");
 			eliminarStorage();

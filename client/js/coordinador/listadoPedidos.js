@@ -100,8 +100,12 @@ function listarPedidos(){
 					cadena =  cadena + fecha + "<br>";
 				}
 			}
-			$('#contienelistados').html(cadena);
 		}
+		else {
+			cadena = "No hay pedidos disponibles"
+		}
+
+		$('#contienelistados').html(cadena);
 	})
 }
 

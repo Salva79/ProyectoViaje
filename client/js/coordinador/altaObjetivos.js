@@ -59,6 +59,31 @@ function insertarObjetivo(datos,url) {
 	});
 }
 
+/* Funciones para validar fechas */
+function validarFechaDias (valorFecha) {
+	if (!isNaN(valorFecha) && (valorFecha>0) && (valorFecha <=31)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function validarMeses (valorFecha) {
+	if (!isNaN(valorFecha) && (valorFecha>0) && (valorFecha <=12)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function validarYear (valorFecha) {
+	if (!isNaN(valorFecha)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 
 function compruebafechas(){
 	var dinicio = $("#dinicio").val();
@@ -67,26 +92,41 @@ function compruebafechas(){
 	var dfin = $("#dfin").val();
 	var mfin = $("#mfin").val();
 	var afin = $("#afin").val();
-	if(ainicio<=afin){
-		if(ainicio===afin){
-			if(minicio<=mfin){
-				if(minicio===mfin){
-					if(dinicio<dfin){
-						return true;
+
+	var diaInicio = validarFechaDias(dinicio);
+	var diaFin = validarFechaDias(dfin);
+
+	var mesInicio = validarMeses(minicio);
+	var mesFin = validarMeses(mfin);
+
+	var yearInicio = validarYear(ainicio);
+	var yearFin = validarYear(afin);
+
+	if (diaInicio && diaFin && mesInicio && mesFin && yearInicio && yearFin) {
+		if(ainicio<=afin){
+			if(ainicio===afin){
+				if(minicio<=mfin){
+					if(minicio===mfin){
+						if(dinicio<dfin){
+							return true;
+						}else{
+							return false;
+						}
 					}else{
-						return false;
+						return true;
 					}
 				}else{
-					return true;
+					return false;
 				}
 			}else{
-				return false;
+				return true;
 			}
 		}else{
-			return true;
+			return false;
 		}
-	}else{
-		return false;
+	} else {
+		$('#info').addClass('alert alert-danger');
+		$('#info').html("Introduce fechas válidas");
 	}
 }
 

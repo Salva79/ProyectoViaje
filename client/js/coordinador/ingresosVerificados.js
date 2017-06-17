@@ -47,8 +47,9 @@ function conexionCentro(){
 		method: 'GET',
 		url: url,
 	}).done(function (respuesta){
-			var cadena = "<div class='listado'>";
+			var cadena = "";
 			var presunto = "";
+
 			if(respuesta.length>0){
 				for(var i = 0; i < respuesta.length; i++){
 					presunto = respuesta[i].Nombre + " " + respuesta[i].Apellidos;
@@ -59,27 +60,29 @@ function conexionCentro(){
 						method: 'GET',
 						url: dire,
 					}).done(function (respuesta){
-						for(var i=0; i<respuesta.length; i++){
-							if(respuesta[i].Verificado === true){
-								cadena = cadena + presunto + '<br>Cantidad: ' + respuesta[i].Cantidad + "€ - ";
-								var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '?access_token=' + sessionStorage.userToken;
-								$.ajax({
-									async: false,
-									dataType: 'json',
-									method: 'GET',
-									url: urltipo,
-								}).done(function (respuesta){
-									cadena = cadena + respuesta.Nombre + "<br>";
-								});
-							}	
+						if(respuesta.length>0){
+							for(var i=0; i<respuesta.length; i++){
+								if(respuesta[i].Verificado === true){
+									cadena = cadena + presunto + '<br>Cantidad: ' + respuesta[i].Cantidad + "€ - ";
+									var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '?access_token=' + sessionStorage.userToken;
+									$.ajax({
+										async: false,
+										dataType: 'json',
+										method: 'GET',
+										url: urltipo,
+									}).done(function (respuesta){
+										cadena = cadena + respuesta.Nombre + "<br>";
+									});
+								}	
+							}
+						} else{
+							cadena = "No hay ingresos verificados";
 						}
+						$('#contienelistados').html(cadena);
 					});
 				}
 										
-			}else{
-				cadena = "No hay ingresos sin verificar");
 			}
-			$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
 			console.log("Error Ingresos");
 			eliminarStorage();
