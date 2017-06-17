@@ -61,7 +61,7 @@ function conexion(metodo,datos,url){
 							break;
 						}
 						case "admin":{
-							window.location.href = "coordinador/inicio.html";
+							window.location.href = "admin/inicio.html";
 							break;
 						}
 						default:{

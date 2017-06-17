@@ -80,7 +80,7 @@ function listaAlumos(datos,url) {
 		var objetivo = "";
 		if(respuesta.length > 0){
 			for(var i = 0; i < respuesta.length; i++){
-				if(respuesta[i].Curso !== "Coordinador"){
+				if((respuesta[i].Curso !== "Coordinador") && (respuesta[i].Curso !== 'admin')){
 					var dire = '/api/Objetivos/' + respuesta[i].objetivo + '?access_token=' + sessionStorage.userToken;
 					$.ajax({
 						async: false,
@@ -94,7 +94,22 @@ function listaAlumos(datos,url) {
 						}
 					});
 					cadena = cadena + respuesta[i].DNI + " " + respuesta[i].Nombre + " " + respuesta[i].Apellidos + '  <button onclick="veralumnado(' + respuesta[i].id +')" class="botonVerificar btn btn-success" title="Ver"><i class="fa fa-info-circle" aria-hidden="true"></i></button>' + ' <button onclick="borraUsuario(' + respuesta[i].id + ')"  class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
-				  	"<br>";
+				  	"<br>Alumno<br>";
+				}else if(respuesta[i].Curso === "Coordinador"){
+					var dire = '/api/Objetivos/' + respuesta[i].objetivo + '?access_token=' + sessionStorage.userToken;
+					$.ajax({
+						async: false,
+						dataType: 'json',
+						method: 'GET',
+						url: dire,
+					}).done(function(ob) {
+						objetivo = ob.Nombre;
+						if (objetivo === undefined){
+							objetivo = "Sin Objetivo";
+						}
+					});
+					cadena = cadena + respuesta[i].DNI + " " + respuesta[i].Nombre + " " + respuesta[i].Apellidos + '  <button onclick="veralumnado(' + respuesta[i].id +')" class="botonVerificar btn btn-success" title="Ver"><i class="fa fa-info-circle" aria-hidden="true"></i></button>' + ' <button onclick="borraUsuario(' + respuesta[i].id + ')"  class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
+				  	"<br>Coordinador<br>";
 				}				
 			}
 		} else {
@@ -105,16 +120,12 @@ function listaAlumos(datos,url) {
 }
 
 $(document).ready(function() {
-	var metodoAlumnos = '/api/Centros/' + sessionStorage.userCentroId + '/alumnos?access_token=' + sessionStorage.userToken;
+	var metodoAlumnos = '/api/Usuarios?access_token=' + sessionStorage.userToken;
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
 	listaAlumos('',metodoAlumnos);
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";
-	});
-
-	$("#botonPerfil").click(function(){
-		window.location.href = "../perfil.html";
 	});
 })
