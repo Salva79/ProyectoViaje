@@ -16,11 +16,6 @@ function obtenerPedidosDisponibles(metodo,datos,url){
 					arrayPedidos[i] = respuesta[i].id;
 					arrayFechas[i] = respuesta[i].FechaPedido;
 				}
-			}else{
-				estilosAlerta();
-				$('#info').html("No exiten Pedidos");
-				console.log("No exiten Pedidos");
-				eliminarAlerta();
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
@@ -45,11 +40,6 @@ function obtenerDetallesDisponibles(metodo,datos,url){
 					var objeto = [respuesta[i].CantidadPedido,respuesta[i].CantidadEntrega];
 					arrayDetalles.push(objeto);	
 				}
-			}else{
-				estilosAlerta();
-				$('#info').html("No exiten Pedidos");
-				console.log("No exiten Pedidos");
-				eliminarAlerta();
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
@@ -96,7 +86,7 @@ function eliminarStorage(){
 function cargarDatos(){
 	var nombre = ("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre);
 	$("#botonPerfil").html(nombre);
-	var cadena = "<div class='listado'>";
+	var cadena = "";
 	if(arrayPedidos>0){
 		for(var i=0 ; i<arrayPedidos.length ; i++){
 			var anyo = arrayFechas[i].substring(0,4);
@@ -104,9 +94,9 @@ function cargarDatos(){
 			var dia = arrayFechas[i].substring(8,10);
 			cadena = cadena + (i+1) + " - Fecha de Pedido: " + dia + " - " + mes + " - " + anyo + "<br>       Cantidad: " + arrayDetalles[i][0] + "€    -    Entregado: " + arrayDetalles[i][1] + "€<br>";
 		}
-		cadena = cadena + "</div>";
+		cadena = cadena;
 	}else{
-		cadena = "No dispones de pedidos realizados. </div>";
+		cadena = "No dispones de pedidos realizados";
 	}
 	$("#contienelistados").html(cadena);
 }

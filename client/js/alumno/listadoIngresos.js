@@ -44,11 +44,8 @@ function obtenerTiposDisponibles(metodo,datos,url){
 				for(var i = 0; i < respuesta.length; i++){
 					arrayTipos[i] = respuesta[i].Nombre;
 				}
-			}else{
-				estilosAlerta();
-				$('#info').html("No exite el tipo de producto");
-				console.log("No exite el tipo de producto");
-				eliminarAlerta();
+			} else {
+				arrayTipos[0] = "No hay categorías disponibles"
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
@@ -87,12 +84,6 @@ function conexion(metodo,datos,url){
 					cadena = cadena + "No tienes ningún ingreso realizado </div>";
 				}
 				$('#contienelistados').html(cadena);
-			}else{
-				estilosAlerta();
-				$('#info').html("No exite el usuario");
-				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
-				eliminarAlerta();
 			}
 	}).fail(function (xhr){
 			if(xhr.statusText === 'Unauthorized'){
