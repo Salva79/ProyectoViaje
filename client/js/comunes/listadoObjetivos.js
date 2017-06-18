@@ -102,7 +102,7 @@ function conexion(metodo,datos,url){
 						fin = fin + "";
 						fin = fin.substring(0,10);
 						var finMostrar = invertir(fin);
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + "<br>   " + inicioMostrar + " a " + finMostrar + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
+						cadena = cadena + "<p>" + (i+1) + " - Nombre: " + respuesta[i].Nombre + "<br>   " + inicioMostrar + " a " + finMostrar + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button></p>";
 					}
 				}else{
 					cadena = "No hay objetivos disponibles.</div>";

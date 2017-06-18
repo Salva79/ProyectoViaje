@@ -44,7 +44,7 @@ function conexionCentro(){
 						if(respuesta.length>0){
 							for(var i=0; i<respuesta.length; i++){
 								if(respuesta[i].Verificado === true){
-									cadena = cadena + presunto + '<br>Cantidad: ' + respuesta[i].Cantidad + "€ - ";
+									cadena = cadena + "<p>" + presunto + '<br>Cantidad: ' + respuesta[i].Cantidad + "€ - ";
 									var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '?access_token=' + sessionStorage.userToken;
 									$.ajax({
 										async: false,
@@ -52,7 +52,7 @@ function conexionCentro(){
 										method: 'GET',
 										url: urltipo,
 									}).done(function (respuesta){
-										cadena = cadena + respuesta.Nombre + "<br>";
+										cadena = cadena + respuesta.Nombre + "</p>";
 									});
 								}	
 							}

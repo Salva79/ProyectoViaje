@@ -66,7 +66,7 @@ function conexion(metodo,datos,url){
 				var cadena = "";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Descripcion + " <button type='button' id='borrar' onclick='borraProductos(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
+						cadena = cadena + "<p>" + (i+1) + " -   Nombre: " + respuesta[i].Descripcion + " <button type='button' id='borrar' onclick='borraProductos(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
 						cadena = cadena + "Referencia: " + respuesta[i].Referencia + "<br>";
 						cadena = cadena + "Precio Venta: " + respuesta[i].PrecioiVenta + "€  -  Beneficio: " + respuesta[i].Beneficio + "€<br>"
 						var urlcategoria = '/api/TipoProductos/' + respuesta[i].tipoProductoId + '?access_token=' + sessionStorage.userToken;
@@ -85,9 +85,8 @@ function conexion(metodo,datos,url){
 							method: 'GET',
 							url: urlproveedor,
 						}).done(function (respuesta){
-							cadena = cadena + "Proveedor: " + respuesta.Nombre + "<br>";
+							cadena = cadena + "Proveedor: " + respuesta.Nombre + "</p>";
 						})
-						cadena = cadena + "<br>"
 					}
 				}else{
 					cadena = "No hay productos disponbles";

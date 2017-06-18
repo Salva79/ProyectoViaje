@@ -67,7 +67,7 @@ function conexion(metodo,datos,url){
 				var cadena = "";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraCentro(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button>";
+						cadena = cadena + "<p>" + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraCentro(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button>";
 						cadena = cadena + "<br>Codigo: " + respuesta[i].CodigoCentro;
 						cadena = cadena + "<br>Localidad: " + respuesta[i].Localidad;
 						urlCoordinador = '/api/Usuarios/' + respuesta[i].userId + '?access_token=' + sessionStorage.userToken;;
@@ -77,7 +77,7 @@ function conexion(metodo,datos,url){
 							method: 'GET',
 							url: urlCoordinador,
 						}).done(function (respuesta){
-							cadena = cadena + "<br>Coordinador: " + respuesta.Nombre + " " + respuesta.Apellidos + "<br>";
+							cadena = cadena + "<br>Coordinador: " + respuesta.Nombre + " " + respuesta.Apellidos + "</p>";
 						});
 					}
 				}else{

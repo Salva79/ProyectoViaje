@@ -86,7 +86,7 @@ function cargarDatos(){
 			var anyo = arrayFechas[i].substring(0,4);
 			var mes = arrayFechas[i].substring(5,7);
 			var dia = arrayFechas[i].substring(8,10);
-			cadena = cadena + (i+1) + " - Fecha de Pedido: " + dia + " - " + mes + " - " + anyo + "<br>       Cantidad: " + arrayDetalles[i][0] + "€    -    Entregado: " + arrayDetalles[i][1] + "€<br>";
+			cadena = cadena + "<p>" + (i+1) + " - Fecha de Pedido: " + dia + " - " + mes + " - " + anyo + "<br>Cantidad: " + arrayDetalles[i][0] + "€ - Entregado: " + arrayDetalles[i][1] + "€</p>";
 		}
 	}else{
 		cadena = "No dispones de pedidos realizados";

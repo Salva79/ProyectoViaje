@@ -64,7 +64,7 @@ function conexion(metodo,datos,url){
 						}else{
 							verify = "No"
 						}
-						cadena = cadena + (i+1) + " -   Tipo: " + arrayTipos[respuesta[i].tipo-1] + "  -  Cantidad: " + respuesta[i].Cantidad + " €<br>Verificado: " + verify + "<br>";
+						cadena = cadena + "<p>" (i+1) + " -   Tipo: " + arrayTipos[respuesta[i].tipo-1] + "  -  Cantidad: " + respuesta[i].Cantidad + " €<br>Verificado: " + verify + "</p>";
 					}
 					cadena = cadena + "</div>";
 				}else{

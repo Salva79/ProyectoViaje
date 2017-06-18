@@ -46,7 +46,7 @@ function listarPedidos(){
 					url: urlUsuario,
 				}).done(function(respuesta) {
 					if (respuesta.centroId == sessionStorage.userCentroId){
-						cadena =  cadena + (i+1) + " - " + respuesta.DNI + " - " + respuesta.Nombre + " " + respuesta.Apellidos + "<br>";					
+						cadena =  cadena + "<p>" + (i+1) + " - " + respuesta.DNI + " - " + respuesta.Nombre + " " + respuesta.Apellidos + "<br>";					
 					}else{
 						salta = true;
 					}
@@ -78,7 +78,7 @@ function listarPedidos(){
 						})
 						cadena =  cadena + "Total: " + respuesta[0].CantidadPedido + "€ - Entregado: " + respuesta[0].CantidadEntrega + "€<br>";
 					})
-					cadena =  cadena + fecha + "<br>";
+					cadena =  cadena + fecha + "</p>";
 				}
 			}
 		}

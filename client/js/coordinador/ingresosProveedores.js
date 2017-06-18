@@ -74,7 +74,7 @@ function conexion(){
 										method: 'GET',
 										url: urltipo,
 									}).done(function (respuesta){
-										cadena = cadena + proveedores[(respuesta[0].Fabricante-1)] + ": " + total + " € <br>";
+										cadena = cadena + "<p>" proveedores[(respuesta[0].Fabricante-1)] + ": " + total + " € </p>";
 									});
 								}	
 							}
