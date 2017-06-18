@@ -27,6 +27,8 @@ app.start = function(){
       var explorerPath = app.get('loopback-component-explorer').mountPath;
       console.log(chalk.magenta('---------------------------------------------------------------------------'));
       console.log('\tNavega por tu REST API en %s%s', baseUrl, explorerPath);
+    }else{
+      console.log('\tREST API desabilitado');
     }
     console.log(chalk.magenta('---------------------------------------------------------------------------'));
   });
