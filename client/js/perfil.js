@@ -94,9 +94,9 @@ function actualizaDatos(metodo,datos,url){
 				eliminarAlerta();
 			}
 	}).fail(function (xhr){
-			console.log("Error Actualiza Perfil");
-			eliminarStorage();
-			window.location.href = "../index.html";		
+			estilosAlerta();
+			$('#info').html("Perfil no actualizado");
+			eliminarAlerta();		
 	});		
 }
 function cogeObjetivo(metodo,datos,url){
@@ -111,11 +111,7 @@ function cogeObjetivo(metodo,datos,url){
 				sessionStorage.NombreObjetivo = respuesta.Nombre;
 			}else{
 				sessionStorage.NombreObjetivo = "Sin Objetivo Asignado";
-			}
-	}).fail(function (xhr){
-			console.log("Error Objetivo");
-			eliminarStorage();
-			window.location.href = "../index.html";		
+			}	
 	});		
 }
 function cogeCentro(metodo,datos,url){
@@ -131,10 +127,6 @@ function cogeCentro(metodo,datos,url){
 			}else{
 				sessionStorage.NombreCentro = "Sin centro asignado";
 			}
-	}).fail(function (xhr){
-			console.log("Error Centro");
-			eliminarStorage();
-			window.location.href = "../index.html";
 	});		
 }
 function recogeDatos(){

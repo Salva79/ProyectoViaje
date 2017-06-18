@@ -55,9 +55,7 @@ function conexion2(metodo,datos,url){
 			}
 			$('#tipoProducto').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Categorías");
-			eliminarStorage();
-			window.location.href = "../../index.html";		
+			$('#tipoProducto').html('<option value="0">No hay categorías disponibles</option>');		
 	});		
 }
 
@@ -77,9 +75,10 @@ function conexionInsertar(metodo,datos,url){
 				$('#info').html("Error, no se ha podido realizar el alta del ingreso");
 			}
 	}).fail(function (xhr){
-			console.log("Error Alta Ingresos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, ingreso no insertado");
+			reiniciarElementos();
+			eliminarAlerta();			
 	});	
 }
 

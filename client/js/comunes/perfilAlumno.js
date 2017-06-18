@@ -48,9 +48,7 @@ function obtenerObjetivosDisponibles(metodo,datos,url){
 				$('#objetivo').html(cadena);				
 			}
 	}).fail(function (xhr){
-		console.log("Error Objetivos");
-		eliminarStorage();
-		window.location.href = "index.html";			
+		$('#objetivo').html("No hay objetivos disponibles");			
 	});		
 }
 
@@ -72,15 +70,7 @@ function conexion(metodo,datos,url){
 			$('#centro').val(respuesta.centroId);
 			$('#objetivo').val(respuesta.objetivo);
 			$("#username").val(respuesta.username);
-		}else{
-			console.log("Error");
-			eliminarStorage();
-			window.location.href = "../../index.html";
-		}
-	}).fail(function (xhr){
-			console.log("Error Mostrar Datos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+		}			
 	});		
 }
 
@@ -98,14 +88,12 @@ function actualizaDatos(metodo,datos,url){
 		}else{
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("No se han actualizado los datos del usuario");
-			console.log("No exite el usuario");
-			nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
 		}
 		eliminarAlerta();
 	}).fail(function (xhr){
-			console.log("Error Actualiza Datos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, datos no actualizados");
+			eliminarAlerta();			
 	});		
 }
 

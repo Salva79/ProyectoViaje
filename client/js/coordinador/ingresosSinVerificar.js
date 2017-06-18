@@ -94,7 +94,7 @@ function verificando(id){
 												url: urlIngreso,
 											}).done(function (respuesta){
 												$('#info').addClass('alert alert-success');
-												$('#info').html("Ingreso Verificado");
+												$('#info').html("Ingreso verificado");
 												$('#modalCaja').modal({
 													show: 'true'
 												});
@@ -102,9 +102,12 @@ function verificando(id){
 												window.location.href = "ingresosSinVerificar.html";
 											})
 										}).fail(function (xhr){
-												console.log("Error Verificar Ingresos");
-												eliminarStorage();
-												window.location.href = "../../index.html";			
+												$('#info').addClass('alert alert-danger');
+												$('#info').html("Error, ingreso no verificado");
+												$('#modalCaja').modal({
+													show: 'true'
+												});
+												eliminarAlerta();			
 										});
 
 									}									
@@ -158,14 +161,12 @@ function conexionCentro() {
 										
 				}
 			} else{
-				cadena = "No hay ingresos por proveedor";
+				cadena = "No hay ingresos sin verificar";
 			}
 			$('#contienelistados').html(cadena);
 										
 	}).fail(function (xhr){
-			console.log("Error Conexión Centro");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html("No hay ingresos sin verificar");			
 	});		
 }
 

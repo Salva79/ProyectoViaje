@@ -61,13 +61,11 @@ function conexionCentro(){
 				}
 										
 			} else{
-				cadena = "No hay ingresos por proveedor";
+				cadena = "No hay ingresos verificados";
 			}
 			$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Conexión Centro");
-			eliminarStorage();
-			window.location.href = "../../index.html";		
+			$('#contienelistados').html("No hay ingresos verificados");		
 	});		
 }
 $(document).ready(function() {

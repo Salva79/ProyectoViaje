@@ -52,9 +52,12 @@ function borraProveedor(id){
 		eliminarAlerta();
 		window.location.href = "listadoProveedores.html";
 	}).fail(function (xhr){
-			console.log("Error Borrar Proveedores");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, provvedor no eliminado");
+			$('#modalCaja').modal({
+				show: 'true'
+			}); 
+			eliminarAlerta();				
 	});
 }
 
@@ -78,9 +81,7 @@ function conexion(metodo,datos,url){
 				$('#contienelistados').html(cadena);
 			}
 	}).fail(function (xhr){
-			console.log("Error Listado Proveedores");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html("No hay proveedores disponibles");			
 	});		
 }
 

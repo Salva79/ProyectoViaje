@@ -57,9 +57,7 @@ function conexion2(metodo,datos,url){
 			}
 			$('#tipoProducto').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Alta Productos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#tipoProducto').html('<option value="0">No hay categorías disponibles</option>');			
 	});		
 }
 function conexion(metodo,datos,url){
@@ -80,9 +78,7 @@ function conexion(metodo,datos,url){
 			}
 			$('#fabricante').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Proveedores");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#fabricante').html('<option value="0">No hay proveedores disponibles</option>');			
 	});		
 }
 
@@ -102,14 +98,10 @@ function conexionInsertar(metodo,datos,url){
 				$('#info').html("Error, producto no insertado");
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
-
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, producto no insertado");
+			reiniciarElementos();
+			eliminarAlerta();			
 	});		
 }
 

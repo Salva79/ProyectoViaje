@@ -53,9 +53,12 @@ function borraObjetivo(id){
 		eliminarAlerta();
 		window.location.href = "listadoObjetivos.html";	
 	}).fail(function (xhr){
-			console.log("Error Borrar Objetivos");
-			eliminarStorage();
-			window.location.href = "../../index.html";		
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, objetivo no eliminado");
+			$('#modalCaja').modal({
+				show: 'true'
+			}); 
+			eliminarAlerta();		
 	});
 }
 
@@ -105,17 +108,12 @@ function conexion(metodo,datos,url){
 						cadena = cadena + "<p>" + (i+1) + " - Nombre: " + respuesta[i].Nombre + "<br>   " + inicioMostrar + " a " + finMostrar + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button></p>";
 					}
 				}else{
-					cadena = "No hay objetivos disponibles.</div>";
+					cadena = "No hay objetivos disponibles";
 				}
 				$('#contienelistados').html(cadena);
-			}else{
-				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
 			}
 	}).fail(function (xhr){
-			console.log("Error Listado Objetivos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html("No hay objetivos disponibles");			
 	});		
 }
 

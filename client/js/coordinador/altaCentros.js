@@ -58,9 +58,10 @@ function insertarCentros(datos,url) {
 			$('#info').addClass('alert alert-danger');
 		}
 	}).fail(function (xhr){
-			console.log("Error Alta Centro");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, centro no insertado");
+			reiniciarElementos();
+			eliminarAlerta();			
 	});
 }
 
@@ -83,9 +84,10 @@ function modificarCentroId(datos,url) {
 		reiniciarElementos();
 		eliminarAlerta();
 	}).fail(function (xhr){
-			console.log("Error Modificar Centro ID");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, centro no insertado");
+			reiniciarElementos();
+			eliminarAlerta();		
 	});
 }
 

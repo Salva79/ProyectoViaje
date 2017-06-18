@@ -17,11 +17,7 @@ function obtenerPedidosDisponibles(metodo,datos,url){
 					arrayPedidos[i] = respuesta[i].id;
 					arrayFechas[i] = respuesta[i].FechaPedido;
 				}
-			}
-	}).fail(function (xhr){
-			console.log("Error Pedidos Disponibles");
-			eliminarStorage();
-			window.location.href = "../../index.html";		
+			}		
 	});		
 }
 
@@ -38,11 +34,7 @@ function obtenerDetallesDisponibles(metodo,datos,url){
 					var objeto = [respuesta[i].CantidadPedido,respuesta[i].CantidadEntrega];
 					arrayDetalles.push(objeto);	
 				}
-			}
-	}).fail(function (xhr){
-			console.log("Error Detalles de Pedido");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			}			
 	});		
 }
 function obtenerDetallesPedido(){

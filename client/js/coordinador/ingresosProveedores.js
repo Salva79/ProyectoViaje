@@ -35,9 +35,7 @@ function ListaProveedores(){
 			}
 		}
 	}).fail(function (xhr){
-			console.log("Error Lista Proveedores");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			console.log("Error Lista Proveedores");			
 	});
 }
 
@@ -74,7 +72,7 @@ function conexion(){
 										method: 'GET',
 										url: urltipo,
 									}).done(function (respuesta){
-										cadena = cadena + "<p>" proveedores[(respuesta[0].Fabricante-1)] + ": " + total + " € </p>";
+										cadena = cadena + "<p>" + proveedores[(respuesta[0].Fabricante-1)] + ": " + total + " € </p>";
 									});
 								}	
 							}
@@ -86,10 +84,9 @@ function conexion(){
 			}
 			$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Ingresos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
-	});		
+		$('#contienelistados').html("No hay ingresos por proveedor");			
+	});	
+
 }
 $(document).ready(function() {
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;

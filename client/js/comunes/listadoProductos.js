@@ -48,9 +48,12 @@ function borraProductos(id){
 		eliminarAlerta();
 		window.location.href = "listadoProductos.html";
 	}).fail(function (xhr){
-			console.log("Error Borrar Productos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, producto no eliminado");
+			$('#modalCaja').modal({
+				show: 'true'
+			}); 
+			eliminarAlerta();			
 	});
 }
 
@@ -94,9 +97,7 @@ function conexion(metodo,datos,url){
 				$('#contienelistados').html(cadena);
 			}
 	}).fail(function (xhr){
-			console.log("Error Listado Productos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html("No hay productos disponbles");			
 	});		
 }
 

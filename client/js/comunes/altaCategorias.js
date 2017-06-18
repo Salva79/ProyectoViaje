@@ -51,9 +51,10 @@ function insertarCategoria(datos,url) {
 			$('#info').html("Error, categoria no insertada");
 		}
 	}).fail(function (xhr){
-			console.log("Error Alta Categorías");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error,categoría no insertado");
+			reiniciarElementos();
+			eliminarAlerta();				
 	});
 }
 

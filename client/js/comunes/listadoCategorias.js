@@ -53,9 +53,12 @@ function borraCategoria(id){
 		eliminarAlerta();
 		window.location.href = "listadoCategorias.html";
 	}).fail(function (xhr){
-			console.log("Error Borrar Categorías");
-			eliminarStorage();
-			window.location.href = "../../index.html";		
+			$('#info').addClass('alert alert-danger'); 
+			$('#info').html("Error, categoria no borrada");
+			$('#modalCaja').modal({
+			show: 'true'
+		}); 
+		eliminarAlerta();		
 	});
 }
 
@@ -79,9 +82,7 @@ function conexion(metodo,datos,url){
 				$('#contienelistados').html(cadena);
 			}
 	}).fail(function (xhr){
-			console.log("Error Listado Categorías");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html("No hay categorías disponibles");			
 	});		
 }
 

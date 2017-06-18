@@ -48,9 +48,12 @@ function obtenerDatosCentro(datos,url) {
 			eliminarAlerta();
 		}
 	}).fail(function (xhr){
-			console.log("Error Obtener Datos Centro");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').html("Coordinador sin centro asignado");
+			$('#info').addClass('alert alert-danger');
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			eliminarAlerta();			
 	});
 }
 

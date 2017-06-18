@@ -88,15 +88,9 @@ function listarPedidos(){
 
 		$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Listado Pedidos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html("No hay pedidos disponibles");			
 	});	
 }
-
-
-
-
 
 $(document).ready(function() {
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;

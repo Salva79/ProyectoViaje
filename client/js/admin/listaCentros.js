@@ -41,7 +41,7 @@ function borraCentro(id){
 			$('#info').html("Centro eliminado");	
 		}else{
 			$('#info').addClass('alert alert-danger');
-			$('#info').html("Error, alumno no borrado");
+			$('#info').html("Error, centro no eliminado");
 		}
 		$('#modalCaja').modal({
 			show: 'true'
@@ -49,9 +49,12 @@ function borraCentro(id){
 		eliminarAlerta();
 		window.location.href = "listadoCentro.html";
 	}).fail(function (xhr){
-			console.log("Error Borrar Centros");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, centro no eliminado");
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			eliminarAlerta();				
 	});
 }
 
@@ -86,9 +89,7 @@ function conexion(metodo,datos,url){
 				$('#contienelistados').html(cadena);
 			}
 	}).fail(function (xhr){
-			console.log("Error Listado Centros");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html("No hay Centros disponibles");			
 	});		
 }
 

@@ -53,7 +53,6 @@ function obtenerAlumnos(datos,url) {
 		method: 'GET',
 		url: url,
 	}).done(function(respuesta) {
-		var cadena = '<option value="0">Selecciona un alumno</option>';
 		if(respuesta.length > 0){
 			var cadena = '<option value="0">Selecciona un alumno</option>';
 			for(var i = 0; i < respuesta.length; i++){
@@ -64,9 +63,7 @@ function obtenerAlumnos(datos,url) {
 		}
 		$("#alumno").html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Obtener Alumnos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$("#alumno").html('<option value="0">No hay alumnos disponibles</option>');			
 	});
 }
 
@@ -90,9 +87,7 @@ function obtenerProductos(datos,url) {
 		}
 		$("#producto").html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Obtener Productos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$("#producto").html('<option value="0">No hay productos disponibles</option>');			
 	});
 }
 
@@ -114,9 +109,7 @@ function obtenerObjetivo(datos,url) {
 		}
 		$("#objetivo").html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Obtener Objetivos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$("#objetivo").html('<option value="0">No hay objetivos disponibles</option>');			
 	});
 }
 
@@ -152,9 +145,10 @@ function insertarPedido(datos,url) {
 			insertarDetallePedido(datosDetalles, detalles);
 		} 
 	}).fail(function (xhr){
-			console.log("Error Alta Pedidos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, pedido no insertado");
+			reiniciarElementos();
+			eliminarAlerta();			
 	});
 }
 
@@ -174,9 +168,10 @@ function insertarDetallePedido(datos,url) {
 			$('#info').html("Error, pedido no insertado");
 		}
 	}).fail(function (xhr){
-			console.log("Error Alta Detalles Pedido");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, pedido no insertado");
+			reiniciarElementos();
+			eliminarAlerta();			
 	});
 }
 

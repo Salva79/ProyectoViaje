@@ -37,12 +37,10 @@ function obtenerTiposDisponibles(metodo,datos,url){
 					arrayTipos[i] = respuesta[i].Nombre;
 				}
 			} else {
-				arrayTipos[0] = "No hay categorías disponibles"
+				arrayTipos[0] = "No hay categorías disponibles";
 			}
 	}).fail(function (xhr){
-			console.log("Error Categorías");
-			eliminarStorage();
-			window.location.href = "../../index.html";		
+			arrayTipos[0] = "No hay categorías disponibles";		
 	});		
 }
 
@@ -55,7 +53,7 @@ function conexion(metodo,datos,url){
 		url: url,
 	}).done(function (respuesta){
 			if(typeof(respuesta) !== undefined){
-				var cadena = "<div class='listado'>";
+				var cadena = "";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
 						var verify = "";
@@ -66,16 +64,13 @@ function conexion(metodo,datos,url){
 						}
 						cadena = cadena + "<p>" (i+1) + " -   Tipo: " + arrayTipos[respuesta[i].tipo-1] + "  -  Cantidad: " + respuesta[i].Cantidad + " €<br>Verificado: " + verify + "</p>";
 					}
-					cadena = cadena + "</div>";
 				}else{
-					cadena = cadena + "No tienes ningún ingreso realizado </div>";
+					cadena = cadena + "No tienes ningún ingreso realizado";
 				}
-				$('#contienelistados').html(cadena);
+				$('#contienelistados').html("No tienes ningún ingreso realizado");
 			}
 	}).fail(function (xhr){
-			console.log("Error Listado Ingresos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html();			
 	});		
 }
 

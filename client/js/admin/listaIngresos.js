@@ -24,13 +24,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-function eliminarAlerta() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass();
-    	$('#modalCaja').modal('toggle');}, 2500);
-}
-
 function conexionCentro() {
 	var url = '/api/Usuarios?access_token=' + sessionStorage.userToken;
 	$.ajax({
@@ -77,9 +70,7 @@ function conexionCentro() {
 			$('#contienelistados').html(cadena);
 										
 	}).fail(function (xhr){
-			console.log("Error Listado Ingresos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html("No hay ingresos disponibles");			
 	});		
 }
 

@@ -51,9 +51,12 @@ function borraUsuario(id){
 		eliminarAlerta();
 		window.location.href = "alumnos.html";
 	}).fail(function (xhr){
-		console.log("Error Borrar Alumnos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, alumno no eliminado");
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			eliminarAlerta();			
 	});
 }
 
@@ -106,13 +109,11 @@ function listaAlumos(datos,url) {
 				}				
 			}
 		} else {
-			cadena = "No hay alumnos disponibles."
+			cadena = "No hay alumnos disponibles";
 		}
 		$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Listado Alumnos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#contienelistados').html("No hay alumnos disponibles");			
 	});	
 }
 

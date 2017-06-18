@@ -34,7 +34,6 @@ function obtenerCentrosDisponibles(metodo,datos,url){
 		method: metodo,
 		url: url,
 	}).done(function (respuesta){
-			var cadena = '<option value="0">Selecciona el centro</option>';
 			if(respuesta.length > 0){
 				var cadena = '<option value="0">Selecciona el centro</option>';
 				for(var i = 0; i < respuesta.length; i++){
@@ -45,9 +44,7 @@ function obtenerCentrosDisponibles(metodo,datos,url){
 			}
 			$('#centro').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Centros");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#centro').html("<option value="0">No hay centros disponibles</option>");			
 	});		
 }
 function obtenerObjetivosDisponibles(metodo,datos,url){
@@ -68,9 +65,7 @@ function obtenerObjetivosDisponibles(metodo,datos,url){
 			}
 			$('#objetivo').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Objetivos");
-			eliminarStorage();
-			window.location.href = "../../index.html";			
+			$('#objetivo').html("<option value="0">No hay objetivos disponibles</option>");			
 	});		
 }
 function conexion(envio, url) {

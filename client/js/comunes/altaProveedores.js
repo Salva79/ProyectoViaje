@@ -51,9 +51,10 @@ function insertarProveedor(datos,url) {
 			$('#info').html("Error, proveedor no insertado");
 		}
 	}).fail(function (xhr){
-		console.log("Error Alta Proveedores");
-		eliminarStorage();
-		window.location.href = "../../index.html";			
+			$('#info').addClass('alert alert-danger');
+			$('#info').html("Error, proveedor no insertado");
+			reiniciarElementos();
+			eliminarAlerta();				
 	});
 }
 
