@@ -20,25 +20,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-function estilosinfo() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-success');
-}
-function eliminarinfo() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-success');}, 2500);
-}
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
-function eliminarAlerta() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-danger');}, 2500);
-}
-
 function conexionCentro(){
 	var url = '/api/Centros/' + sessionStorage.userCentroId + '/alumnos?access_token=' + sessionStorage.userToken;
 	$.ajax({
@@ -84,7 +65,7 @@ function conexionCentro(){
 			}
 			$('#contienelistados').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Ingresos");
+			console.log("Error Conexión Centro");
 			eliminarStorage();
 			window.location.href = "../../index.html";		
 	});		

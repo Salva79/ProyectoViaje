@@ -101,7 +101,11 @@ function verificando(id){
 												eliminarAlerta();
 												window.location.href = "ingresosSinVerificar.html";
 											})
-										})
+										}).fail(function (xhr){
+												console.log("Error Verificar Ingresos");
+												eliminarStorage();
+												window.location.href = "../../index.html";			
+										});
 
 									}									
 								}
@@ -159,7 +163,7 @@ function conexionCentro() {
 			$('#contienelistados').html(cadena);
 										
 	}).fail(function (xhr){
-			console.log("Error Ingresos");
+			console.log("Error Conexión Centro");
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		

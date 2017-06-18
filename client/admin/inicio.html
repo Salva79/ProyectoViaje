@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/estilos.css">
 		<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../js/admin/admin.js"></script>
+		<script type="text/javascript" src="../js/usuario.js"></script>
 		<link rel="icon" type="image/png" href="../img/logo.png">
 		<title>Inicio</title>
 	</head>
@@ -32,48 +32,48 @@
 					    <div class="collapse navbar-collapse" id="myNavbar">
 					    	<ul class="nav navbar-nav">
 						    	<li class="active"><a href="inicio.html">Inicio</a></li>
-						    	<li class="active"><a href="centros/listadoCentro.html">Centros</a></li>
-			      				<li class="active"><a href="alumnos/alumnos.html">Alumnos</a></li>
+						    	<li><a href="centros/listadoCentro.html">Centros</a></li>
+			      				<li><a href="alumnos/alumnos.html">Alumnos</a></li>
 						    	<li class="dropdown">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Objetivos<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
-			          						<li><a href="../objetivos/altaObjetivos.html">Alta Objetivos</a></li>
-			          						<li><a href="../objetivos/listadoObjetivos.html">Listado Objetivos</a></li>
+			          						<li><a href="objetivos/altaObjetivos.html">Alta Objetivos</a></li>
+			          						<li><a href="objetivos/listadoObjetivos.html">Listado Objetivos</a></li>
 			        				</ul>
 			      				</li>
 			      				<li><a href="ingresos/listaIngresos.html">Ingresos</a></li>
 			      				<li class="dropdown">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Pedidos<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
-			          						<li><a href="../pedidos/altaPedidos.html">Alta Pedidos</a></li>
-			          						<li><a href="../pedidos/listadoPedidos.html">Listado Pedidos</a></li>
+			          						<li><a href="pedidos/altaPedidos.html">Alta Pedidos</a></li>
+			          						<li><a href="pedidos/listadoPedidos.html">Listado Pedidos</a></li>
 			        				</ul>
 			      				</li>
 			      				<li class="dropdown">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Productos<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
-			          						<li><a href="../productos/altaProductos.html">Alta Productos</a></li>
-			          						<li><a href="../productos/listadoProductos.html">Listado Productos</a></li>
+			          						<li><a href="productos/altaProductos.html">Alta Productos</a></li>
+			          						<li><a href="productos/listadoProductos.html">Listado Productos</a></li>
 			        				</ul>
 			      				</li>
 			      				<li class="dropdown">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Categorías<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
-			          						<li><a href="../categorias/altaCategorias.html">Alta Categorías</a></li>
-			          						<li><a href="../categorias/listadoCategorias.html">Listado Categorías</a></li>
+			          						<li><a href="categorias/altaCategorias.html">Alta Categorías</a></li>
+			          						<li><a href="categorias/listadoCategorias.html">Listado Categorías</a></li>
 			        				</ul>
 			      				</li>
 			      				<li class="dropdown">
 			        				<a class="dropdown-toggle" data-toggle="dropdown" href="#">Proveedores<span class="caret"></span></a>
 			        				<ul class="dropdown-menu">
-			          						<li><a href="../proveedores/altaProveedores.html">Alta Proveedores</a></li>
-			          						<li><a href="../proveedores/listadoProveedores.html">Listado Proveedores</a></li>
+			          						<li><a href="proveedores/altaProveedores.html">Alta Proveedores</a></li>
+			          						<li><a href="proveedores/listadoProveedores.html">Listado Proveedores</a></li>
 			        				</ul>
 			      				</li>
 						    </ul>
 
 					        <ul class="nav navbar-nav navbar-right">
-					        	<button id="botonPerfil" class="btn btn-info navbar-btn">
+					        	<button id="botonPerfilAdmin" class="btn btn-info navbar-btn">
 					        	</button>
 					        	<button id="botonSalir" class="btn btn-danger navbar-btn">
 					        		<i class="fa fa-power-off" aria-hidden="true"></i> Salir
@@ -85,7 +85,7 @@
 			</header>
 
 			<div id="contenido" class="row">
-				<h2>BIENVENIDO A LA APLICACIÓN DE GESTIÓN DEL VIAJE DE ESTUDIOS</h2>
+				<h2 id="mensajeInicio" class="mayus col-xs-12 col-sm-6 col-sm-offset-3"></h2>
 			</div>
 			
 		</div>

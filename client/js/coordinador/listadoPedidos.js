@@ -22,25 +22,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-function estilosinfo() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-success');
-}
-function eliminarinfo() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-success');}, 2500);
-}
-function estilosAlerta() {
-	$('#info').removeClass();
-	$('#info').addClass('alert alert-danger');
-}
-function eliminarAlerta() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-danger');}, 2500);
-}
-
 function listarPedidos(){
 	var url = '/api/Pedidos?access_token=' + sessionStorage.userToken;
 	var fecha = "";
@@ -106,12 +87,12 @@ function listarPedidos(){
 		}
 
 		$('#contienelistados').html(cadena);
-	})
+	}).fail(function (xhr){
+			console.log("Error Listado Pedidos");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
+	});
 }
-
-
-
-
 
 $(document).ready(function() {
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;

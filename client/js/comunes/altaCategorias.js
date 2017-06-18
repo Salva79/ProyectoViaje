@@ -50,6 +50,10 @@ function insertarCategoria(datos,url) {
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, categoria no insertada");
 		}
+	}).fail(function (xhr){
+			console.log("Error Alta Categorías");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -77,11 +81,17 @@ $(document).ready(function() {
 	/* Mostrar el nombre del usuario conectado */
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
+	$("#botonPerfilAdmin").html(nombre);
 
 	/* Salir de la aplicación */
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";
+	});
+
+	/* Ver información del perfil del usuario */
+	$("#botonPerfil").click(function(){
+		window.location.href = "../perfil.html";
 	});
 
 	$('#enviar').click(function() {

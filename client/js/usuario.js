@@ -1,13 +1,6 @@
 var direccion = '/api/Usuarios/' + sessionStorage.userId + '?access_token=' + sessionStorage.userToken;
 var nombre;
 
-function eliminarAlerta() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-danger');
-    	$('#modalCaja').modal('toggle');}, 2500);
-}
-
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
 	sessionStorage.removeItem("userToken");
@@ -52,24 +45,15 @@ function conexion(metodo,datos,url){
 				sessionStorage.userObjetivoId = respuesta.objetivo;
 				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 				$("#botonPerfil").html(nombre);
+				$("#botonPerfilAdmin").html(nombre);
 				$('#mensajeInicio').html("BIENVENIDO " + sessionStorage.userNombre + " A LA APLICACIÓN DE GESTIÓN DEL VIAJE DE ESTUDIOS");
 			}else{
-				$('#info').addClass('alert alert-danger');
-				$('#info').html("No exite el usuario");
-				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
+				console.log("Error Inicio");
+				eliminarStorage();
+				window.location.href = "../index.html";
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				$('#info').addClass('alert alert-danger');
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");	
-			}else{
-				$('#info').addClass('alert alert-danger');
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-			}
-			eliminarAlerta();
+			console.log("Error Inicio");
 			eliminarStorage();
 			window.location.href = "../index.html";			
 	});		

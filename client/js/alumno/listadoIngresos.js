@@ -24,14 +24,6 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
-function eliminarAlerta() {
-	setTimeout(function(){
-        $('#info').html("");
-        $('#info').removeClass('alert alert-danger');
-        $('#modalCaja').modal('toggle');
-    }, 2500);
-}
-
 function obtenerTiposDisponibles(metodo,datos,url){
 	$.ajax({
 		async: false,
@@ -48,12 +40,7 @@ function obtenerTiposDisponibles(metodo,datos,url){
 				arrayTipos[0] = "No hay categorías disponibles"
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
-
+			console.log("Error Categorías");
 			eliminarStorage();
 			window.location.href = "../../index.html";		
 	});		
@@ -86,12 +73,7 @@ function conexion(metodo,datos,url){
 				$('#contienelistados').html(cadena);
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
-
+			console.log("Error Listado Ingresos");
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		

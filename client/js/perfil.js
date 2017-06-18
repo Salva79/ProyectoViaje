@@ -86,29 +86,17 @@ function actualizaDatos(metodo,datos,url){
 				estilosinfo();
 				$('#info').html("Has actualizado tus datos");
 				eliminarinfo();
-				window.location.href = "inicio.html";
+				window.location.href = "perfil.html";
 				
 			}else{
 				estilosAlerta();
-				$('#info').html("No exite el usuario");
-				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
+				$('#info').html("Perfil no actualizado");
 				eliminarAlerta();
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
-			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos 1");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
-			}
+			console.log("Error Actualiza Perfil");
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../index.html";		
 	});		
 }
 function cogeObjetivo(metodo,datos,url){
@@ -122,26 +110,12 @@ function cogeObjetivo(metodo,datos,url){
 			if(typeof(respuesta.id) !== undefined){
 				sessionStorage.NombreObjetivo = respuesta.Nombre;
 			}else{
-				estilosAlerta();
-				$('#info').html("No exite el objetivo");
-				console.log("No exite el objetivo");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
-				eliminarAlerta();
+				sessionStorage.NombreObjetivo = "Sin Objetivo Asignado";
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
-			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
-			}
+			console.log("Error Objetivo");
 			eliminarStorage();
-			window.location.href = "../index.html";			
+			window.location.href = "../index.html";		
 	});		
 }
 function cogeCentro(metodo,datos,url){
@@ -155,24 +129,10 @@ function cogeCentro(metodo,datos,url){
 			if(typeof(respuesta.id) !== undefined){
 				sessionStorage.NombreCentro = respuesta.Nombre;
 			}else{
-				estilosAlerta();
-				$('#info').html("No exite el centro");
-				console.log("No exite el centro");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ---";
-				eliminarAlerta();
+				sessionStorage.NombreCentro = "Sin centro asignado";
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				estilosAlerta();
-				$('#info').html("Error, usuario no registrado");
-				console.log("Error, usuario no registrado");
-				eliminarAlerta();	
-			}else{
-				estilosAlerta();
-				$('#info').html("Error en el envio de datos");
-				console.log("Error en el envio de datos");
-				eliminarAlerta();
-			}		
+			console.log("Error Centro");
 			eliminarStorage();
 			window.location.href = "../index.html";
 	});		

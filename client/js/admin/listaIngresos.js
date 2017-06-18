@@ -39,7 +39,7 @@ function conexionCentro() {
 		method: 'GET',
 		url: url,
 	}).done(function (respuesta){
-			var cadena = "<div class='listado'>";
+			var cadena = "";
 			var presunto = "";
 			if(respuesta.length>0){
 				for(var i = 0; i < respuesta.length; i++){
@@ -64,18 +64,20 @@ function conexionCentro() {
 										cadena = cadena + respuesta.Nombre + "<br>";
 									});
 								}
+							} else {
+								cadena = "No hay ingresos disponibles";
 							}	
 						
 					});
 										
 				}
 			} else{
-				cadena = "No hay ingresos";
+				cadena = "No hay ingresos disponibles";
 			}
 			$('#contienelistados').html(cadena);
 										
 	}).fail(function (xhr){
-			console.log("Error Ingresos");
+			console.log("Error Listado Ingresos");
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		
@@ -83,7 +85,7 @@ function conexionCentro() {
 
 $(document).ready(function() {
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
-	$("#botonPerfil").html(nombre);
+	$("#botonPerfilAdmin").html(nombre);
 	conexionCentro();
 	$("#botonSalir").click(function(){
 		eliminarStorage();

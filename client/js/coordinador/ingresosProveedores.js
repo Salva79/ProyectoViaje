@@ -34,7 +34,11 @@ function ListaProveedores(){
 				proveedores[i] = respuesta[i].Nombre;
 			}
 		}
-	})
+	}).fail(function (xhr){
+			console.log("Error Lista Proveedores");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
+	});
 }
 
 ListaProveedores();

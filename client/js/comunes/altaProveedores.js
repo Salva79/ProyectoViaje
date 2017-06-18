@@ -50,6 +50,10 @@ function insertarProveedor(datos,url) {
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, proveedor no insertado");
 		}
+	}).fail(function (xhr){
+		console.log("Error Alta Proveedores");
+		eliminarStorage();
+		window.location.href = "../../index.html";			
 	});
 }
 
@@ -75,6 +79,7 @@ $(document).ready(function() {
 	/* Mostrar el nombre del usuario conectado */
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
+	$("#botonPerfilAdmin").html(nombre);
 
 	/* Salir de la aplicación */
 	$("#botonSalir").click(function(){

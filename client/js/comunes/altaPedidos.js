@@ -53,7 +53,6 @@ function obtenerAlumnos(datos,url) {
 		method: 'GET',
 		url: url,
 	}).done(function(respuesta) {
-		var cadena = '<option value="0">Selecciona un alumno</option>';
 		if(respuesta.length > 0){
 			var cadena = '<option value="0">Selecciona un alumno</option>';
 			for(var i = 0; i < respuesta.length; i++){
@@ -110,7 +109,7 @@ function obtenerObjetivo(datos,url) {
 
 
 function mostarDatos() {
-	var datosAlumnos = '/api/Centros/' + sessionStorage.userCentroId + '/alumnos/?filter={"where": {"Curso": {"nlike": "Coordinador"}}}&access_token=' + sessionStorage.userToken;
+	var datosAlumnos = '/api/Usuarios?access_token=' + sessionStorage.userToken;
 	obtenerAlumnos("", datosAlumnos);
 
 	var datosProductos = '/api/Productos/?access_token=' + sessionStorage.userToken;
@@ -198,6 +197,7 @@ $(document).ready(function() {
 	/* Mostrar el nombre del usuario conectado */
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
+	$("#botonPerfilAdmin").html(nombre);
 	$("#total").val("0€");
 	$("#cantidad").val("1");
 

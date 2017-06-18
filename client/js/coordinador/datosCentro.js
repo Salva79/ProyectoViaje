@@ -47,6 +47,10 @@ function obtenerDatosCentro(datos,url) {
 			$('#info').addClass('alert alert-danger');
 			eliminarAlerta();
 		}
+	}).fail(function (xhr){
+			console.log("Error Obtener Datos Centro");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -75,6 +79,10 @@ function modificarCentro(datos,url) {
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, centro no modificado");
 		}
+	}).fail(function (xhr){
+			console.log("Error Modificar Centros");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 

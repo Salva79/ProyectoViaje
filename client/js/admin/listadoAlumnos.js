@@ -51,14 +51,9 @@ function borraUsuario(id){
 		eliminarAlerta();
 		window.location.href = "alumnos.html";
 	}).fail(function (xhr){
-		if(xhr.statusText === 'Unauthorized'){
-			console.log("Error, usuario no registrado");
-		}else{
-			console.log("Error, en el envio de datos");
-		}
-
-		eliminarStorage();
-		window.location.href = "../../index.html";			
+		console.log("Error Borrar Alumnos");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -93,8 +88,7 @@ function listaAlumos(datos,url) {
 							objetivo = "Sin Objetivo";
 						}
 					});
-					cadena = cadena + respuesta[i].DNI + " " + respuesta[i].Nombre + " " + respuesta[i].Apellidos + '  <button onclick="veralumnado(' + respuesta[i].id +')" class="botonVerificar btn btn-success" title="Ver"><i class="fa fa-info-circle" aria-hidden="true"></i></button>' + ' <button onclick="borraUsuario(' + respuesta[i].id + ')"  class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
-				  	"<br>Alumno<br>";
+					cadena = cadena + "<p>Alumno " + respuesta[i].DNI + " " + respuesta[i].Nombre + " " + respuesta[i].Apellidos + '  <button onclick="veralumnado(' + respuesta[i].id +')" class="botonVerificar btn btn-success" title="Ver"><i class="fa fa-info-circle" aria-hidden="true"></i></button>' + ' <button onclick="borraUsuario(' + respuesta[i].id + ')"  class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' + "</p>";
 				}else if(respuesta[i].Curso === "Coordinador"){
 					var dire = '/api/Objetivos/' + respuesta[i].objetivo + '?access_token=' + sessionStorage.userToken;
 					$.ajax({
@@ -108,21 +102,24 @@ function listaAlumos(datos,url) {
 							objetivo = "Sin Objetivo";
 						}
 					});
-					cadena = cadena + respuesta[i].DNI + " " + respuesta[i].Nombre + " " + respuesta[i].Apellidos + '  <button onclick="veralumnado(' + respuesta[i].id +')" class="botonVerificar btn btn-success" title="Ver"><i class="fa fa-info-circle" aria-hidden="true"></i></button>' + ' <button onclick="borraUsuario(' + respuesta[i].id + ')"  class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' +
-				  	"<br>Coordinador<br>";
+					cadena = cadena + "<p>Coordinador " + respuesta[i].DNI + " " + respuesta[i].Nombre + " " + respuesta[i].Apellidos + '  <button onclick="veralumnado(' + respuesta[i].id +')" class="botonVerificar btn btn-success" title="Ver"><i class="fa fa-info-circle" aria-hidden="true"></i></button>' + ' <button onclick="borraUsuario(' + respuesta[i].id + ')"  class="botonEliminar btn btn-danger" title="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></button>' + "</p>";
 				}				
 			}
 		} else {
 			cadena = "No hay alumnos disponibles."
 		}
 		$('#contienelistados').html(cadena);
-	});
+	}).fail(function (xhr){
+			console.log("Error Listado Alumnos");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
+	});	
 }
 
 $(document).ready(function() {
 	var metodoAlumnos = '/api/Usuarios?access_token=' + sessionStorage.userToken;
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
-	$("#botonPerfil").html(nombre);
+	$("#botonPerfilAdmin").html(nombre);
 	listaAlumos('',metodoAlumnos);
 	$("#botonSalir").click(function(){
 		eliminarStorage();

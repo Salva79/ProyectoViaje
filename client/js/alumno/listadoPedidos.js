@@ -3,6 +3,7 @@ var arrayPedidos = [];
 var arrayObjetivos = [];
 var arrayFechas = [];
 var arrayDetalles = [];
+
 function obtenerPedidosDisponibles(metodo,datos,url){
 	$.ajax({
 		async: false,
@@ -18,15 +19,12 @@ function obtenerPedidosDisponibles(metodo,datos,url){
 				}
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
+			console.log("Error Pedidos Disponibles");
 			eliminarStorage();
-			window.location.href = "../../index.html";			
+			window.location.href = "../../index.html";		
 	});		
 }
+
 function obtenerDetallesDisponibles(metodo,datos,url){
 	$.ajax({
 		async: true,
@@ -42,11 +40,7 @@ function obtenerDetallesDisponibles(metodo,datos,url){
 				}
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
+			console.log("Error Detalles de Pedido");
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		

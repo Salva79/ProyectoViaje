@@ -34,7 +34,7 @@ function eliminarAlerta() {
 
 function obtenerObjetivosDisponibles(metodo,datos,url){
 	$.ajax({
-		async: false,
+		async: true,
 		dataType: 'json',
 		data: datos,
 		method: metodo,
@@ -48,7 +48,7 @@ function obtenerObjetivosDisponibles(metodo,datos,url){
 				$('#objetivo').html(cadena);				
 			}
 	}).fail(function (xhr){
-		console.log("Error");
+		console.log("Error Objetivos");
 		eliminarStorage();
 		window.location.href = "index.html";			
 	});		
@@ -75,23 +75,18 @@ function conexion(metodo,datos,url){
 		}else{
 			console.log("Error");
 			eliminarStorage();
-			window.location.href = "index.html";
+			window.location.href = "../../index.html";
 		}
 	}).fail(function (xhr){
-		if(xhr.statusText === 'Unauthorized'){
-			console.log("Error, usuario no registrado");
-		}else{
-			console.log("Error, en el envio de datos");
-		}
-
-		eliminarStorage();
-		window.location.href = "index.html";			
+			console.log("Error Mostrar Datos");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});		
 }
 
 function actualizaDatos(metodo,datos,url){
 	$.ajax({
-		async: true,
+		async: false,
 		dataType: 'json',
 		data: datos,
 		method: metodo,
@@ -108,20 +103,17 @@ function actualizaDatos(metodo,datos,url){
 		}
 		eliminarAlerta();
 	}).fail(function (xhr){
-		if(xhr.statusText === 'Unauthorized'){
-			console.log("Error, usuario no registrado");
-		}else{
-			console.log("Error, en el envio de datos");
-		}
-
-		eliminarStorage();
-		window.location.href = "index.html";			
+			console.log("Error Actualiza Datos");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});		
 }
 
 $(document).ready(function() {
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
+	$("#botonPerfilAdmin").html(nombre);
+
 	obtenerObjetivosDisponibles("GET", "", metodoObjetivos);
 	conexion('GET','',urlAlumuno);
 

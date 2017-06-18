@@ -77,15 +77,10 @@ function conexionInsertar(metodo,datos,url){
 				$('#info').html("Error, no se ha podido realizar el alta del ingreso");
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
-
+			console.log("Error Alta Ingresos");
 			eliminarStorage();
 			window.location.href = "../../index.html";			
-	});		
+	});	
 }
 
 /* Función para comprobar los datos introducidos */

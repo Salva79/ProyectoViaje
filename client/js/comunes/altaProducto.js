@@ -57,7 +57,7 @@ function conexion2(metodo,datos,url){
 			}
 			$('#tipoProducto').html(cadena);
 	}).fail(function (xhr){
-			console.log("Error Categorías");
+			console.log("Error Alta Productos");
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		
@@ -150,6 +150,7 @@ function validarDatos() {
 $(document).ready(function() {
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
 	$("#botonPerfil").html(nombre);
+	$("#botonPerfilAdmin").html(nombre);
 
 	var metodoProveedor = '/api/Proveedores?access_token=' + sessionStorage.userToken;
 	conexion('GET', "", metodoProveedor);
@@ -159,6 +160,10 @@ $(document).ready(function() {
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";
+	});
+
+	$("#botonPerfil").click(function(){
+		window.location.href = "../perfil.html";
 	});
 
 	$("#insertar").click(function(){

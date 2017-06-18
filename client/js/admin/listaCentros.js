@@ -49,14 +49,9 @@ function borraCentro(id){
 		eliminarAlerta();
 		window.location.href = "listadoCentro.html";
 	}).fail(function (xhr){
-		if(xhr.statusText === 'Unauthorized'){
-			console.log("Error, usuario no registrado");
-		}else{
-			console.log("Error, en el envio de datos");
-		}
-
-		eliminarStorage();
-		window.location.href = "../../index.html";			
+			console.log("Error Borrar Centros");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -69,7 +64,7 @@ function conexion(metodo,datos,url){
 		url: url,
 	}).done(function (respuesta){
 			if(typeof(respuesta) !== undefined){
-				var cadena = "<div class='listado'>";
+				var cadena = "";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
 						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraCentro(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button>";
@@ -85,19 +80,13 @@ function conexion(metodo,datos,url){
 							cadena = cadena + "<br>Coordinador: " + respuesta.Nombre + " " + respuesta.Apellidos + "<br>";
 						});
 					}
-					cadena = cadena + "</div>";
 				}else{
-					cadena = "No hay Centros disponibles </div>";
+					cadena = "No hay Centros disponibles";
 				}
 				$('#contienelistados').html(cadena);
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
-
+			console.log("Error Listado Centros");
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		
@@ -105,7 +94,7 @@ function conexion(metodo,datos,url){
 
 $(document).ready(function() {
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
-	$("#botonPerfil").html(nombre);
+	$("#botonPerfilAdmin").html(nombre);
 	var centrosurl = '/api/Centros?access_token=' + sessionStorage.userToken;
 	conexion('GET','',centrosurl);
 	$("#botonSalir").click(function(){

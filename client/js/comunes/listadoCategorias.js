@@ -1,4 +1,4 @@
-var direccionProveedores = '/api/Proveedores?access_token=' + sessionStorage.userToken;
+var direccionCategorias = '/api/TipoProductos?access_token=' + sessionStorage.userToken;
 
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
@@ -27,11 +27,12 @@ function eliminarAlerta() {
 	setTimeout(function() {
 		$('#info').html("");
 		$('#info').removeClass();
+		$('#modalCaja').modal('toggle');
 	}, 2500);
 }
 
-function borraProveedor(id){
-	var url = '/api/Proveedores/' + id + '?access_token=' + sessionStorage.userToken;
+function borraCategoria(id){
+	var url = '/api/TipoProductos/' + id + '?access_token=' + sessionStorage.userToken;
 	$.ajax({
 		async: true,
 		dataType: 'json',
@@ -40,23 +41,21 @@ function borraProveedor(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			window.location.href = "listadoProveedores.html";	
+			$('#info').addClass('alert alert-success');
+			$('#info').html("Categoría eliminada");	
 		}else{
-			$('#info').addClass('alert alert-danger');
-			$('#info').html("Error, proveedor no borrado");
-			$('#modalCaja').modal({
-				show: 'true'
-			});
-			eliminarAlerta();
+			$('#info').addClass('alert alert-danger'); 
+			$('#info').html("Error, categoria no borrada");
 		}
+		$('#modalCaja').modal({
+			show: 'true'
+		}); 
+		eliminarAlerta();
+		window.location.href = "listadoCategorias.html";
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
+			console.log("Error Borrar Categorías");
 			eliminarStorage();
-			window.location.href = "../../index.html";			
+			window.location.href = "../../index.html";		
 	});
 }
 
@@ -69,39 +68,39 @@ function conexion(metodo,datos,url){
 		url: url,
 	}).done(function (respuesta){
 			if(typeof(respuesta) !== undefined){
-				var cadena = "<div class='listado'>";
+				var cadena = "";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
-						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraProveedor(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
+						cadena = cadena + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraCategoria(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button><br>";
 					}
-					cadena = cadena + "</div>";
 				}else{
-					cadena = "No hay proveedores disponibles</div>";
+					cadena = "No hay categorías disponibles";
 				}
 				$('#contienelistados').html(cadena);
-			}else{
-				estilosAlerta();
-				$('#info').html("No exite el usuario");
-				console.log("No exite el usuario");
-				nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> --- ";
-				eliminarAlerta();
 			}
 	}).fail(function (xhr){
-			if(xhr.statusText === 'Unauthorized'){
-				console.log("Error, usuario no registrado");
-			}else{
-				console.log("Error, en el envio de datos");
-			}
+			console.log("Error Listado Categorías");
 			eliminarStorage();
 			window.location.href = "../../index.html";			
 	});		
 }
 
 $(document).ready(function() {
-	conexion("GET","",direccionProveedores)
-	$("#botonPerfil").html(("<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre));
+	conexion("GET","",direccionCategorias)
+	
+	/* Mostrar el nombre del usuario conectado */
+	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
+	$("#botonPerfil").html(nombre);
+	$("#botonPerfilAdmin").html(nombre);
+
+	/* Ver información del perfil del usuario */
+	$("#botonPerfil").click(function(){
+		window.location.href = "../perfil.html";
+	});
+	
 	$("#botonSalir").click(function(){
 		eliminarStorage();
 		window.location.href = "../../index.html";
 	});
+	
 })

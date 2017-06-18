@@ -63,6 +63,10 @@ function obtenerAlumnos(datos,url) {
 			var cadena = '<option value="0">No hay alumnos disponibles</option>';
 		}
 		$("#alumno").html(cadena);
+	}).fail(function (xhr){
+			console.log("Error Obtener Alumnos");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -85,6 +89,10 @@ function obtenerProductos(datos,url) {
 			var cadena = '<option value="0">No hay productos disponibles</option>';
 		}
 		$("#producto").html(cadena);
+	}).fail(function (xhr){
+			console.log("Error Obtener Productos");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -105,6 +113,10 @@ function obtenerObjetivo(datos,url) {
 			var cadena = '<option value="0">No hay objetivos disponibles</option>';
 		}
 		$("#objetivo").html(cadena);
+	}).fail(function (xhr){
+			console.log("Error Obtener Objetivos");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -139,6 +151,10 @@ function insertarPedido(datos,url) {
 			}
 			insertarDetallePedido(datosDetalles, detalles);
 		} 
+	}).fail(function (xhr){
+			console.log("Error Alta Pedidos");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 
@@ -157,6 +173,10 @@ function insertarDetallePedido(datos,url) {
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, pedido no insertado");
 		}
+	}).fail(function (xhr){
+			console.log("Error Alta Detalles Pedido");
+			eliminarStorage();
+			window.location.href = "../../index.html";			
 	});
 }
 
