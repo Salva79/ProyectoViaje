@@ -90,9 +90,9 @@ $(document).ready(function() {
 	cargarDatos();
 	$("#botonSalir").click(function(){
 		eliminarStorage();
-		window.location.href = "../../index.html";
+		window.location.href = "../index.html";
 	});
 	$("#botonPerfil").click(function(){
-		window.location.href = "../perfil.html";
+		window.location.href = "perfil.html";
 	});
 })

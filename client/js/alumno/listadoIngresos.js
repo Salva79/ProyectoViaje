@@ -62,15 +62,15 @@ function conexion(metodo,datos,url){
 						}else{
 							verify = "No"
 						}
-						cadena = cadena + "<p>" (i+1) + " -   Tipo: " + arrayTipos[respuesta[i].tipo-1] + "  -  Cantidad: " + respuesta[i].Cantidad + " €<br>Verificado: " + verify + "</p>";
+						cadena = cadena + "<p>" + (i+1) + " -   Tipo: " + arrayTipos[respuesta[i].tipo-1] + "  -  Cantidad: " + respuesta[i].Cantidad + " €<br>Verificado: " + verify + "</p>";
 					}
 				}else{
 					cadena = cadena + "No tienes ningún ingreso realizado";
 				}
-				$('#contienelistados').html("No tienes ningún ingreso realizado");
+				$('#contienelistados').html(cadena);
 			}
 	}).fail(function (xhr){
-			$('#contienelistados').html();			
+			$('#contienelistados').html("No tienes ningún ingreso realizado");			
 	});		
 }
 
@@ -82,9 +82,9 @@ $(document).ready(function() {
 	$("#botonPerfil").html(nombre);
 	$("#botonSalir").click(function(){
 		eliminarStorage();
-		window.location.href = "../../index.html";
+		window.location.href = "../index.html";
 	});
 	$("#botonPerfil").click(function(){
-		window.location.href = "../perfil.html";
+		window.location.href = "perfil.html";
 	});
 })

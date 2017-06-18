@@ -39,17 +39,15 @@ function borraUsuario(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			$('#info').addClass('alert alert-success');
-			$('#info').html("Alumno eliminado");	
+			window.location.href = "alumnos.html";	
 		}else{
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, alumno no borrado");
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			eliminarAlerta();
 		}
-		$('#modalCaja').modal({
-			show: 'true'
-		}); 
-		eliminarAlerta();
-		window.location.href = "alumnos.html";
 	}).fail(function (xhr){
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, alumno no eliminado");

@@ -117,7 +117,7 @@ function validarDatos() {
 	descripcion = descripcion.trim();
 	referencia = referencia.trim();
 
-	if( (descripcion === "") || (referencia === "") || (fabricante <= 0) || (tipoProducto <= 0) || (isNaN(precioVenta) === false) || (isNaN(beneficio) === false)){
+	if( (descripcion === "") || (referencia === "") || (fabricante <= 0) || (tipoProducto <= 0) || (isNaN(precioVenta) === true) || (isNaN(beneficio) === true)){
 		$('#info').addClass('alert alert-danger');
 		$('#info').html("Por favor revisa los datos introducidos");
 	}else{

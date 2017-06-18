@@ -37,16 +37,15 @@ function obtenerCentrosDisponibles(metodo,datos,url){
 			if(respuesta.length > 0){
 				var cadena = '<option value="0">Selecciona el centro</option>';
 				for(var i = 0; i < respuesta.length; i++){
-					cadena = (cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>');
+					cadena = cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>';
 				}			
 			} else {
 				var cadena = '<option value="0">No hay centros disponibles</option>';
 			}
-			$('#centro').html(cadena);
-	}).fail(function (xhr){
-			$('#centro').html("<option value="0">No hay centros disponibles</option>");			
+			$('#centro').html(cadena);			
 	});		
 }
+
 function obtenerObjetivosDisponibles(metodo,datos,url){
 	$.ajax({
 		async: true,
@@ -58,14 +57,12 @@ function obtenerObjetivosDisponibles(metodo,datos,url){
 			if(respuesta.length > 0){
 				var cadena = '<option value="0">Selecciona el Objetivo</option>';
 				for(var i = 0; i < respuesta.length; i++){
-					cadena = (cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>');
+					cadena = cadena + '<option value=' + respuesta[i].id +'>' + respuesta[i].Nombre + '</option>';
 				}				
 			} else {
 				var cadena = '<option value="0">No hay objetivos disponibles</option>';
 			}
-			$('#objetivo').html(cadena);
-	}).fail(function (xhr){
-			$('#objetivo').html("<option value="0">No hay objetivos disponibles</option>");			
+			$('#objetivo').html(cadena);		
 	});		
 }
 function conexion(envio, url) {
@@ -157,10 +154,10 @@ function validarDatos() {
 	}
 }
 
-obtenerCentrosDisponibles("GET", "", metodoCentros);
-obtenerObjetivosDisponibles("GET", "", metodoObjetivos);
-
 $(document).ready(function() {
+	obtenerCentrosDisponibles("GET", "", metodoCentros);
+	obtenerObjetivosDisponibles("GET", "", metodoObjetivos);
+
 	$('#enviar').click(function() {
 		validarDatos();
 	});

@@ -22,6 +22,29 @@ function eliminarStorage(){
 	sessionStorage.removeItem("NombreObjetivo");     
 }
 
+// Función para mostrar la fecha adecuadamente
+function invertir(cadena) {
+	var longitudCadena = cadena.length;
+    var cadenaMostrar = "";
+
+    // DIA
+    cadenaMostrar = cadenaMostrar + cadena.charAt(8);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(9);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(7);
+
+    // MES
+    cadenaMostrar = cadenaMostrar + cadena.charAt(5);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(6);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(4);
+
+    // AÑO
+    for (var i = 0; i < 4; i++) {
+    	cadenaMostrar = cadenaMostrar + cadena.charAt(i);
+    }
+
+    return cadenaMostrar;
+}
+
 function listarPedidos(){
 	var url = '/api/Pedidos?access_token=' + sessionStorage.userToken;
 	var fecha = "";
@@ -39,6 +62,7 @@ function listarPedidos(){
 				var urlDetalles = '/api/Pedidos/' + respuesta[i].id + '/detallesPedidos?access_token=' + sessionStorage.userToken;
 				fecha = respuesta[i].FechaPedido;
 				fecha = fecha.substring(0,10);
+				var fechaMostrar = invertir(fecha);
 				$.ajax({
 					async: false,
 					dataType: 'json',
@@ -78,7 +102,7 @@ function listarPedidos(){
 						})
 						cadena =  cadena + "Total: " + respuesta[0].CantidadPedido + "€ - Entregado: " + respuesta[0].CantidadEntrega + "€<br>";
 					})
-					cadena =  cadena + fecha + "</p>>";
+					cadena =  cadena + fechaMostrar + "</p>";
 				}
 			}
 		}

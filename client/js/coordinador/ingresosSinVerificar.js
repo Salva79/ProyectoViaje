@@ -129,7 +129,7 @@ function conexionCentro() {
 		method: 'GET',
 		url: url,
 	}).done(function (respuesta){
-			var cadena = "<div class='listado'>";
+			var cadena = "";
 			var presunto = "";
 			if(respuesta.length>0){
 				for(var i = 0; i < respuesta.length; i++){

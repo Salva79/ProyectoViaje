@@ -1,4 +1,4 @@
-var direccionProveedores = '/api/Proveedores?access_token=' + sessionStorage.userToken;
+var direccionObjetivos = '/api/Objetivos?access_token=' + sessionStorage.userToken;
 
 /* Eliminar los valores de sesión */
 function eliminarStorage(){ 
@@ -31,8 +31,8 @@ function eliminarAlerta() {
 	}, 2500);
 }
 
-function borraProveedor(id){
-	var url = '/api/Proveedores/' + id + '?access_token=' + sessionStorage.userToken;
+function borraObjetivo(id){
+	var url = '/api/Objetivos/' + id + '?access_token=' + sessionStorage.userToken;
 	$.ajax({
 		async: true,
 		dataType: 'json',
@@ -41,23 +41,46 @@ function borraProveedor(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			window.location.href = "listadoProveedores.html";	
+			window.location.href = "listadoObjetivos.html";
 		}else{
 			$('#info').addClass('alert alert-danger');
-			$('#info').html("Error, proveedor no eliminado");
+			$('#info').html("Error, objetivo no eliminado");
 			$('#modalCaja').modal({
 				show: 'true'
 			});
 			eliminarAlerta();
-		}
+		}	
 	}).fail(function (xhr){
 			$('#info').addClass('alert alert-danger');
-			$('#info').html("Error, provvedor no eliminado");
+			$('#info').html("Error, objetivo no eliminado");
 			$('#modalCaja').modal({
 				show: 'true'
 			}); 
-			eliminarAlerta();				
+			eliminarAlerta();		
 	});
+}
+
+// Función para mostrar la fecha adecuadamente
+function invertir(cadena) {
+	var longitudCadena = cadena.length;
+    var cadenaMostrar = "";
+
+    // DIA
+    cadenaMostrar = cadenaMostrar + cadena.charAt(8);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(9);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(7);
+
+    // MES
+    cadenaMostrar = cadenaMostrar + cadena.charAt(5);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(6);
+    cadenaMostrar = cadenaMostrar + cadena.charAt(4);
+
+    // AÑO
+    for (var i = 0; i < 4; i++) {
+    	cadenaMostrar = cadenaMostrar + cadena.charAt(i);
+    }
+
+    return cadenaMostrar;
 }
 
 function conexion(metodo,datos,url){
@@ -72,20 +95,28 @@ function conexion(metodo,datos,url){
 				var cadena = "";
 				if(respuesta.length>0){
 					for(var i = 0; i < respuesta.length; i++){
-						cadena = cadena + "<p>" + (i+1) + " -   Nombre: " + respuesta[i].Nombre + " <button type='button' id='borrar' onclick='borraProveedor(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button></p>";
+						var inicio = respuesta[i].YearInicio;
+						var fin = respuesta[i].YearFin;
+						inicio = inicio + "";
+						inicio = inicio.substring(0,10);
+						var inicioMostrar = invertir(inicio);
+						fin = fin + "";
+						fin = fin.substring(0,10);
+						var finMostrar = invertir(fin);
+						cadena = cadena + "<p>" + (i+1) + " - Nombre: " + respuesta[i].Nombre + "<br>   " + inicioMostrar + " a " + finMostrar + " <button type='button' id='borrar' onclick='borraObjetivo(" + respuesta[i].id + ")' title='Eliminar' class='btn btn-danger botonForm btn-xs'><i class='fa fa-trash' aria-hidden='true'></i></button></p>";
 					}
 				}else{
-					cadena = "No hay proveedores disponibles";
+					cadena = "No hay objetivos disponibles";
 				}
 				$('#contienelistados').html(cadena);
 			}
 	}).fail(function (xhr){
-			$('#contienelistados').html("No hay proveedores disponibles");			
+			$('#contienelistados').html("No hay objetivos disponibles");			
 	});		
 }
 
 $(document).ready(function() {
-	conexion("GET","",direccionProveedores)
+	conexion("GET","",direccionObjetivos)
 	
 	/* Mostrar el nombre del usuario conectado */
 	var nombre = "<i class='fa fa-user-circle' aria-hidden='true'></i> " + sessionStorage.userNombre;
@@ -101,4 +132,5 @@ $(document).ready(function() {
 		eliminarStorage();
 		window.location.href = "../../index.html";
 	});
+	
 })

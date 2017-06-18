@@ -41,17 +41,15 @@ function borraObjetivo(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			$('#info').addClass('alert alert-success');
-			$('#info').html("Objetivo eliminado");
+			window.location.href = "listadoObjetivos.html";
 		}else{
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, objetivo no eliminado");
-		}
-		$('#modalCaja').modal({
-			show: 'true'
-		}); 
-		eliminarAlerta();
-		window.location.href = "listadoObjetivos.html";	
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			eliminarAlerta();
+		}	
 	}).fail(function (xhr){
 			$('#info').addClass('alert alert-danger');
 			$('#info').html("Error, objetivo no eliminado");

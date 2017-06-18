@@ -41,17 +41,15 @@ function borraCategoria(id){
 		url: url,
 	}).done(function (respuesta){
 		if(respuesta.count === 1){
-			$('#info').addClass('alert alert-success');
-			$('#info').html("Categoría eliminada");	
+			window.location.href = "listadoCategorias.html";
 		}else{
 			$('#info').addClass('alert alert-danger'); 
 			$('#info').html("Error, categoria no borrada");
+			$('#modalCaja').modal({
+				show: 'true'
+			});
+			eliminarAlerta();
 		}
-		$('#modalCaja').modal({
-			show: 'true'
-		}); 
-		eliminarAlerta();
-		window.location.href = "listadoCategorias.html";
 	}).fail(function (xhr){
 			$('#info').addClass('alert alert-danger'); 
 			$('#info').html("Error, categoria no borrada");

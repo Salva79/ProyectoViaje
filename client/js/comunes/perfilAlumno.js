@@ -66,10 +66,16 @@ function conexion(metodo,datos,url){
 			$("#apellidos").val(respuesta.Apellidos);
 			$("#email").val(respuesta.email);
 			$("#telefono").val(respuesta.Telefono);
-			$("#curso").val(respuesta.Curso);
-			$('#centro').val(respuesta.centroId);
 			$('#objetivo').val(respuesta.objetivo);
 			$("#username").val(respuesta.username);
+
+			if (respuesta.Curso == "Coordinador") {
+				$("#curso").hide();
+				$("#objetivo").hide();
+			}else{
+				$("#curso").val(respuesta.Curso);
+				$("#objetivo").val(respuesta.objetivo);
+			}	
 		}			
 	});		
 }
