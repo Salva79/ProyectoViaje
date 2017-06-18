@@ -43,7 +43,7 @@ function conexion(metodo,datos,url){
 				sessionStorage.userEmail = respuesta.email;
 				sessionStorage.userCentroId = respuesta.centroId;
 				sessionStorage.userObjetivoId = respuesta.objetivo;
-				if((sessionStorage.userCurso !== "Coordinador") || (sessionStorage.userCurso !== "admin")){
+				if((sessionStorage.userCurso !== "Coordinador") && (sessionStorage.userCurso !== "admin")){
 					eliminarStorage();
 					window.location.href = "../index.html";
 				}

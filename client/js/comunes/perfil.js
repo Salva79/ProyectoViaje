@@ -47,7 +47,7 @@ function eliminarAlerta() {
 }
 
 function cargaDatos(){
-	if((sessionStorage.userCurso !== "Coordinador") || (sessionStorage.userCurso !== "admin")){
+	if((sessionStorage.userCurso !== "Coordinador") && (sessionStorage.userCurso !== "admin")){
 		eliminarStorage();
 		window.location.href = "../index.html";
 	}else{
