@@ -74,10 +74,10 @@ function conexion(){
 									}).done(function (respuesta){
 										cadena = cadena + "<p>" + proveedores[(respuesta[0].Fabricante-1)] + ": " + total + " € </p>";
 									});
+								} else {
+									cadena = "No hay ingresos sin verificar";
 								}	
 							}
-						} else {
-							cadena = "No hay ingresos sin verificar";
 						}
 					});
 				}						

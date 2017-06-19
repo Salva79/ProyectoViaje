@@ -54,10 +54,10 @@ function conexionCentro(){
 									}).done(function (respuesta){
 										cadena = cadena + respuesta.Nombre + "</p>";
 									});
+								} else {
+									cadena = "No hay ingresos sin verificar";
 								}	
 							}
-						} else {
-							cadena = "No hay ingresos sin verificar";
 						}
 					});
 				}

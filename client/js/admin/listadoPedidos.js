@@ -56,7 +56,6 @@ function listarPedidos(){
 	}).done(function(respuesta) {
 		if(respuesta.length>0){
 			for(var i=0; i<respuesta.length ; i++){
-				var salta = false;
 				var urlUsuario = '/api/Usuarios/' + respuesta[i].userId + '?access_token=' + sessionStorage.userToken;
 				var urlObjetivo = '/api/Objetivos/' + respuesta[i].objetivoId + '?access_token=' + sessionStorage.userToken;
 				var urlDetalles = '/api/Pedidos/' + respuesta[i].id + '/detallesPedidos?access_token=' + sessionStorage.userToken;
@@ -69,14 +68,9 @@ function listarPedidos(){
 					method: 'GET',
 					url: urlUsuario,
 				}).done(function(respuesta) {
-					if (respuesta.centroId == sessionStorage.userCentroId){
-						cadena =  cadena + "<p>" + (i+1) + " - " + respuesta.DNI + " - " + respuesta.Nombre + " " + respuesta.Apellidos + "<br>";					
-					}else{
-						salta = true;
-					}
-					
+					cadena =  cadena + "<p>" + (i+1) + " - " + respuesta.DNI + " - " + respuesta.Nombre + " " + respuesta.Apellidos + "<br>";						
 				})
-				if(!salta){
+				
 					$.ajax({
 						async: false,
 						dataType: 'json',
@@ -103,7 +97,6 @@ function listarPedidos(){
 						cadena =  cadena + "Total: " + respuesta[0].CantidadPedido + "€ - Entregado: " + respuesta[0].CantidadEntrega + "€<br>";
 					})
 					cadena =  cadena + fechaMostrar + "</p>";
-				}
 			}
 		}
 		else {

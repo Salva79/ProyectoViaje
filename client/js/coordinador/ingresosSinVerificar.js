@@ -93,12 +93,6 @@ function verificando(id){
 												data: date,
 												url: urlIngreso,
 											}).done(function (respuesta){
-												$('#info').addClass('alert alert-success');
-												$('#info').html("Ingreso verificado");
-												$('#modalCaja').modal({
-													show: 'true'
-												});
-												eliminarAlerta();
 												window.location.href = "ingresosSinVerificar.html";
 											})
 										}).fail(function (xhr){
@@ -144,7 +138,7 @@ function conexionCentro() {
 						if(respuesta.length>0){
 							for(var i=0; i<respuesta.length; i++){
 								if(respuesta[i].Verificado === false){
-									cadena = cadena + "<p>" + presunto +  '<button onclick="verificando(' + respuesta[i].id +')" class="botonVerificar btn btn-warning" title="Verificar"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>' + '<br>Cantidad: ' + respuesta[i].Cantidad + "€ - ";
+									cadena = cadena + "<p>" + presunto +  ' <button onclick="verificando(' + respuesta[i].id +')" class="botonVerificar btn btn-warning" title="Verificar"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>' + '<br>Cantidad: ' + respuesta[i].Cantidad + "€ - ";
 									var urltipo = '/api/TipoProductos/' + respuesta[i].tipo + '?access_token=' + sessionStorage.userToken;
 									$.ajax({
 										async: false,
@@ -154,11 +148,11 @@ function conexionCentro() {
 									}).done(function (respuesta){
 										cadena = cadena + respuesta.Nombre + "</p>";
 									});
-								}
-							}	
-						} else {
-							cadena = "No hay ingresos sin verificar";
+								} else {
+							cadena = "No hay ingresos sin verificar 1";
 						}
+							}	
+						} 
 					});
 										
 				}
