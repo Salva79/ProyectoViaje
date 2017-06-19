@@ -76,6 +76,8 @@ function conexion(){
 									});
 								}	
 							}
+						} else {
+							cadena = "No hay ingresos sin verificar";
 						}
 					});
 				}						

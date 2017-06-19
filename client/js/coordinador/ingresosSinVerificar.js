@@ -156,6 +156,8 @@ function conexionCentro() {
 									});
 								}
 							}	
+						} else {
+							cadena = "No hay ingresos sin verificar";
 						}
 					});
 										
